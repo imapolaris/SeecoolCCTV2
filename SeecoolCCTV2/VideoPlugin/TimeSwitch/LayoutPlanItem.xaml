@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="VideoNS.TimeSwitch.LayoutPlanItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VideoNS.TimeSwitch"
+             xmlns:videoInfo="clr-namespace:VideoNS.VideoInfo"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml"/>
+                <ResourceDictionary Source="../VideoInfo/Search/DictSearchBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="26"/>
+        </Grid.RowDefinitions>
+        <local:LayoutPlanItemPanel x:Name="layoutPlan" DataContext="{Binding Path=LayoutSource.SplitScreenData, Mode=OneWay}" Grid.Row="0"/>
+        <Border Background="#80102642" Grid.Row="1" VerticalAlignment="Stretch" CornerRadius="3">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="停留时长:" Foreground="{StaticResource MainBrush}" FontSize="15" Margin="5,2" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                <TextBox Name="tbStayingSeconds" Text="{Binding StaySeconds, Mode=TwoWay}" Foreground="Gold"  FontSize="15" Margin="2,0,2,2" VerticalAlignment="Bottom" DockPanel.Dock="Left" 
+                         IsEnabled="{Binding Focusable, ElementName=tbStayingSeconds}"
+                         CaretBrush="{StaticResource LightingTextColor}"
+                         PreviewTextInput="tbStayingSeconds_PreviewTextInput"
+                         PreviewKeyDown="tbStayingSeconds_PreviewKeyDown"
+                         DataObject.Pasting="tbStayingSeconds_Pasting"
+                         Background="{x:Null}" BorderThickness="0" MinWidth="20" MaxLength="10"/>
+                <TextBlock Text="秒" Foreground="{StaticResource MainBrush}"  Margin="2" FontSize="15" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+            </DockPanel>
+        </Border>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="-2" BorderThickness="0"
+                CornerRadius="3"
+                Background="{StaticResource PanelBackground}">
+            <Button Background="{StaticResource 关闭_默认}"  
+                helper:CustomBrush.MouseOverBrush="{StaticResource 关闭_悬浮}" 
+                Style="{StaticResource CommonButtonStyle}" 
+                BorderThickness="0"
+                Command="{Binding DeleteCommand}"/>
+        </Border>
+        <!--<Button Style="{StaticResource TextButtonStyle}" Background="{StaticResource 关闭_默认_Vec}"  helper:CustomBrush.MouseOverBrush="{StaticResource 关闭_悬浮_Vec}" 
+                HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Margin="-3"
+                BorderThickness="0"
+                Command="{Binding DeleteCommand}"/>-->
+    </Grid>
+</UserControl>

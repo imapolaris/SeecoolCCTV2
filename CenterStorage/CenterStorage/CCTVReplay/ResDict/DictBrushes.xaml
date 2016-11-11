@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCTVReplay">
+    <!--播放控制条背景颜色-->
+    <SolidColorBrush x:Key="PlayBarBrush"
+                     Color="#064E9A" />
+    <Color x:Key="PlayControlCenterColor">#1354B0</Color>
+    <Color x:Key="PlayControlEdgeColor">#043A80</Color>
+    <!--播放视频区域面板背景颜色-->
+    <RadialGradientBrush x:Key="PlayControlBrush"
+                         Center="0.5,0.5"
+                         RadiusX="0.3"
+                         RadiusY="0.2">
+        <GradientStop Color="{StaticResource PlayControlCenterColor}"
+                      Offset="0" />
+        <GradientStop Color="{StaticResource PlayControlEdgeColor}"
+                      Offset="1" />
+    </RadialGradientBrush>
+    <!--文字前景颜色-->
+    <SolidColorBrush x:Key="TextBrush"
+                     Color="White" />
+    <!--文本输入框文字颜色-->
+    <SolidColorBrush x:Key="EditTextBrush"
+                     Color="#013661" />
+    <!--文本输入框背景颜色-->
+    <SolidColorBrush x:Key="EditTextBackBrush"
+                     Color="#7ECDF3" />
+    <!--复选框按钮背景颜色-->
+    <SolidColorBrush x:Key="CheckBoxBtnBackBrush"
+                     Color="#3A97FF" />
+    <!--视频树面板背景颜色-->
+    <SolidColorBrush x:Key="VideoTreePanelBrush"
+                     Color="#0447A0" />
+    <!--面板边界分割细线条颜色-->
+    <SolidColorBrush x:Key="PanelSplitBorderBrush"
+                     Color="#3E72B2" />
+    <!--列表框列表项分割细线条颜色-->
+    <SolidColorBrush x:Key="ListItemSplitBorderBrush"
+                     Color="#637E95" />
+    <!--窗口边框颜色-->
+    <SolidColorBrush x:Key="WinBorderBrush"
+                     Color="#63748A" />
+    <!--侧边栏显隐控制按钮背景-->
+    <SolidColorBrush x:Key="DockButtonBrush"
+                     Color="#034292" />
+    <!--数据源管理窗口背景颜色-->
+    <SolidColorBrush x:Key="SrcWinBrush"
+                     Color="#023763" />
+    <!--数据源信息面板背景颜色-->
+    <SolidColorBrush x:Key="SrcInfoBrush"
+                     Color="#21558E" />
+    <!--#region 渐变按钮颜色-->
+    <LinearGradientBrush x:Key="EnableBtnBrush"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="#378FF7"
+                      Offset="0" />
+        <GradientStop Color="#0340A2"
+                      Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="EnableBtnBorderBrush"
+                     Color="#5991FA" />
+    <!--=============-->
+    <LinearGradientBrush x:Key="DisableBtnBrush"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="#7F8993"
+                      Offset="0" />
+        <GradientStop Color="#48525C"
+                      Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="DisableBtnBorderBrush"
+                     Color="#8C8C8C" />
+    <!--=============-->
+    <LinearGradientBrush x:Key="OverBtnBrush"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="#24A203"
+                      Offset="0" />
+        <GradientStop Color="#0F5005"
+                      Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="OverBtnBorderBrush"
+                     Color="#48B22C" />
+    <!--#endregion-->
+
+    <SolidColorBrush x:Key="panelBack"
+                             Color="#4000" />
+    <SolidColorBrush x:Key="mouseoverBack"
+                     Color="#804499f3"/>
+    <SolidColorBrush x:Key="selectedBack"
+                     Color="#4499f3"/>
+</ResourceDictionary>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta charset="UTF-8">
+    <title>CCTV2.0配置项</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" href="css/chosen.css"/>
+
+    <link rel="stylesheet" href="css/ace-fonts.css"/>
+    <link rel="stylesheet" href="css/ace.min.css" id="main-ace-style"/>
+
+    <link rel="stylesheet" href="css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="css/ace-rtl.min.css">
+    <!--<link rel="stylesheet" href="css/fuelux.min.css"/>-->
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css"/>
+
+    <link rel="stylesheet" href="css/mystyle.css"/>
+
+    <script src="js/ace-extra.min.js"></script>
+</head>
+<body class="no-skin">
+<!--标题栏-->
+<div id="navbar" class="navbar navbar-default">
+
+    <div class="navbar-container" id="navbar-container">
+        <!-- #section:basics/sidebar.mobile.toggle -->
+        <!--移动端使用的汉堡菜单项-->
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">Toggle sidebar</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--标题内容-->
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="fa fa-leaf"></i>
+                    CCTV2.0配置项
+                </small>
+            </a>
+        </div>
+
+        <!-- #section:basics/navbar.dropdown -->
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <!-- #section:basics/navbar.user_menu -->
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="image/user.png" alt="Jason's Photo"/>
+                        <span class="user-info">
+                            <label class="login-username"></label>
+                            <small>欢迎登录！</small>
+                        </span>
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <!--<li>-->
+                        <!--<a href="#">-->
+                        <!--<i class="ace-icon fa fa-cog"></i>-->
+                        <!--Settings-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li>-->
+                        <!--<a href="profile.html">-->
+                        <!--<i class="ace-icon fa fa-user"></i>-->
+                        <!--Profile-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li class="divider"></li>-->
+
+                        <li>
+                            <a href="#" id="menu-logout">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- /section:basics/navbar.user_menu -->
+            </ul>
+        </div>
+
+        <!-- /section:basics/navbar.dropdown -->
+    </div><!-- /.navbar-container -->
+</div>
+
+<div class="main-container" id="main-container">
+
+    <!-- #section:basics/sidebar -->
+    <div id="sidebar" class="sidebar  responsive">
+
+        <ul class="nav nav-list">
+            <!--节点服务器-->
+            <li class="">
+                <a href="#mgserver" class="linkaction" data-page="html/server-manager-page.html">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text">节点管理</span>
+                </a>
+            </li>
+            <!--逻辑节点树-->
+            <li class="">
+                <a href="#mgtree" class="linkaction" data-page="html/logicaltree-manager-page.html">
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <span class="menu-text">视频树</span>
+                </a>
+            </li>
+            <li class="sc-adminonly">
+                <a href="#uimanager" class="linkaction" data-page="html/user-manager-page.html">
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <span class="menu-text">用户信息</span>
+                </a>
+            </li>
+            <!--<li class="sc-adminonly">-->
+                <!--<a href="#" class="dropdown-toggle">-->
+                    <!--<i class="menu-icon fa fa-list-alt"></i>-->
+                    <!--<span class="menu-text">告警信息</span>-->
+                    <!--<b class="arrow fa fa-angle-down"></b>-->
+                <!--</a>-->
+                <!--<ul class="submenu">-->
+                    <!--<li class="">-->
+                        <!--<a href="#alarmstatus" class="linkaction" data-page="html/alarm/alarmstatus-page.html">-->
+                            <!--<i class="menu-icon fa fa-caret-right"></i>-->
+                            <!--<span class="menu-text">告警状态</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="">-->
+                        <!--<a href="#bufang" class="linkaction" data-page="html/alarm/bufang-page.html">-->
+                            <!--<i class="menu-icon fa fa-caret-right"></i>-->
+                            <!--<span class="menu-text">布防</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="">-->
+                        <!--<a href="#chefang" class="linkaction" data-page="html/alarm/chefang-page.html">-->
+                            <!--<i class="menu-icon fa fa-caret-right"></i>-->
+                            <!--<span class="menu-text">撤防</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <li class="sc-adminonly">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">平台互联</span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <ul class="submenu">
+                    <li class="">
+                        <a href="#mggateway" class="linkaction" data-page="html/gateway-setting-page.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            <span class="menu-text">网关配置</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#mgplatsuper" class="linkaction" data-page="html/platsuper-manager-page.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            <span class="menu-text">上级域</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#mgplatlower" class="linkaction" data-page="html/platlower-manager-page.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            <span class="menu-text">下级域</span>
+                        </a>
+                    </li>
+                    <!--<li class="">-->
+                        <!--<a href="#mggbtdevice" class="linkaction" data-page="html/gbtdevice-manager-page.html">-->
+                            <!--<i class="menu-icon fa fa-caret-right"></i>-->
+                            <!--<span class="menu-text">设备管理</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                </ul>
+            </li>
+        </ul><!-- /.nav-list -->
+
+        <!-- #section:basics/sidebar.layout.minimize -->
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+    </div>
+
+    <!-- /section:basics/sidebar -->
+    <div class="main-content" id="shared-content-div"></div><!-- /.main-content -->
+
+    <!--<div id="dialog-message" class="hide">-->
+    <!--<p id="dialog-message-content">信息提示!</p>-->
+    <!--</div>-->
+    <!--<div id="dialog-confirm" class="hide">-->
+    <!--<p id="dialog-confirm-content">消息确认!</p>-->
+    <!--</div>-->
+    <div id="mycustom-dialog" class="hidden">
+        <!--自定义的共用消息弹窗，只支持单级弹窗。-->
+    </div>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <!-- #section:basics/footer -->
+            <div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">北京视酷伟业科技股份有限公司</span>
+                            &copy; 2016-2017
+						</span>
+            </div>
+
+            <!-- /section:basics/footer -->
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<!--jquery & bootstrap-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/knockout.js"></script>
+
+<script src="js/chosen.jquery.min.js"></script>
+
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/jquery.dataTables.bootstrap.js"></script>
+<script src="js/moment.min.js"></script>
+
+<script src="js/jquery.ztree.all.js"></script>
+
+<!--ace scripts-->
+<script src="js/ace.min.js"></script>
+<script src="js/ace-elements.min.js"></script>
+
+<script src="js/jquery.validate.js"></script>
+
+<!--copied code from the demo page to a special file-->
+<script src="js/custom/custom-datatable.js"></script>
+<script src="js/custom/custom-contextmenu.js"></script>
+<script src="js/custom/custom-modalform.js"></script>
+<script src="js/custom/custom-chosen.js"></script>
+<script src="js/custom/custom-utility.js"></script>
+<script src="js/custom/form-video-backcode.js"></script>
+<script src="js/custom/server-backcode.js"></script>
+<script src="js/custom/form-user-backcode.js"></script>
+<script src="js/custom/user-backcode.js"></script>
+<script src="js/custom/logicaltree-backcode.js"></script>
+<script src="js/custom/gbservice-backcode.js"></script>
+<script src="js/custom/alarmpage-backcode.js"></script>
+<script src="js/custom/load-page-content.js"></script>
+</body>
+</html>

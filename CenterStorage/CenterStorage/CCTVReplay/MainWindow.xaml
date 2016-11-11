@@ -1,0 +1,91 @@
+﻿<Window x:Class="CCTVReplay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CCTVReplay"
+        xmlns:video="clr-namespace:CCTVReplay.Video"
+        xmlns:combo="clr-namespace:CCTVReplay.Combo"
+        xmlns:src="clr-namespace:CCTVReplay.Source"
+        xmlns:util="clr-namespace:CCTVReplay.Util"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Title="视频录像回放"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="600"
+        Width="800"
+        MinWidth="600"
+        MinHeight="360">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResDict/DictBrushes.xaml" />
+                <ResourceDictionary Source="ResDict/DictComStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="panelBack"
+                             Color="#4000" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="util:WindowCommands.Close"
+                        Executed="CloseCmdHandler"
+                        CanExecute="CanCloseExecute" />
+        <CommandBinding Command="util:WindowCommands.Maximize"
+                        Executed="MaximizeCmdHandler"
+                        CanExecute="CanMaximizeExecute" />
+        <CommandBinding Command="util:WindowCommands.Minimize"
+                        Executed="MinimizeCmdHandler"
+                        CanExecute="CanMinimizeExecute" />
+        <CommandBinding Command="util:WindowCommands.Restore"
+                        Executed="RestoreCmdHandler"
+                        CanExecute="CanRestoreExecute" />
+        <CommandBinding Command="util:UrlCommands.Import"
+                        Executed="ImportUrlCmdHandler"
+                        CanExecute="CanImportUrlExecute" />
+        <CommandBinding Command="util:UrlCommands.Export"
+                        Executed="ExportUrlCmdHandler"
+                        CanExecute="CanExportUrlExecute" />
+    </Window.CommandBindings>
+    <Border Margin="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <local:WindowControlBox MouseLeftButtonDown="headerMouseDownHandler"
+                                    MouseDoubleClick="headerDoubleClick"
+                                    VerticalAlignment="Stretch" 
+                                    Height="40"
+                                    x:Name="ctrlBox"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5" x:Name="nodeSplitter"/>
+                    <ColumnDefinition Width="300"
+                                      x:Name="nodeTreeSpan" />
+                </Grid.ColumnDefinitions>
+                <combo:PlayControl x:Name="playCtrl"/>
+                <ToggleButton IsChecked="{Binding IsExpand, Mode=TwoWay}" 
+                              Width="18"
+                              Height="80"
+                              HorizontalAlignment="Right"
+                              Style="{StaticResource ExpandButton}"
+                            VerticalAlignment="Center"/>
+                <GridSplitter Grid.Column="1"
+                              HorizontalAlignment="Stretch"
+                              Background="{StaticResource PanelSplitBorderBrush}"/>
+                <Grid Background="{StaticResource VideoTreePanelBrush}"
+                    Grid.Column="2">
+                    <src:VideoSelectPanel x:Name="videoSelPanel"
+                                          Background="{StaticResource VideoTreePanelBrush}"
+                                          BorderBrush="{StaticResource PanelSplitBorderBrush}"
+                                          BorderThickness="0,1,0,0" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

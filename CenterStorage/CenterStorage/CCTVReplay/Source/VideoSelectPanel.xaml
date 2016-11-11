@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="CCTVReplay.Source.VideoSelectPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CCTVReplay.Source"
+             xmlns:searcher="clr-namespace:CCTVReplay.VideoTree.Search"
+             xmlns:util="clr-namespace:CCTVReplay.Util"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ResDict/DictComStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+            <searcher:SearcherControl x:Name="searcher"/>
+    </Grid>
+</UserControl>

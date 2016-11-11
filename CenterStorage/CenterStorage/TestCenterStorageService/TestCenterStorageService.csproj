@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98A3BFA6-8E9C-404A-B2AA-07B75883515E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestCenterStorageService</RootNamespace>
+    <AssemblyName>TestCenterStorageService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Binary\Framework\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\Binary\Libs\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Base\ExceptionManager.cs" />
+    <Compile Include="CCTVDownloadService\DownloadsConfigFileTest.cs" />
+    <Compile Include="CCTVDownloadService\DownloadingLimitManagerTest.cs" />
+    <Compile Include="CCTVDownloadService\VideoPackageRecorderTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\HikHeaderPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\FfmpegHeaderPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\MessagePacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\LocalDownloadInfoPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\LocalVideosInfoPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoInfoTest.cs" />
+    <Compile Include="CenterStorageCmd\Settings.cs" />
+    <Compile Include="CenterStorageCmd\TimeProbeManagerTest.cs" />
+    <Compile Include="CenterStorageCmd\URL\LocalUrlTest.cs" />
+    <Compile Include="CenterStorageCmd\URL\RemoteUrlTest.cs" />
+    <Compile Include="CenterStorageCmd\VideoBaseFileRecorderTest.cs" />
+    <Compile Include="Base\BaseInfo.cs" />
+    <Compile Include="CenterStorageService\HikStreamCombineTest.cs" />
+    <Compile Include="Other\ReplayProcessManager.cs" />
+    <Compile Include="Other\ReplayProcessManagerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CenterStorageService\MultiVideoDisplayerTest.cs" />
+    <Compile Include="CenterStorageCmd\FolderManagerTest.cs" />
+    <Compile Include="CenterStorageService\StorageSearcherTest.cs" />
+    <Compile Include="CenterStorageService\LargeDataSearcherTest.cs" />
+    <Compile Include="CenterStorageCmd\TimePeriodManagerTest.cs" />
+    <Compile Include="CenterStorageCmd\GlobalProcessTest.cs" />
+    <Compile Include="CenterStorageCmd\HardDiskSpaceManagerTest.cs" />
+    <Compile Include="CenterStorageCmd\IndexesPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\StreamPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoStreamsPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\FileManagerTest.cs" />
+    <Compile Include="CenterStorageService\StorageDownloaderTest.cs" />
+    <Compile Include="CenterStorageService\VideoStoragerManagerTest.cs" />
+    <Compile Include="CCTVDownloadService\DownloadProgressManagerTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\PacketBaseTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\TimePeriodPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\DownloadInfoExpandPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\DownloadInfoParamTest.cs" />
+    <Compile Include="CenterStorageCmd\DownloadInfoPartConverterTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\StorageFlagParamTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoBaseParamTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoDataInfoParamTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoTimePeriodsPacketTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoBasePacketTest.cs" />
+    <Compile Include="CenterStorageCmd\ConfigFileTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\DownloadStatusManagerTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\SourceInfoTest.cs" />
+    <Compile Include="CCTVDownloadService\DownloadRecorderTest.cs" />
+    <Compile Include="CCTVDownloadService\DownloadSpeedMonitorTest.cs" />
+    <Compile Include="CenterStorageCmd\Packet\VideoDataParamTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CCTVDownloadService\CCTVDownloadService.csproj">
+      <Project>{4a84e983-1b91-48cf-8f8a-3517fd4ddd2e}</Project>
+      <Name>CCTVDownloadService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenterStorageCmd\CenterStorageCmd.csproj">
+      <Project>{3e399021-8386-455e-9bda-ec0f85ff5d76}</Project>
+      <Name>CenterStorageCmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenterStorageService\CenterStorageService.csproj">
+      <Project>{eed0c705-4514-4a06-b977-ddce14aef185}</Project>
+      <Name>CenterStorageService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

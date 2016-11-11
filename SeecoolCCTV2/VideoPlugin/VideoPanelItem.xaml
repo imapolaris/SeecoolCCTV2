@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="VideoNS.VideoPanelItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:base="clr-namespace:VideoNS.BaseXaml"
+             xmlns:local="clr-namespace:VideoNS"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.DataContext>
+        <local:VideoItemViewModel/>
+    </UserControl.DataContext>
+    <Grid Background="Transparent">
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="Images/空白添加视频背景.png" />
+        </Grid.Background>-->
+        <Grid x:Name="gridPanel" Margin="1"/>
+        <!--突起效果-->
+        <base:BreakoutBorder/>
+        <!--右上角关闭按钮-->
+        <Grid x:Name="gridVideoPanelItemControl" Margin="1"/>
+    </Grid>
+</UserControl>

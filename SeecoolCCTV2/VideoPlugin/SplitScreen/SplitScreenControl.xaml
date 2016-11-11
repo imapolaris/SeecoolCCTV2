@@ -1,0 +1,487 @@
+﻿<UserControl x:Class="VideoNS.SplitScreen.SplitScreenControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VideoNS.SplitScreen"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib"
+             xmlns:handler="clr-namespace:VideoNS.DragDropHandler"
+             xmlns:drag="clr-namespace:DragDropHelper;assembly=DragDropHelper"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             xmlns:converter="clr-namespace:VideoNS.Converter"
+             xmlns:main="clr-namespace:VideoNS"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Dictionary\DictStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <handler:SplitScreenDropHandler x:Key="DropHandler" />
+            <clr:Double x:Key="collapsedPos">-32</clr:Double>
+            <Duration x:Key="duration">0:0:0.3</Duration>
+            <ImageBrush x:Key="foreCircle"
+                        ImageSource="..\Images\倒计时开始.png" />
+            <ImageBrush x:Key="backCircle"
+                        ImageSource="..\Images\倒计时结束.png" />
+            <main:HalfValueConverter x:Key="halfConverter" />
+            <local:StateToAngleConverter x:Key="angleConverter" />
+            <local:ProgressToPoint x:Key="pointConverter" />
+            <local:ProgressToTrans x:Key="transConverter" />
+            <converter:BoolToVisibilityConverter x:Key="boolToVisi" />
+            <Style TargetType="Button"
+                   x:Key="InnerBtnStyle">
+                <Setter Property="FontSize"
+                        Value="14" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#01FFFFFF">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border x:Name="normal"
+                                            Padding="5"
+                                            Width="{TemplateBinding ActualHeight}"
+                                            Height="{TemplateBinding ActualHeight}">
+                                        <Rectangle Fill="{TemplateBinding Background}" />
+                                    </Border>
+                                    <Border x:Name="cover"
+                                            Visibility="Collapsed"
+                                            Padding="5"
+                                            Width="{TemplateBinding ActualHeight}"
+                                            Height="{TemplateBinding ActualHeight}">
+                                        <Rectangle Fill="{TemplateBinding helper:CustomBrush.MouseOverBrush}" />
+                                    </Border>
+                                    <ContentPresenter VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Visibility"
+                                            TargetName="normal"
+                                            Value="Collapsed" />
+                                    <Setter Property="Visibility"
+                                            TargetName="cover"
+                                            Value="Visible" />
+                                    <Setter Property="Foreground"
+                                            Value="{StaticResource MouseOverColor}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="ToggleButton"
+                   x:Key="toggleBtnStyle">
+                <Setter Property="FontSize"
+                        Value="14" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid Background="#01FFFFFF">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border x:Name="normal"
+                                            Padding="5"
+                                            Width="{TemplateBinding ActualHeight}"
+                                            Height="{TemplateBinding ActualHeight}">
+                                        <Rectangle Fill="{TemplateBinding Background}" />
+                                    </Border>
+                                    <Border x:Name="cover"
+                                            Visibility="Collapsed"
+                                            Padding="5"
+                                            Width="{TemplateBinding ActualHeight}"
+                                            Height="{TemplateBinding ActualHeight}">
+                                        <Rectangle Fill="{TemplateBinding helper:CustomBrush.MouseOverBrush}" />
+                                    </Border>
+                                    <ContentPresenter VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Visibility"
+                                            TargetName="normal"
+                                            Value="Collapsed" />
+                                    <Setter Property="Visibility"
+                                            TargetName="cover"
+                                            Value="Visible" />
+                                    <Setter Property="Foreground"
+                                            Value="{StaticResource MouseOverColor}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:SplitControlModel />
+    </UserControl.DataContext>
+    <Grid ClipToBounds="false">
+        <Image Source="../Images/Background.jpg"
+               Stretch="Fill" />
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="../Images/空白添加视频背景.png" />
+            </Border.Background>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <!--中间视频面板-->
+            <Grid x:Name="gridCenter"
+                  Grid.Row="{Binding CenterGridRowIndex}"
+                  Grid.RowSpan="{Binding CenterGridRowSpan}">
+                <local:SplitScreenPanel x:Name="splitPanel"
+                                        DataContext="{Binding SettingModel.SplitModel}"
+                                        drag:DragDropTool.AllowDrop="True"
+                                        drag:DragDropTool.DropHandler="{StaticResource DropHandler}" />
+            </Grid>
+            <!--上侧设置面板-->
+            <Grid Grid.Row="0"
+                  x:Name="gridUp"
+                  Background="{StaticResource NormalBlue}"
+                  DataContext="{Binding SettingModel}"
+                  helper:MouseCommandBehavior.MouseEnterCommand="{Binding MouseEnterCmd}"
+                  helper:MouseCommandBehavior.MouseLeaveCommand="{Binding MouseLeaveCmd}">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=ControlState}"
+                                         Value="Visible">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard AccelerationRatio="0.5"
+                                                    DecelerationRatio="0.5">
+                                            <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             Duration="{StaticResource duration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard AccelerationRatio="0.5"
+                                                    DecelerationRatio="0.5">
+                                            <DoubleAnimation To="{StaticResource collapsedPos}"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             Duration="{StaticResource duration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=ControlState}"
+                                         Value="Hidden">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=WindowState,Mode=OneWay}"
+                                         Value="Maximized">
+                                <Setter Property="Width"
+                                        Value="600" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="uppanelTranslate"
+                                        Y="0" />
+                </Grid.RenderTransform>
+                <Grid Grid.Column="1"
+                      Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <!--<Border Grid.Column="0"
+                            Grid.ColumnSpan="7"
+                            CornerRadius="2"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                    </Border>-->
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/sclogo.png"
+                               Grid.Column="0"
+                               Margin="5,0" />
+                        <TextBlock Text="{Binding Title}"
+                                   Margin="5"
+                                   FontSize="15"
+                                   Foreground="{StaticResource FillColor}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Button Content="编辑布局"
+                            Grid.Column="1"
+                            Command="{Binding LayoutEditCmd}"
+                            Style="{StaticResource InnerBtnStyle}"
+                            Background="{StaticResource 布局_默认_Vec}"
+                            Visibility="{Binding ElementName=splitPanel,Path=DataContext.IsOnEditting,Converter={StaticResource boolToVisi},ConverterParameter=false}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 布局_悬浮_Vec}" />
+                    <Button Grid.Column="2"
+                            Command="{Binding TimingSwitchCmd}"
+                            Style="{StaticResource InnerBtnStyle}"
+                            Background="{StaticResource 定时切换_默认_Vec}"
+                            Visibility="{Binding ElementName=splitPanel,Path=DataContext.IsOnEditting,Converter={StaticResource boolToVisi},ConverterParameter=false}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 定时切换_悬浮_Vec}"
+                            Content="{Binding SwitchButtonText}" />
+                    <ToggleButton Grid.Column="3"
+                                  IsChecked="{Binding EmerencyChecked}"
+                                  helper:CustomBrush.MouseOverBrush="{StaticResource 应急指挥_悬浮_Vec}"
+                                  Visibility="{Binding ElementName=splitPanel,Path=DataContext.IsOnEditting,Converter={StaticResource boolToVisi},ConverterParameter=false}"
+                                  Content="应急指挥">
+                        <ToggleButton.Style>
+                            <Style TargetType="ToggleButton"
+                                   BasedOn="{StaticResource toggleBtnStyle}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="{StaticResource 应急指挥_悬浮_Vec}" />
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource MouseOverColor}" />
+                                    </Trigger>
+                                    <Trigger Property="IsChecked"
+                                             Value="False">
+                                        <Setter Property="Background"
+                                                Value="{StaticResource 应急指挥_默认_Vec}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <Button Grid.Column="5"
+                            Command="{Binding MinWinCmd}"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Margin="2"
+                            Background="{StaticResource 最小化_默认}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 最小化_悬浮}"
+                            Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}" />
+                    <Button Grid.Column="6"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Command="{Binding NormalWinCmd}"
+                            Margin="2"
+                            Background="{StaticResource 最大化还原_默认}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 最大化还原_悬浮}"
+                            Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                            Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource boolToVisi},ConverterParameter=true}">
+                    </Button>
+                    <Button Grid.Column="6"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Command="{Binding MaxWinCmd}"
+                            Margin="2"
+                            Background="{StaticResource 最大化_默认}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 最大化_悬浮}"
+                            Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                            Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource boolToVisi},ConverterParameter=true}">
+                    </Button>
+                    <Button Grid.Column="7"
+                            Command="{Binding CloseWinCmd}"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Margin="2"
+                            Background="{StaticResource 关闭_默认}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 关闭_悬浮}"
+                            Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}" />
+
+                </Grid>
+                <!--下拉箭头-->
+                <Grid x:Name="gridArrow"
+                      helper:MouseCommandBehavior.MouseEnterCommand="{Binding MouseEnterCmd}"
+                      helper:MouseCommandBehavior.MouseLeaveCommand="{Binding MouseLeaveCmd}"
+                      Opacity="{Binding ButtonOpacity}">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=WindowState,Mode=OneWay}"
+                                             Value="Maximized">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform Y="{Binding ElementName=gridArrow,Path=ActualHeight}" />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Path Fill="{StaticResource NormalBlue}"
+                          Stroke="Gray"
+                          StrokeThickness="2"
+                          Grid.Column="1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure IsClosed="true"
+                                            StartPoint="1,0">
+                                    <ArcSegment Point="29,0"
+                                                Size="14,14"
+                                                IsLargeArc="True"
+                                                SweepDirection="Counterclockwise" />
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                    <Button x:Name="btnUpDown"
+                            Width="13"
+                            Height="13"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Background="{StaticResource 云镜控制箭头_默认_Vec}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 云镜控制箭头_悬浮_Vec}"
+                            Grid.Column="1"
+                            Command="{Binding ChangeControlStateCmd}"
+                            BorderThickness="0"
+                            Padding="0">
+                        <Button.RenderTransform>
+                            <RotateTransform x:Name="contentRotate"
+                                             Angle="{Binding ControlState,Converter={StaticResource angleConverter},Mode=OneWay}"
+                                             CenterX="{Binding ElementName=btnUpDown,Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                             CenterY="{Binding ElementName=btnUpDown,Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                        </Button.RenderTransform>
+                    </Button>
+                </Grid>
+                <Border BorderThickness="1,0,1,1"
+                        BorderBrush="Gray">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WindowState}"
+                                             Value="Maximized">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+            <!--倒计时圆盘-->
+            <Grid x:Name="gridCircle"
+                  Grid.Row="2"
+                  Opacity="0.7"
+                  Margin="5"
+                  Background="Transparent"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  DataContext="{Binding SettingModel}"
+                  helper:MouseCommandBehavior.MouseUpCommand="{Binding PauseCmd}"
+                  Visibility="{Binding ClockVisibility}">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                Value="#5AFF1E" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                        Value="{StaticResource MouseOverColor}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform Y="-15" />
+                        <TranslateTransform Y="{Binding ElementName=uppanelTranslate,Path=Y}" />
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Ellipse Fill="#5000"
+                         Width="63"
+                         Height="63" />
+                <Border Background="{StaticResource backCircle}"
+                        Width="80"
+                        Height="80" />
+                <Path Fill="{StaticResource foreCircle}">
+                    <Path.Data>
+                        <PathGeometry FillRule="EvenOdd">
+                            <PathFigure IsClosed="True"
+                                        StartPoint="0,0">
+                                <LineSegment Point="80,0" />
+                                <LineSegment Point="80,80" />
+                                <LineSegment Point="0,80" />
+                            </PathFigure>
+                            <PathFigure IsClosed="true"
+                                        StartPoint="40,40">
+                                <LineSegment Point="40,0" />
+                                <ArcSegment x:Name="clipArc"
+                                            Point="{Binding Path=ProgressAngle,Converter={StaticResource pointConverter},ConverterParameter=40|40|40,Mode=OneWay}"
+                                            Size="40,40"
+                                            IsLargeArc="{Binding IsLargeArc,Mode=OneWay}"
+                                            SweepDirection="Clockwise" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <Image Source="..\Images\倒计时_圆球.png"
+                       Width="22"
+                       Height="22">
+                    <Image.RenderTransform>
+                        <TranslateTransform Y="-32" />
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="..\Images\倒计时_圆球.png"
+                       Width="22"
+                       Height="22">
+                    <Image.RenderTransform>
+                        <TranslateTransform X="{Binding Path=ProgressAngle,Converter={StaticResource transConverter},ConverterParameter=32|X,Mode=OneWay}"
+                                            Y="{Binding Path=ProgressAngle,Converter={StaticResource transConverter},ConverterParameter=32|Y,Mode=OneWay}" />
+                    </Image.RenderTransform>
+                </Image>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding RemainingTime}"
+                               Foreground="{Binding ElementName=gridCircle,Path=(helper:CustomBrush.MouseOverBrush)}"
+                               HorizontalAlignment="Center"
+                               FontSize="18" />
+                    <TextBlock Text="{Binding SwitchLabelText}"
+                               Foreground="{Binding ElementName=gridCircle,Path=(helper:CustomBrush.MouseOverBrush)}"
+                               HorizontalAlignment="Center"
+                               FontSize="15" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Border x:Name="coverBorder"
+                Background="#7f000000"
+                IsHitTestVisible="False"
+                Visibility="Collapsed" />
+    </Grid>
+</UserControl>

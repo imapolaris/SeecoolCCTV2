@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E399021-8386-455E-9BDA-EC0F85FF5D76}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CenterStorageCmd</RootNamespace>
+    <AssemblyName>CenterStorageCmd</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\..\Binary\Framework\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\ConfigFile.cs" />
+    <Compile Include="Base\DownloadCode.cs" />
+    <Compile Include="Base\DownloadControlCode.cs" />
+    <Compile Include="Base\GlobalProcess.cs" />
+    <Compile Include="Base\HardDiskSpaceManager.cs" />
+    <Compile Include="Base\TimeProbeManager.cs" />
+    <Compile Include="Base\StreamType.cs" />
+    <Compile Include="Base\DownloadStatus.cs" />
+    <Compile Include="Base\VideoType.cs" />
+    <Compile Include="Converter\DownloadExpandPart.cs" />
+    <Compile Include="Converter\DownloadInfoPartConverter.cs" />
+    <Compile Include="Interface\IDownloadInfo.cs" />
+    <Compile Include="Interface\IDownloadInfoExpand.cs" />
+    <Compile Include="Interface\ISearcher.cs" />
+    <Compile Include="Manager\VideoBaseFileRecorder.cs" />
+    <Compile Include="Packet\StorageFlagParam.cs" />
+    <Compile Include="Packet\DownloadInfoExpandPacket.cs" />
+    <Compile Include="Interface\IDownloader.cs" />
+    <Compile Include="Interface\ISourceInfo.cs" />
+    <Compile Include="Interface\ITimePeriod.cs" />
+    <Compile Include="Interface\IVideoBaseInfom.cs" />
+    <Compile Include="Interface\IVideoInfo.cs" />
+    <Compile Include="Manager\FileManager.cs" />
+    <Compile Include="Manager\FolderManager.cs" />
+    <Compile Include="Manager\HistoryFolderInfo.cs" />
+    <Compile Include="Manager\RecorderBase.cs" />
+    <Compile Include="Manager\TimePeriodManager.cs" />
+    <Compile Include="Packet\DownloadInfoParam.cs" />
+    <Compile Include="Packet\FfmpegHeaderPacket.cs" />
+    <Compile Include="Packet\HikHeaderPacket.cs" />
+    <Compile Include="Packet\IndexesPacket.cs" />
+    <Compile Include="Packet\LocalDownloadInfoPacket.cs" />
+    <Compile Include="Packet\LocalVideosInfoPacket.cs" />
+    <Compile Include="Packet\MessagePacket.cs" />
+    <Compile Include="Packet\PacketBase.cs" />
+    <Compile Include="Base\ParamCode.cs" />
+    <Compile Include="Packet\SourceInfo.cs" />
+    <Compile Include="Packet\StreamPacket.cs" />
+    <Compile Include="Packet\TimePeriodPacket.cs" />
+    <Compile Include="Packet\UniviewHeaderPacket.cs" />
+    <Compile Include="Packet\UniviewStreamPacket.cs" />
+    <Compile Include="Packet\VideoBasePacket.cs" />
+    <Compile Include="Packet\VideoBaseParam.cs" />
+    <Compile Include="Packet\VideoDataInfoParam.cs" />
+    <Compile Include="Packet\VideoInfo.cs" />
+    <Compile Include="Packet\VideoStreamsPacket.cs" />
+    <Compile Include="Packet\VideoStreamsParam.cs" />
+    <Compile Include="Packet\VideoTimePeriodsPacket.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Url\ILocalUrl.cs" />
+    <Compile Include="Url\IRemoteUrl.cs" />
+    <Compile Include="Url\IUrl.cs" />
+    <Compile Include="Url\LocalUrl.cs" />
+    <Compile Include="Url\RemoteUrl.cs" />
+    <Compile Include="Url\UrlBase.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="CCTVDownload.WindowControlBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CCTVDownload"
+             xmlns:util="clr-namespace:CCTVDownload.Util"
+             mc:Ignorable="d"
+             BorderThickness="0"
+             d:DesignHeight="50"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary/DictStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="B2VConverter" />
+            <Style TargetType="Button">
+                <Setter Property="Width"
+                    Value="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}" />
+                <Setter Property="Margin"
+                    Value="0" />
+            </Style>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+        <Border SnapsToDevicePixels="True">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#387CFC" Offset="0"/>
+                    <GradientStop Color="#266CE6" Offset="0.3"/>
+                    <GradientStop Color="#1254C2" Offset="0.6"/>
+                    <GradientStop Color="#0140A1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <DockPanel LastChildFill="False">
+            <Grid DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Content="{StaticResource 最小化按键}"
+                        Style="{StaticResource  IconTextButtonStyle}"
+                        Command="util:WindowCommands.Minimize" 
+                Grid.Column="0"/>
+                <Button Content="{StaticResource 最大化按键}"
+                        Style="{StaticResource IconTextButtonStyle}"
+                        Command="util:WindowCommands.Maximize"
+                        Grid.Column="1"
+                        Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource B2VConverter}}" />
+                <Button Content="{StaticResource 还原按键}"
+                        Style="{StaticResource IconTextButtonStyle}"
+                        Command="util:WindowCommands.Restore"
+                        Grid.Column="1"
+                        Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource B2VConverter}}" />
+                <Button Content="{StaticResource 关闭按键}"
+                        Style="{StaticResource  IconTextButtonStyle}"
+                        Command="util:WindowCommands.Close"
+                        Grid.Column="2" />
+            </Grid>
+            <DockPanel>
+                <Image Source="Images/sclogo.png"/>
+                <TextBlock Text="录像下载"
+                           FontSize="20"
+                           FontFamily="Century Gothic"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           DockPanel.Dock="Left"
+                           Margin="0,0,10,0"/>
+            </DockPanel>
+            <GridSplitter HorizontalAlignment="Center" 
+                          Width="2"
+                          Opacity="0.3"
+                          Margin="20,5,0,0"/>
+
+            <StackPanel Orientation="Horizontal" 
+                        DataContext="{Binding CommandModel}"
+                        DockPanel.Dock="Left">
+                <Button Content="{StaticResource 新建任务按键}"
+                    Style="{StaticResource IconTextButtonStyle}"
+                    Command="{Binding NewDownloadsCommand}"/>
+                <GridSplitter HorizontalAlignment="Center" Width="1" Height="25"/>
+                <Button Content="{StaticResource 全部开始按键}"
+                    Style="{StaticResource IconTextButtonStyle}"
+                    Command="{Binding StartCommand}"/>
+                <GridSplitter HorizontalAlignment="Center" Width="1" Height="25"/>
+                <Button Content="{StaticResource 全部暂停按键}"
+                    Style="{StaticResource IconTextButtonStyle}"
+                    Command="{Binding PauseCommand}"/>
+                <GridSplitter HorizontalAlignment="Center" Width="1" Height="25"/>
+                <Button Content="{StaticResource 删除下载按键}"
+                    Style="{StaticResource IconTextButtonStyle}"
+                    Command="{Binding DeleteCommand}"/>
+                <GridSplitter HorizontalAlignment="Center" Width="1" Height="25"/>
+                <ToggleButton IsChecked="{Binding Path=MultiSelected, Mode=TwoWay}"
+                    Style="{StaticResource  MultiSelectedsStyle}"/>
+            </StackPanel>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

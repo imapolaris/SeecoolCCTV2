@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="VideoNS.TimeSwitch.TimeSwitchPlanControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:layout="clr-namespace:VideoNS.Layout"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:VideoNS.TimeSwitch"
+             xmlns:drag="clr-namespace:DragDropHelper;assembly=DragDropHelper"
+             xmlns:dragHandler="clr-namespace:VideoNS.DragDropHandler"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml"/>
+                <ResourceDictionary Source="../Dictionary/DictScrollViewer.xaml" />
+                <ResourceDictionary Source="../VideoInfo/Search/DictSearchBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:TimeSwitchListDragHandler x:Key="DragHandler"/>
+            <local:TimeSwitchListDropHandler x:Key="DropHandler"/>
+            <ControlTemplate TargetType="telerik:RadListBoxItem" x:Key="planRadListBoxItem">
+                <Border x:Name="bordLayout" Width="268" Height="188">
+                    <local:LayoutPlanPanel DataContext="{Binding Mode=OneWay}" Margin="12"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="true">
+                        <Setter TargetName="bordLayout" Property="Background" Value="{StaticResource 定时切换背景_默认}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver"
+                                 Value="true">
+                        <Setter TargetName="bordLayout" Property="Background" Value="{StaticResource 定时切换背景_悬浮}">
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="true">
+                        <Setter TargetName="bordLayout" Property="Background" Value="{StaticResource 定时切换背景_选中}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:TimeSwitchViewModel/>
+    </UserControl.DataContext>
+    <DockPanel>
+        <Border Height="46" DockPanel.Dock="Top" Style="{StaticResource BorderStyle}">
+            <DockPanel LastChildFill="False">
+                <!--<Image Source="../Images/sclogo.png" Margin="0,0,-5,0"/>-->
+                <Image Source="../Images/TimeSwitch/定时切换.png"/>
+                <Button Content="{StaticResource 导入按键}" Width="80" Style="{StaticResource ShortIconButtonStyle}" DockPanel.Dock="Left" Margin="5,8,0,7" Command="{Binding ImportCommand}"/>
+                <Button Content="{StaticResource 导出按键}" Width="80" Style="{StaticResource ShortIconButtonStyle}" DockPanel.Dock="Left" Margin="5,8,0,7" Command="{Binding ExportCommand}"/>
+                <Button Content="{StaticResource 清空按键}" Width="80" Style="{StaticResource ShortIconButtonStyle}" DockPanel.Dock="Left" Margin="5,8,10,7" Command="{Binding ClearCommand}"/>
+                <Button Content="{StaticResource 返回界面布局设置}" Width="175" Style="{StaticResource IconButtonStyle}" DockPanel.Dock="Right" Margin="5,8,10,7" Command="{Binding ReturnCommand}"/>
+            </DockPanel>
+        </Border>
+        <Border DockPanel.Dock="Top" Style="{StaticResource BorderStyle}">
+            <telerik:RadListBox x:Name="PlansListbox" ItemsSource="{Binding PlansSource.View, Mode=OneWay}" SelectedItem="{Binding Path =SelectedPlan, Mode=TwoWay}"
+                                ItemsPanel="{StaticResource stackPanelHorizontal}"
+                                ScrollViewer.VerticalScrollBarVisibility = "Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility = "Auto"
+                                Background="{x:Null}" IsSynchronizedWithCurrentItem="False"
+                                BorderThickness="0" MouseUp="PlansListbox_MouseUp"
+                                Style="{StaticResource RadListBoxStyle}"
+                                drag:DragDropTool.AllowDrag="True"
+                                drag:DragDropTool.AllowDrop="True"
+                                drag:DragDropTool.ForceDrag="True"
+                                drag:DragDropTool.DragHandler="{StaticResource DragHandler}"
+                                drag:DragDropTool.DropHandler="{StaticResource DropHandler}"
+                                drag:DragDropData.Data="{Binding SelectedPlan}"
+                                drag:DragDropVisual.Opacity="1"
+                                drag:DragDropVisual.SizeToContent="WidthAndHeight"
+                                drag:DragDropVisual.MousePositionInVisual="Center">
+                <telerik:RadListBox.Resources>
+                    <Style TargetType="telerik:RadListBoxItem">
+                        <Setter Property="Template" Value="{StaticResource planRadListBoxItem}"/>
+                    </Style>
+                </telerik:RadListBox.Resources>
+            </telerik:RadListBox>
+        </Border>
+        <Border>
+            <layout:LayoutPanel DataContext="{Binding CurrentPlan}"/>
+        </Border>
+    </DockPanel>
+</UserControl>

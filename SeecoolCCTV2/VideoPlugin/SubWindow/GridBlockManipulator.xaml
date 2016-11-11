@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="VideoNS.SubWindow.GridBlockManipulator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VideoNS.SubWindow"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Grid.Row="{Binding Row}"
+             Grid.Column="{Binding Column}"
+             Grid.RowSpan="{Binding RowSpan}"
+             Grid.ColumnSpan="{Binding ColumnSpan}">
+    <UserControl.DataContext>
+        <local:GridBlockModel/>
+    </UserControl.DataContext>
+    <Grid x:Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <!--背景按钮-->
+        <Button x:Name="btnBack"
+                Cursor="SizeAll"
+                Background="Transparent"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="5">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="1"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!--控制按钮-->
+        <Button x:Name="btnLeftTop"
+                Cursor="SizeNWSE"
+                helper:ArrowDirection.Direction="LeftUp"
+                Grid.Row="0"
+                Grid.Column="0">
+            <Button.RenderTransform>
+                <TranslateTransform X="-5"
+                                    Y="-5"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnTopCenter"
+                Cursor="SizeNS"
+                helper:ArrowDirection.Direction="Up"
+                Grid.Row="0"
+                Grid.Column="2">
+            <Button.RenderTransform>
+                <TranslateTransform Y="-5" />
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnRightTop"
+                Cursor="SizeNESW"
+                helper:ArrowDirection.Direction="RightUp"
+                Grid.Row="0"
+                Grid.Column="4">
+            <Button.RenderTransform>
+                <TranslateTransform X="5"
+                                    Y="-5" />
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnLeftCenter"
+                Cursor="SizeWE"
+                helper:ArrowDirection.Direction="Left"
+                Grid.Row="2"
+                Grid.Column="0">
+            <Button.RenderTransform>
+                <TranslateTransform X="-5"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnRightCenter"
+                Cursor="SizeWE"
+                helper:ArrowDirection.Direction="Right"
+                Grid.Row="2"
+                Grid.Column="4">
+            <Button.RenderTransform>
+                <TranslateTransform X="5"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnLeftBottom"
+                Cursor="SizeNESW"
+                helper:ArrowDirection.Direction="LeftDown"
+                Grid.Row="4"
+                Grid.Column="0">
+            <Button.RenderTransform>
+                <TranslateTransform X="-5"
+                                    Y="5" />
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnBottomCenter"
+                Cursor="SizeNS"
+                helper:ArrowDirection.Direction="Down"
+                Grid.Row="4"
+                Grid.Column="2">
+            <Button.RenderTransform>
+                <TranslateTransform Y="5" />
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnRightBottom"
+                Cursor="SizeNWSE"
+                helper:ArrowDirection.Direction="RightDown"
+                Grid.Row="4"
+                Grid.Column="4">
+            <Button.RenderTransform>
+                <TranslateTransform X="5"
+                                    Y="5" />
+            </Button.RenderTransform>
+        </Button>
+    </Grid>
+</UserControl>

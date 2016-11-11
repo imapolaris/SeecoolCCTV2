@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body>
+<h1>模态弹窗示例</h1>
+<button id="btn">弹出模态框</button>
+
+<div id="mymodalform" class="hidden">
+    <p>这是第一行</p>
+    <p>这是第二行</p>
+    <p class="text-danger">
+        注意：如果您已经在模态框容器内部的元素上注册了事件，在模态框对象生成后，
+        事件将仍然生效，比如下方按钮的点击事件。
+    </p>
+    <button type="button" id="btnClick">尝试点击我</button>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/custom/custom-modalform.js"></script>
+
+<script>
+    $(function () {
+        var options = {
+            core: {
+                size: "sm", //可选项，sm--小窗口,md--普通窗口,lg--大窗口。默认为md
+                animation: true
+            },
+            title: {
+                "class": "test-class", //为标题栏添加类定义，//可选项。
+                "text": "自定义的模式弹窗", //标题栏文本, //可选项，建议设置。
+                "istexthtml": false, //标题文本是否以html格式显示，false--以纯文本方式显示，true--文本中可以包含html标签。默认为false。//可选项。
+                "iconclass": "glyphicon glyphicon-fire text-primary", //显示在标题文本前面，使用[awesome风格]或[jquery-ui风格]或[bootstrap风格]的图标。//可选的。
+            },
+            footer: {
+                "class": "test-footer-class",//为模态窗口页脚添加类定义。//可选项。
+                //窗口按钮组，//必选项。
+                "buttons": [
+                    {
+                        "id": "mybutton1",//为按钮定义个id标识，//可选项。
+                        "class": "btn-primary",//为按钮添加类定义。//可选项。
+                        "iconclass": "glyphicon glyphicon-ok text-danger",//显示在按钮文本前面，使用[awesome风格]或[jquery-ui风格]或[bootstrap风格]的图标。//可选的。
+                        "text": "确定",//按钮文本。//可选项，建议设置。
+                        "iscancel": false,//标记按钮是否是默认的取消按钮，true--点击按钮时，模态框将关闭。//可选项。
+                        "action": function (event, modal) {
+                            //Do Something
+                            modal.hide();
+                        }
+                    },
+                    {
+                        "id": "mybutton2",//为按钮定义个id标识，//可选项。
+                        "class": "btn-warning",//为按钮添加类定义。//可选项。
+                        "iconclass": "glyphicon glyphicon-off text-danger",//显示在按钮文本前面，使用[awesome风格]或[jquery-ui风格]或[bootstrap风格]的图标。//可选的。
+                        "text": "取消",//按钮文本。//可选项，建议设置。
+                        "iscancel": true,//标记按钮是否是默认的取消按钮，true--点击按钮时，模态框将关闭。//可选项。
+                        "action": function (event, modal) {
+                            //Do Something
+                        }
+                    }
+                ]
+            },
+            events: {
+                "showing": undefined,
+                "shown": undefined,
+                "hiding": undefined,
+                "hidden": undefined
+            }
+        }
+
+        $("#btnClick").click(function () {
+            alert("你点击了这个按钮。");
+        });
+
+        $("#mymodalform").scModalForm(options);
+        $("#btn").click(function () {
+            $("#mymodalform").scModalForm().show();
+        });
+        //或者使用下面被注释的代码也可以。
+//        var scModal = new SCModalForm($("#mymodalform"), options);
+//        $("#btn").click(function () {
+//            scModal.show();
+//        });
+
+
+    })
+</script>
+</body>
+</html>

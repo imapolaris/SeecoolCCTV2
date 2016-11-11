@@ -1,0 +1,402 @@
+﻿<UserControl x:Class="VideoNS.PTZControlPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VideoNS"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             xmlns:subctrl="clr-namespace:VideoNS.SubControls"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="120"
+             d:DesignWidth="75">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Duration x:Key="hideDuration">0:0:0</Duration>
+            <local:OpacityConverter x:Key="opacityConverter" />
+            <local:SpeedConverter x:Key="speedConverter" />
+            <local:HalfValueConverter x:Key="halfConverter" />
+            <local:RatioValueConverter x:Key="ratioConverter"/>
+            <local:FontSizeConverter x:Key="fontSizeConverter" />
+            <Style x:Key="ButtonStyle"
+                   TargetType="Button"
+                   BasedOn="{StaticResource CommonButtonStyle}">
+            </Style>
+            <clr:Double x:Key="rotCenterX">0</clr:Double>
+            <clr:Double x:Key="rotCenterY">0</clr:Double>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="girdMain">
+        <Border Background="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid x:Name="gridDirection"
+                      Height="{Binding RelativeSource={RelativeSource Self},Path=ActualWidth}"
+                      PreviewMouseDown="Button_PreviewMouseDown"
+                      PreviewMouseUp="Button_PreviewMouseUp">
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="gridArrows"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0"
+                                                     Duration="{StaticResource hideDuration}" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="gridArrows"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="{StaticResource hideDuration}" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <!--<Ellipse x:Name="elliBack"
+                             Fill="LightGray"
+                             Opacity="0.3" 
+                             IsHitTestVisible="False"
+                             Stroke="Orange"
+                             StrokeThickness="1"/>-->
+                    <!--+++中心圆面板+++-->
+                    <Grid x:Name="gridArcBall">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="2*" />
+                        </Grid.RowDefinitions>
+                        <!--中心控制圆-->
+                        <Button x:Name="btnCenter"
+                                Background="{StaticResource 圆_默认}"
+                                helper:CustomBrush.MouseOverBrush="{StaticResource 圆_悬浮}"
+                                Style="{StaticResource ButtonStyle}"
+                                Grid.Column="1"
+                                Grid.Row="1">
+                            <Button.DataContext>
+                                <local:TransformParam />
+                            </Button.DataContext>
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding Path=RotateAngle}"
+                                                     CenterX="{Binding RelativeSource={RelativeSource AncestorType=Button,AncestorLevel=1},Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                                     CenterY="{Binding RelativeSource={RelativeSource AncestorType=Button,AncestorLevel=1},Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                                    <TranslateTransform X="{Binding Path=TranslateX}"
+                                                        Y="{Binding Path=TranslateY}" />
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                        <!--转向控制方向键-->
+                        <Button x:Name="btnCtrlArrow"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                IsHitTestVisible="False"
+                                Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                Height="{Binding ElementName=btnRight,Path=ActualHeight}"
+                                helper:ArrowDirection.Direction="Left"
+                                Background="{StaticResource 箭头_点击}"
+                                Opacity="{Binding ElementName=gridArrows,Path=Opacity,Converter={StaticResource opacityConverter}}"
+                                Style="{StaticResource ButtonStyle}">
+                            <Button.DataContext>
+                                <local:TransformParam />
+                            </Button.DataContext>
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding RotateAngle}"
+                                                     CenterX="{Binding RelativeSource={RelativeSource AncestorType=Button,AncestorLevel=1},Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                                     CenterY="{Binding RelativeSource={RelativeSource AncestorType=Button,AncestorLevel=1},Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                                    <TranslateTransform X="{Binding TranslateX}"
+                                                        Y="{Binding TranslateY}" />
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                        <!--速度提示条-->
+                        <subctrl:SpeedTipBar x:Name="speedBar1"
+                                             IsHitTestVisible="False"
+                                             Opacity="{Binding ElementName=gridArrows,Path=Opacity,Converter={StaticResource opacityConverter}}"
+                                             Grid.ColumnSpan="3"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Width="{Binding ElementName=gridAnimRight,Path=ActualWidth,Converter={StaticResource ratioConverter},ConverterParameter=0.7}"
+                                             Height="{Binding ElementName=speedBar1,Path=ActualWidth,Converter={StaticResource ratioConverter},ConverterParameter=0.25}">
+                            <subctrl:SpeedTipBar.DataContext>
+                                <local:TransformParam />
+                            </subctrl:SpeedTipBar.DataContext>
+                            <subctrl:SpeedTipBar.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding RotateAngle}"
+                                                     CenterX="{Binding RelativeSource={RelativeSource AncestorType=subctrl:SpeedTipBar,AncestorLevel=1},Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                                     CenterY="{Binding RelativeSource={RelativeSource AncestorType=subctrl:SpeedTipBar,AncestorLevel=1},Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                                    <TranslateTransform X="{Binding TranslateX}"
+                                                        Y="{Binding TranslateY}" />
+                                </TransformGroup>
+                            </subctrl:SpeedTipBar.RenderTransform>
+                        </subctrl:SpeedTipBar>
+                    </Grid>
+                    <!--***中心圆面板***-->
+                    <!--+++方向控制按钮面板+++-->
+                    <Grid x:Name="gridArrows">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="3*" />
+                        </Grid.RowDefinitions>
+                        <!--arrow to left-->
+                        <Grid x:Name="gridAnimLeft"
+                              Grid.Column="3"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="4*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnLeft"
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    helper:ArrowDirection.Direction="Left"
+                                    Background="{StaticResource 箭头_默认}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                    Style="{StaticResource ButtonStyle}">
+                            </Button>
+                            <subctrl:ArrowAnimationBar Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       IsHitTestVisible="False"/>
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="180"
+                                                 CenterX="{DynamicResource rotCenterX}"
+                                                 CenterY="{DynamicResource rotCenterY}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+                        <!--arrow to up-->
+                        <Grid x:Name="gridAnimUp"
+                              Grid.Column="3"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="4*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnUp"
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Background="{StaticResource 箭头_默认}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    helper:ArrowDirection.Direction="Up"
+                                    Style="{StaticResource ButtonStyle}">
+                            </Button>
+                            <subctrl:ArrowAnimationBar Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       IsHitTestVisible="False"/>
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="270"
+                                                 CenterX="{DynamicResource rotCenterX}"
+                                                 CenterY="{DynamicResource rotCenterY}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+                        <!--arrow to right-->
+                        <Grid x:Name="gridAnimRight"
+                              Grid.Column="3"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="4*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnRight"
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    helper:ArrowDirection.Direction="Right"
+                                    Background="{StaticResource 箭头_默认}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                    Style="{StaticResource ButtonStyle}">
+                            </Button>
+                            <subctrl:ArrowAnimationBar x:Name="animBarRight"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       IsHitTestVisible="False"/>
+                        </Grid>
+                        <!--arrow to down-->
+                        <Grid x:Name="gridAnimDown"
+                              Grid.Column="3"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="4*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnDown"
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    helper:ArrowDirection.Direction="Down"
+                                    Background="{StaticResource 箭头_默认}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                    Style="{StaticResource ButtonStyle}">
+                            </Button>
+                            <subctrl:ArrowAnimationBar Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       IsHitTestVisible="False"/>
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="90"
+                                                 CenterX="{DynamicResource rotCenterX}"
+                                                 CenterY="{DynamicResource rotCenterY}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Grid>
+                    <!--***方向控制按钮面板***-->
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="3" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Style="{StaticResource ButtonStyle}"
+                                Background="{StaticResource 箭头_默认}"
+                                helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                helper:MouseCommandBehavior.MouseDownCommand="{Binding ZoomOutCommand}"
+                                helper:MouseCommandBehavior.MouseUpCommand="{Binding ZoomStopCommand}"
+                                Height="{Binding ElementName=btnRight, Path=ActualHeight}"
+                                Width="{Binding ElementName=btnRight, Path=ActualWidth}"
+                                HorizontalAlignment="Right">
+                            <Button.RenderTransform>
+                                <RotateTransform Angle="180"
+                                                 CenterX="{Binding RelativeSource={RelativeSource AncestorType=Button,Mode=FindAncestor},Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                                 CenterY="{Binding RelativeSource={RelativeSource AncestorType=Button,Mode=FindAncestor},Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                            </Button.RenderTransform>
+                        </Button>
+                        <TextBlock Text="变倍"
+                                   Grid.Column="1"
+                                   Margin="3,0,3,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{StaticResource MainBrush}"
+                                   FontSize="{Binding ElementName=btnRight, Path=ActualHeight,Mode=OneWay,Converter={StaticResource fontSizeConverter}}">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Green"
+                                                  ShadowDepth="0"
+                                                  BlurRadius="3" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <Button Grid.Column="2"
+                                Background="{StaticResource 箭头_默认}"
+                                helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                Style="{StaticResource ButtonStyle}"
+                                helper:MouseCommandBehavior.MouseDownCommand="{Binding ZoomInCommand}"
+                                helper:MouseCommandBehavior.MouseUpCommand="{Binding ZoomStopCommand}"
+                                Height="{Binding ElementName=btnRight, Path=ActualHeight}"
+                                Width="{Binding ElementName=btnRight, Path=ActualWidth}"
+                                HorizontalAlignment="Left">
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Background="{StaticResource 箭头_默认}"
+                                helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                Style="{StaticResource ButtonStyle}"
+                                helper:MouseCommandBehavior.MouseDownCommand="{Binding FocusFarCommand}"
+                                helper:MouseCommandBehavior.MouseUpCommand="{Binding FocusStopCommand}"
+                                Height="{Binding ElementName=btnRight, Path=ActualHeight}"
+                                Width="{Binding ElementName=btnRight, Path=ActualWidth}"
+                                HorizontalAlignment="Right">
+                            <Button.RenderTransform>
+                                <RotateTransform Angle="180"
+                                                 CenterX="{Binding RelativeSource={RelativeSource AncestorType=Button,Mode=FindAncestor},Path=ActualWidth,Converter={StaticResource halfConverter}}"
+                                                 CenterY="{Binding RelativeSource={RelativeSource AncestorType=Button,Mode=FindAncestor},Path=ActualHeight,Converter={StaticResource halfConverter}}" />
+                            </Button.RenderTransform>
+                        </Button>
+                        <TextBlock Text="聚焦"
+                                   Grid.Column="1"
+                                   Margin="3,0,3,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{StaticResource MainBrush}"
+                                   FontSize="{Binding ElementName=btnRight, Path=ActualHeight,Mode=OneWay,Converter={StaticResource fontSizeConverter}}">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Green"
+                                                  ShadowDepth="0"
+                                                  BlurRadius="3" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <Button Grid.Column="2"
+                                Background="{StaticResource 箭头_默认}"
+                                helper:CustomBrush.MouseOverBrush="{StaticResource 箭头_悬浮}"
+                                Style="{StaticResource ButtonStyle}"
+                                helper:MouseCommandBehavior.MouseDownCommand="{Binding FocusNearCommand}"
+                                helper:MouseCommandBehavior.MouseUpCommand="{Binding FocusStopCommand}"
+                                Height="{Binding ElementName=btnRight, Path=ActualHeight}"
+                                Width="{Binding ElementName=btnRight, Path=ActualWidth}"
+                                HorizontalAlignment="Left">
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

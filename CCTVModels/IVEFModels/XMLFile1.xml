@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MSG_IVEF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.iala-to-be-confirmed.org/XMLSchema/IVEF/0.2.5">
+  <Header MsgRefId="{378482a5-2060-4fbb-b4cc-d6909b5b4f38}" Version="0.2.5"/>
+  <Body>
+    <ObjectDatas>
+      <ObjectData>
+        <TrackData COG="221.4" Id="8158" Length="24.299999" Heading="240.642273" SOG="1.9" SourceName="1" UpdateTime="2016-09-23T08:36:24.177Z" TrackStatus="1" Width="3.600000">
+          <Pos Lat="24.60303" Long="118.84945"/>
+        </TrackData>
+        <VesselData Class="1" Id="412451144" SourceName="AIS" SourceType="1" UpdateTime="2016-09-23T08:35:33.000Z">
+          <Construction Length="23.000000" LloydsShipType="30" Width="6.000000">
+          </Construction>
+          <Identifier Callsign="06659" MMSI="412451144">
+          </Identifier>
+        </VesselData>
+        <VoyageData Id="412451144" CargoTypeIMO="0" SourceName="AIS" SourceType="1" UpdateTime="2016-09-23T08:35:33.000Z">
+        </VoyageData>
+        <TaggedItem Key="VendorId" Value="FT-"/>
+        <TaggedItem Key="RefDistFromBakboard" Value="3"/>
+        <TaggedItem Key="RefDistFromBow" Value="18"/>
+        <TaggedItem Key="UpdatingSensors" Value="3"/>
+      </ObjectData>
+    </ObjectDatas>
+  </Body>
+</MSG_IVEF>

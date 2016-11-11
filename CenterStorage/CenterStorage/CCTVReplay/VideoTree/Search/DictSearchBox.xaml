@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCTVReplay.VideoTree.Search">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Resrc/DictBrushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="ButtonCancelStyle"
+           TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="30"
+                            Height="30"
+                            Background="{StaticResource 关闭_默认}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed"
+                                 Value="true">
+                            <Setter Property="Background"
+                                    Value="#9a9a9a" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SearchTextBoxStyle"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <ScrollViewer Margin="0"
+                                      x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:SearchBox}">
+        <Setter Property="Background"
+                Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation"
+                Value="None" />
+        <Setter Property="Focusable"
+                Value="True" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SearchBox}">
+                    <Grid>
+                        <Border BorderThickness="0"
+                                Background="{StaticResource 搜索框_背景}">
+                        </Border>
+                        <DockPanel Margin="5,1">
+                            <Button Width="20"
+                                    Height="20"
+                                    Background="{StaticResource 搜索_图标}"
+                                    BorderThickness="0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button DockPanel.Dock="Right"
+                                    Name="PART_Cancel"
+                                    Grid.Column="2"
+                                    Style="{StaticResource ButtonCancelStyle}" />
+                            <TextBox Name="PART_Textbox"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     FontWeight="Light"
+                                     Visibility="{TemplateBinding Visibility}"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                                     Grid.Column="1"
+                                     TextOptions.TextFormattingMode="Display"
+                                     SelectionBrush="DarkGray"
+                                     CaretBrush="Orange"
+                                     Style="{StaticResource SearchTextBoxStyle}"
+                                     VerticalAlignment="Center"
+                                     Height="{TemplateBinding Height}"
+                                     local:WatermarkAdorner.Text="{TemplateBinding Watermark}"
+                                     local:WatermarkAdorner.Foreground="{TemplateBinding Foreground}" />
+                        </DockPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PART_Textbox, Path=Text}"
+                                     Value="">
+                            <Setter TargetName="PART_Cancel"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

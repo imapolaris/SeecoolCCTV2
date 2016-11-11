@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta charset="UTF-8">
+    <title>集中存储配置</title>
+    <!--bootstrap & fontawesome-->
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+
+    <!--text fonts-->
+    <link rel="stylesheet" href="css/ace-fonts.css"/>
+
+    <!--ace styles-->
+    <link rel="stylesheet" href="css/ace.min.css" id="main-ace-style"/>
+
+    <!--&lt;!&ndash;[if lte IE 9]&ndash;&gt;-->
+    <!--<link rel="stylesheet" href="css/ace-part2.min.css"/>-->
+    <!--<![endif]&ndash;&gt;-->
+
+    <link rel="stylesheet" href="css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="css/ace-rtl.min.css"/>
+
+    <!--ace settings handler-->
+    <script src="js/ace-extra.min.js"></script>
+
+</head>
+<body>
+<!--<h2>集中存储服务配置页面</h2>-->
+<!--<p>-->
+<!--<label>当前是测试状态，点击加载按钮以加载节点树:</label>-->
+<!--<input type="button" id="btnloadnodes" value="获取节点树"/>-->
+<!--</p>-->
+<div class="page-content-area">
+    <div class="page-header">
+        <h1>
+            集中存储服务配置页面
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                分别配置服务器磁盘和视频节点的集中存储开启状态。
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>配置集中存储服务器地址</h4>
+                    <div class="widget-box widget-color-green2">
+                        <div class="widget-header">
+                            <h4 class="widget-title lighter smaller">集中存储服务器地址</h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main padding-8">
+                                <form id="server-info-form" class="form-horizontal" role="form" action="api/server">
+                                    <!--输入服务器地址-->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"
+                                               for="serverip">服务器地址：</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="serverip" name="Ip" placeholder="格式:0.0.0.0"
+                                                   class="form-control sc-form-input"/>
+                                        </div>
+                                    </div>
+
+                                    <!--端口-->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"
+                                               for="serverport">端口:</label>
+                                        <div class="col-sm-6">
+                                            <input type="number" id="serverport" name="Port" min="0" max="65535"
+                                                   placeholder="0 - 65535"
+                                                   class="form-control sc-form-input"/>
+                                        </div>
+                                        <button id="btn-update-server" class="btn btn-sm btn-primary col-sm-2"
+                                                type="button"
+                                                style="width: 75px;">修改
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>视频节点集中存储开关</h4>
+                    <div class="widget-box widget-color-blue2">
+                        <div class="widget-header">
+                            <h4 class="widget-title lighter smaller">视频节点集中存储配置</h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main padding-8">
+                                <div id="nodetree" class="tree" style="min-height: 600px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div id="errormsg" class="text-danger col-sm-12"></div>
+                </div>
+            </div>
+
+            <!-- /section:plugins/fuelux.treeview -->
+            <!--<script type="text/javascript">-->
+            <!--var $assets = "../assets";//this will be used in fuelux.tree-sampledata.js-->
+            <!--</script>-->
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content-area -->
+<div id="mycustom-dialog" class="hidden">
+    <!--自定义的共用消息弹窗，只支持单级弹窗。-->
+</div>
+
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/fuelux.tree.min.js"></script>
+<script src="js/ace-elements.min.js"></script>
+<script src="js/ace.min.js"></script>
+<script src="js/treedatagener.js"></script>
+<script src="js/custom-modalform.js"></script>
+<script>
+    $(document).ready(function () {
+        $.get("api/server").done(function (data) {
+            $("#serverip").val(data.Ip);
+            $("#serverport").val(data.Port);
+        }).fail(function (jqXHR, status, err) {
+            $("<p></p>").text(buildErrMsg("获取集中存储服务器地址失败", jqXHR, err)).appendTo($("#errormsg"));
+        });
+
+        var url = "api/nodes";
+        $.get(url).done(function (data) {
+            buildTree(data);
+        }).fail(function (jqXHR, status, err) {
+            $("<p></p>").text(buildErrMsg("获取节点列表信息失败", jqXHR, err)).appendTo($("#errormsg"));
+        });
+
+        $("#nodetree").on("updated.fu.tree", function (event, inData) {
+            var selItem = inData.item.data();
+            var param = {
+                videoid: selItem.cctvid,
+                flag: inData.eventType == "selected"
+            }
+            var url = "api/nodes?videoid=" + param.videoid + "&flag=" + param.flag;
+            $.post(url).done(function (rdata) {
+                console.info(rdata);
+            }).fail(function (jqXHR, status, err) {
+                $("<p></p>").text(err).appendTo($("#errormsg"));
+            });
+        });
+
+        $("#btn-update-server").click(function () {
+            var ip = $("#serverip").val();
+            var port = $("#serverport").val();
+            if (!(ip && port)) {
+                $("#mycustom-dialog").scSimpleDialog().showDialog("必须设置Ip地址和端口", "错误", "error");
+            }
+            else {
+                var source = {
+                    Ip: ip,
+                    Port: port
+                };
+                $.ajax({
+                    url: "api/server",
+                    type: "post",
+                    data: JSON.stringify(source),
+                    contentType: "application/json",
+                    success: function (data, status, jqXHR) {
+                        $("#mycustom-dialog").scSimpleDialog().showDialog("保存成功", "信息", "info");
+                    },
+                    error: function (jqXHR, status, err) {
+                        $("<p></p>").text(buildErrMsg("设置集中存储服务器地址失败", jqXHR, err)).appendTo($("#errormsg"));
+                    }
+                });
+            }
+        });
+    });
+
+    function buildErrMsg(message, jqXHR, err) {
+        var content = message + "错误码:" + jqXHR.status + " " + err+" ";
+        if (jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.Message)
+            content +=  jqXHR.responseJSON.Message;
+        return content;
+    }
+
+    function buildTree(node) {
+        $("#nodetree").empty();
+        var data = {
+            dataSource: genTreeData(node),
+            multiSelect: true,
+            loadingHTML: '<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
+            'open-icon': 'ace-icon tree-minus',
+            'close-icon': 'ace-icon tree-plus',
+            'selectable': true,
+            'selected-icon': 'ace-icon fa fa-check',
+            'unselected-icon': 'ace-icon fa fa-check'
+        };
+        $("#nodetree").ace_tree(data);
+    }
+</script>
+</body>
+</html>

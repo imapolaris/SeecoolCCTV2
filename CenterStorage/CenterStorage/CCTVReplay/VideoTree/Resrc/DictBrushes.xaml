@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                    xmlns:local="clr-namespace:CCTVReplay.VideoTree.Resrc">
+    <telerik:Windows8Colors x:Key="Windows8Colors" />
+    <ImageBrush x:Key="搜索列表背景"
+                ImageSource="../Images/搜索列表背景.png"
+                Stretch="Fill" />
+    <ImageBrush x:Key="搜索列表悬浮背景"
+                ImageSource="../Images/搜索列表悬浮背景.png"
+                Stretch="Fill" />
+    <!--搜索图标、框-->
+    <ImageBrush x:Key="搜索框_背景"
+                ImageSource="../Images/Search/搜索框背景.png"
+                Stretch="Fill" />
+    <ImageBrush x:Key="搜索_图标"
+                ImageSource="../Images/Search/搜索图标.png"
+                Stretch="Fill" />
+    
+    <ImageBrush x:Key="关闭_默认"
+                ImageSource="../Images/Video/关闭_默认.png" />
+    <ImageBrush x:Key="关闭_悬浮"
+                ImageSource="../Images/Video/关闭_悬浮.png" />
+    <ImageBrush x:Key="关闭_点击"
+                ImageSource="../Images/Video/关闭_点击.png" />
+
+    <SolidColorBrush x:Key="MainBrush"
+                     Color="{Binding Source={StaticResource Windows8Colors}, Path=Palette.MainColor}" />
+    <SolidColorBrush x:Key="LightingTextColor"
+                     Color="#40D030" />
+    <SolidColorBrush x:Key="MouseOverColor"
+                     Color="#FFFF9900" />
+</ResourceDictionary>

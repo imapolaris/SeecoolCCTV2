@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body>
+<h1>消息框示例</h1>
+<p></p>
+<p>
+    <button id="btninfo">弹出提示框</button>
+    <button id="btnwarning">弹出警告框</button>
+    <button id="btnerror">弹出错误框</button>
+    <button id="btnoptions">弹出框也可以改大小</button>
+</p>
+<p>
+    <button id="btnconfirm">弹出一个确认窗口</button>
+</p>
+<!--消息框容器-->
+<div id="mydialog" class="hide"></div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/custom/custom-modalform.js"></script>
+
+<script>
+    $(function () {
+        var dgOptions = {
+            size: "sm",
+            animation: false
+        }
+        var scDialog = new SCSimpleDialog($("#mydialog"), dgOptions)
+        $("#btninfo").click(function () {
+            scDialog.showDialog("这是一个信息框", "提示框", "info");
+        });
+        $("#btnwarning").click(function () {
+            scDialog.showDialog("这是一个警告框", "警告框", "warning");
+        });
+        $("#btnerror").click(function () {
+            scDialog.showDialog("这是一个错误框", "错误框", "error");
+        });
+        $("#btnoptions").click(function () {
+            scDialog.showDialog("改变了弹窗的大小，但不保持。", "提示框", "error", {
+                size: "md",
+                animation: true
+            });
+        });
+
+        $("#btnconfirm").click(function () {
+            scDialog.showConfirm(function (result) {
+                if (result)
+                    alert("您选择了 ‘确认’。");
+                else
+                    alert("您选择了 ‘取消’。");
+            }, "这是一个确认窗口，点击下面的按钮，会收到回掉值，true--确认，false--取消。", "确认框", "warning");
+        });
+
+        //您也可以使用下面的代码来弹出对话框。
+//        $("#mydialog").scSimpleDialog(dgOptions);
+//        $("#btninfo").click(function () {
+//            $("#mydialog").scSimpleDialog().showDialog("这是一个信息框", "提示框", "info");
+//        });
+//        $("#btnwarning").click(function () {
+//            $("#mydialog").scSimpleDialog().showDialog("这是一个警告框", "警告框", "warning");
+//        });
+//        $("#btnerror").click(function () {
+//            $("#mydialog").scSimpleDialog().showDialog("这是一个错误框", "错误框", "error");
+//        });
+//        $("#btnoptions").click(function () {
+//            $("#mydialog").scSimpleDialog().showDialog("改变了弹窗的大小，但不保持。", "提示框", "error", {
+//                size: "md",
+//                animation: true
+//            });
+//        });
+//
+//        $("#btnconfirm").click(function () {
+//            $("#mydialog").scSimpleDialog().showConfirm(function (result) {
+//                if (result)
+//                    alert("您选择了 ‘确认’。");
+//                else
+//                    alert("您选择了 ‘取消’。");
+//            }, "这是一个确认窗口，点击下面的按钮，会收到回掉值，true--确认，false--取消。", "确认框", "warning");
+//        });
+    })
+</script>
+</body>
+</html>

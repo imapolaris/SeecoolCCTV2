@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="VideoNS.SubControls.SpeedTipBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VideoNS.SubControls"
+             xmlns:main="clr-namespace:VideoNS"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             mc:Ignorable="d" 
+             x:Name="rootControl"
+             d:DesignHeight="50"
+             d:DesignWidth="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:ThreeOfFourConverter x:Key="quaterConverter"/>
+            <local:SpeedToOpacityConverter x:Key="speedConverter"/>
+            <Style x:Key="elliStyle"
+                   TargetType="Ellipse">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Ellipse x:Name="elliOne"
+                 Grid.Column="3"
+                 Opacity="{Binding ElementName=rootControl,Path=Speed,Converter={StaticResource speedConverter},ConverterParameter=0.2,Mode=OneWay}"
+                 Fill="{StaticResource GlowBrush}"/>
+        <Ellipse x:Name="elliTwo"
+                 Style="{StaticResource elliStyle}"
+                 Fill="{Binding ElementName=elliOne,Path=Fill}"
+                 Opacity="{Binding ElementName=rootControl,Path=Speed,Converter={StaticResource speedConverter},ConverterParameter=0.4,Mode=OneWay}"
+                 Height="{Binding ElementName=elliOne,Path=ActualHeight,Converter={StaticResource quaterConverter}}"
+                 Width="{Binding ElementName=elliOne,Path=ActualWidth,Converter={StaticResource quaterConverter}}"
+                 Grid.Column="2" />
+        <Ellipse x:Name="elliThree"
+                 Style="{StaticResource elliStyle}"
+                 Fill="{Binding ElementName=elliOne,Path=Fill}"
+                 Opacity="{Binding ElementName=rootControl,Path=Speed,Converter={StaticResource speedConverter},ConverterParameter=0.6,Mode=OneWay}"
+                 Height="{Binding ElementName=elliTwo,Path=ActualHeight,Converter={StaticResource quaterConverter}}"
+                 Width="{Binding ElementName=elliTwo,Path=ActualWidth,Converter={StaticResource quaterConverter}}"
+                 Grid.Column="1" />
+        <Ellipse x:Name="elliFour"
+                 Opacity="{Binding ElementName=rootControl,Path=Speed,Converter={StaticResource speedConverter},ConverterParameter=0.8,Mode=OneWay}"
+                 Style="{StaticResource elliStyle}"
+                 Fill="{Binding ElementName=elliOne,Path=Fill}"
+                 Height="{Binding ElementName=elliThree,Path=ActualHeight,Converter={StaticResource quaterConverter}}"
+                 Width="{Binding ElementName=elliThree,Path=ActualWidth,Converter={StaticResource quaterConverter}}"
+                 Grid.Column="0" />
+    </Grid>
+</UserControl>

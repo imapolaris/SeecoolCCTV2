@@ -1,0 +1,142 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCTVDownload">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DictIcon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--图标+文字+透明背景按钮样式-->
+    <Style TargetType="ButtonBase"
+           x:Key="IconTextButtonStyle">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ButtonBase">
+                    <Grid>
+                        <Border x:Name="center"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="2">
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Margin="0" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter TargetName="center" Property="Background" Value="#3080FF80"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="true">
+                            <Setter TargetName="center" Property="Background" Value="#6080FF80"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="center" Property="Background" Value="#40808080"/>
+                            <Setter Property="Foreground" Value="#808080"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--下载/暂停按钮样式-->
+    <Style x:Key="DownPauseStyle" TargetType="ToggleButton"
+                               BasedOn="{StaticResource IconTextButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <DockPanel>
+                            <Image Source="../Images/downloadcontrol/pause.png" Margin="2,0"/>
+                            <TextBlock Text="暂停" 
+                                       FontSize="12" 
+                                       Foreground="White"/>
+                        </DockPanel>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <DockPanel>
+                            <Image Source="../Images/downloadcontrol/down.png"
+                                   Margin="2,0"/>
+                            <TextBlock Text="下载"
+                                        FontSize="12" 
+                                       Foreground="White"/>
+                        </DockPanel>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--多选/取消多选按钮样式-->
+    <Style x:Key="MultiSelectedsStyle" TargetType="ToggleButton"
+                               BasedOn="{StaticResource IconTextButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <DockPanel>
+                            <Image Source="../Images/downloadcontrol/multiselected_mouseover.png"
+                                   Width="25"
+                                   Height="25"
+                                   Margin="2"/>
+                            <TextBlock Text="取消多选"
+                                       FontSize="16"/>
+                        </DockPanel>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <DockPanel>
+                            <Image Source="../Images/downloadcontrol/multiselected_default.png" 
+                                   Width="25"
+                                   Height="25"
+                                   Margin="2"/>
+                            <TextBlock Text="多选"
+                                       FontSize="16"/>
+                        </DockPanel>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Border x:Key="最小化按键" Padding="9" x:Shared="false">
+        <Image Source="../Images/windowbuttons/SysBtn_Minimize.png"/>
+    </Border>
+    <Border x:Key="关闭按键" Padding="9" x:Shared="false">
+        <Image Source="../Images/windowbuttons/SysBtn_Close.png"/>
+    </Border>
+    <Border x:Key="最大化按键" Padding="9" x:Shared="false">
+        <Image Source="../Images/windowbuttons/SysBtn_Maximize.png"/>
+    </Border>
+    <Border x:Key="还原按键" Padding="9" x:Shared="false">
+        <Image Source="../Images/windowbuttons/SysBtn_Restore.png"/>
+    </Border>
+
+    <!--#region 渐变按钮颜色-->
+    <LinearGradientBrush x:Key="EnableBtnBrush"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="#378FF7"
+                      Offset="0" />
+        <GradientStop Color="#0340A2"
+                      Offset="1" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCTVStreamCmd", "CCTVStreamCmd\CCTVStreamCmd.csproj", "{30420B6F-7687-4AE8-A387-73EB58B6388A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCCTVStreamCmd", "TestCCTVStreamCmd\TestCCTVStreamCmd.csproj", "{DE8CADBA-CBA9-4FDD-B92C-3433CC8A8321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seecool.VideoStreamBase", "Seecool.VideoStreamBase\Seecool.VideoStreamBase.csproj", "{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHikToFfmpeg", "TestHikToFfmpeg\TestHikToFfmpeg.csproj", "{9554277E-918D-4DB3-B4B2-99C8DF2C8F5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE8CADBA-CBA9-4FDD-B92C-3433CC8A8321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE8CADBA-CBA9-4FDD-B92C-3433CC8A8321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE8CADBA-CBA9-4FDD-B92C-3433CC8A8321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE8CADBA-CBA9-4FDD-B92C-3433CC8A8321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9554277E-918D-4DB3-B4B2-99C8DF2C8F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9554277E-918D-4DB3-B4B2-99C8DF2C8F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9554277E-918D-4DB3-B4B2-99C8DF2C8F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9554277E-918D-4DB3-B4B2-99C8DF2C8F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

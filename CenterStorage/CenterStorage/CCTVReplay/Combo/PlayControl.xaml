@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="CCTVReplay.Combo.PlayControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CCTVReplay.Combo"
+             xmlns:util="clr-namespace:CCTVReplay.Util"
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ResDict/DictImageBrushes.xaml" />
+                <ResourceDictionary Source="../ResDict/DictComStyles.xaml" />
+                <ResourceDictionary Source="../ResDict/DictTimeSlider.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:BooleanToVisi x:Key="boolToVisi" />
+            <local:MultiBoolToVisi x:Key="multiBoolToVisi" />
+            <local:FullScreenToMargin x:Key="fullScreenToMargin" />
+            <local:CtrlBarVisiConverter x:Key="ctrlBarVisiConv" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:PlayControlViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Border BorderBrush="{StaticResource PanelSplitBorderBrush}"
+                BorderThickness="0,1,0,0"
+                Grid.Row="0"
+                Margin="{Binding IsFullScreen,Converter={StaticResource fullScreenToMargin}}">
+            <Grid x:Name="gridVideo"
+                  PreviewMouseUp="Grid_PreviewMouseUp"
+                  Background="{StaticResource PlayControlBrush}">
+            </Grid>
+        </Border>
+        <Border x:Name="borderCtrl"
+                BorderBrush="{StaticResource PanelSplitBorderBrush}"
+                BorderThickness="0,1,0,0"
+                Grid.Row="1"
+                Height="65"
+                VerticalAlignment="Bottom">
+            <Border.Visibility>
+                <MultiBinding Mode="OneWay"
+                              Converter="{StaticResource ctrlBarVisiConv}">
+                    <Binding Path="IsFullScreen" />
+                    <Binding Path="ShowCtrlBar" />
+                </MultiBinding>
+            </Border.Visibility>
+            <Grid x:Name="gridCtrl"
+                  Background="{StaticResource PlayBarBrush}">
+                <!--播放速度-->
+                <Popup x:Name="popSpeedType"
+                       Style="{StaticResource PopupStyle}"
+                       PlacementTarget="{Binding ElementName=btnSpeedType}"
+                       Width="50"
+                       StaysOpen="{Binding ElementName=btnSpeedType,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding IsSelectedSpeedControl}">
+                    <Border>
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding Path=SpeedType.View}"
+                                     Background="{x:Null}"
+                                     BorderBrush="{x:Null}"
+                                     SelectedItem="{Binding  SelectedSpeedType,Mode=TwoWay}">
+                                <ListBox.Resources>
+                                    <Style TargetType="ListBoxItem"
+                                           BasedOn="{StaticResource listBoxItem1}" />
+                                </ListBox.Resources>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                DockPanel.Dock="Left" 
+                                VerticalAlignment="Center"
+                                Height="35"
+                                Margin="3,0">
+                        <ToggleButton IsChecked="{Binding IsPlaying, Mode=TwoWay}"
+                                  Padding="3,4,3,2"
+                                  Style="{StaticResource PlayPauseButton}"/>
+                        <!--停止按钮-->
+                        <Button Background="{StaticResource StopBtnBrush}"
+                                Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                            Command="{Binding StopCmd}"
+                            Style="{StaticResource NoBorderButtonStyle}" 
+                            Padding="3,4,3,2"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                Height="35" 
+                                Margin="3"
+                                DockPanel.Dock="Right">
+                        <ToggleButton x:Name="btnSpeedType"
+                                  IsChecked="{Binding Path=IsSelectedSpeedControl,Mode=TwoWay}"
+                                  DockPanel.Dock="Right"
+                                  Content="{Binding SelectedSpeedType, Mode=OneWay}"
+                                  Width="50"
+                                  Height="29"
+                                  BorderBrush="#80FFFFFF"
+                                  BorderThickness="2"
+                                  Style="{StaticResource TextToggleButtonStyle}" 
+                                  Margin="5,0"/>
+                        <Button x:Name="btnDown"
+                            Content="{StaticResource 下载按键}"
+                            Command="{Binding DownloadCmd}"
+                            Style="{StaticResource NoBorderButtonStyle}"
+                                Margin="0"/>
+                        <Button x:Name="btnSnapshot"
+                            Content="{StaticResource 快照按键}"
+                            Command="{Binding SnapshotCmd}"
+                            Style="{StaticResource NoBorderButtonStyle}"
+                                Margin="0"/>
+                        <ToggleButton x:Name="btnFullscreen"
+                                  IsChecked="{Binding IsFullScreen, Mode=TwoWay}"
+                                  Style="{StaticResource FullScreenButton}"
+                                      Margin="0"/>
+                    </StackPanel>
+                    <DockPanel Margin="10,0">
+                        <DockPanel LastChildFill="False"
+                                    DockPanel.Dock="Bottom" Margin="0,-5,0,4">
+                            <local:TimeLabel Value="{Binding PlaySlider.BeginTime ,Mode=OneWay}"
+                                     DockPanel.Dock="Left"
+                                             FontSize="14"
+                                     Foreground="{StaticResource TextBrush}"
+                                     MouseLeftButtonDown="TimeLabel_MouseLeftButtonDown"/>
+                            <local:TimeLabel Value="{Binding PlaySlider.EndTime,Mode=OneWay}"
+                                     DockPanel.Dock="Right"
+                                             FontSize="14"
+                                     Foreground="{StaticResource TextBrush}"
+                                     MouseLeftButtonDown="TimeLabel_MouseLeftButtonDown" />
+                        </DockPanel>
+                        <Slider VerticalAlignment="Center"
+                                Style="{StaticResource Horizontal_Time_Slider}"
+                                DataContext="{Binding PlaySlider, Mode=OneWay}"
+                                Grid.Row="1"
+                                util:MouseCommand.MouseDownCommand="{Binding ProgressBarMouseDownCmd}"
+                                util:MouseCommand.MouseUpCommand="{Binding ProgressBarMouseUpCmd}"
+                                Maximum="{Binding SliderMaximum}"
+                                Value="{Binding Slider, Mode=TwoWay}" 
+                                Margin="0,0,0,-15"/>
+                    </DockPanel>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

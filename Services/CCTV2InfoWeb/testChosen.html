@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestChosen</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/chosen.css"/>
+</head>
+<body>
+
+<div>
+    <p class="text-center">测试选择框</p>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <!--单选项示例-->
+            <select id="myselect1">
+                <option value=""></option>
+                <option value="0">第一项</option>
+                <option value="1">第二项</option>
+                <option value="2">第三项</option>
+                <option value="3">第四项</option>
+            </select>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <!--多选项示例-->
+            <select id="myselect2" data-placeholder="可以同时选择多项"></select>
+        </div>
+        <button class="col-sm-1" type="button" id="btn2">点击</button>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <!--简易数据格式的测试示例-->
+            <select id="myselect3" data-placeholder="可以自定义提示文本"></select>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/chosen.jquery.min.js"></script>
+
+<!--ace scripts-->
+<script src="js/custom/custom-chosen.js"></script>
+<script>
+    var cho1 = new SCChosen($("#myselect1"), {
+        allowDeselect: true, //可选项。//在单选状态下，是否允许取消当前项选中，默认为false。
+        multiple: false, //可选项。//是否允许多选，默认为false。
+        searchBoxDispLimit: 3, //可选项。显示搜索框所需的最小项数，默认值为10。
+        changeHandler: function (selectedValue) { //当选中项改变后的回掉方法。 //可选项。
+            console.log(selectedValue);
+        }
+    });
+    var cho2 = new SCChosen($("#myselect2"), {
+        multiple: true,
+        changeHandler: function (selectedValue) {
+            console.log(selectedValue);
+        }
+    });
+    //更新数据。
+    cho2.update([
+        {
+            name: "多选第一项",
+            value: "first"
+        },
+        {
+            name: "多选第二项",
+            value: "second"
+        },
+        {
+            name: "多选第三项",
+            value: "third"
+        },
+        {
+            name: "多选第四项",
+            value: "forth"
+        }
+    ], "value", "name");
+    $("#btn2").click(function () {
+        var selData = cho2.getSelectedDatas();
+        var selValue = cho2.getSelectedValues();
+        alert("您选中了:" + selData + "\n" + selValue);
+    })
+
+    //手动选择某一项。
+    cho1.select(2);
+    cho2.selectMulti(["third","forth"]);
+
+    //生成第三个选择框
+//    var cho3 = new SCChosen($("#myselect3"));
+//    //系统会自动识别数据项中的display和value属性，分别用于显示和赋值。
+//    cho3.update([
+//        {
+//            display: "使用预定义属性的第一项",
+//            value: "一"
+//        },
+//        {
+//            display: "使用预定义属性的第二项",
+//            value: "二"
+//        },
+//        {
+//            display: "使用预定义属性的第三项",
+//            value: "三"
+//        }
+//    ]);
+//    cho3.select("一");
+
+
+    //也可以使用以下方式生成选择项。
+    $("#myselect3").scChosen();
+    //系统会自动识别数据项中的display和value属性，分别用于显示和赋值。
+    $("#myselect3").scChosen().update([
+        {
+            display: "使用预定义属性的第一项",
+            value: "一"
+        },
+        {
+            display: "使用预定义属性的第二项",
+            value: "二"
+        },
+        {
+            display: "使用预定义属性的第三项",
+            value: "三"
+        }
+    ]);
+
+    //手动选择某一项。
+    $("#myselect3").scChosen().select("一");
+
+</script>
+</body>
+</html>

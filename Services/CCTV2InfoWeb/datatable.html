@@ -1,0 +1,143 @@
+﻿<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/jquery.dataTables.bootstrap.js"></script>
+    <!--自定义可分页DataTable-->
+    <script src="js/custom/custom-datatable.js"></script>
+</head>
+<body>
+<div>
+    <button onclick="javascript:init()">init</button>
+    <button onclick="javascript:addRow()">添加</button>
+
+</div>
+<div id="main">
+
+    <br/>
+    <table id="dt" class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>地址</th>
+            <th>年龄</th>
+            <th>地址1</th>
+            <th>地址2</th>
+            <th>地址3</th>
+            <th>地址4</th>
+            <th>地址5</th>
+            <th>地址6</th>
+            <th>地址7</th>
+            <th>地址8</th>
+            <th>地址9</th>
+            <th>地址10</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="dataList">
+        <tr>
+            <td>你好:{{Name}}</td>
+            <td>{{Address}}</td>
+            <td>{{Age:ageToLabel}}</td>
+            <td>{{Address1}}</td>
+            <td>{{Address2}}</td>
+            <td>{{Address3}}</td>
+            <td>{{Address4}}</td>
+            <td>{{Address5}}</td>
+            <td>{{Address6}}</td>
+            <td>{{Address7}}</td>
+            <td>{{Address8}}</td>
+            <td>{{Address9}}</td>
+            <td>{{Address10}}</td>
+            <td>
+                <div>
+                    <a class="sc-datatable-action" data-clickaction="editRow">修改</a>
+                    <a class="sc-datatable-action" data-clickaction="deleteRow">删除</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="test"></div>
+<script>
+    function reg() {
+        var s = "name:{{name}},age:{{age}}";
+        var re = /{{\w+}}/gi;
+
+        alert(s.match(re));
+    }
+
+    function test(s) {
+        return s.replace("aaa", "ccc");
+    }
+
+    $(document).ready(function () {
+        var actionList = {
+            "editRow": editRow,
+            "deleteRow": deleteRow
+        };
+        var processList = {
+            "ageToLabel": processAgeToLabel
+        }
+        scDT = new SCDataTable($('#dt'), {
+            actionList: actionList,
+            processList: processList
+        });
+    })
+
+    function init() {
+        var data = [];
+        for (var i = 0; i < 500; i++)
+            data.push({
+                Name: 'liaowenhao' + Math.random(), Address: 'address', Age: '21', Address1: '北京市海淀区学院路7号弘彧大厦7层',
+                Address2: '北京市海淀区学院路7号弘彧大厦7层',
+                Address3: '北京市海淀区学院路7号弘彧大厦7层',
+                Address4: '北京市海淀区学院路7号弘彧大厦7层',
+                Address5: '北京市海淀区学院路7号弘彧大厦7层',
+                Address6: '北京市海淀区学院路7号弘彧大厦7层',
+                Address7: '北京市海淀区学院路7号弘彧大厦7层',
+                Address8: '北京市海淀区学院路7号弘彧大厦7层',
+                Address9: '北京市海淀区学院路7号弘彧大厦7层',
+                Address10: '北京市海淀区学院路7号弘彧大厦7层'
+            });
+
+        scDT.init(data);
+    }
+
+    function addRow() {
+        scDT.add({Name: 'liaowenhao' + Math.random(), Address: 'address', Age: '21'});
+    }
+
+    function processAgeToLabel(data, propName) {
+        if (data[propName] == 21) {
+            return "<span><i class='glyphicon glyphicon-ok text-success bigger-130'></i>" + data[propName] + "</span>";
+        }
+        else {
+            return "<span><i class='glyphicon glyphicon-ok text-danger bigger-130'></i>" + data[propName] + "</span>";
+        }
+    }
+
+    function editRow(index) {
+        if (index) {
+            var data = scDT.getData(index);
+            //todo:
+            scDT.update(index, {Name: data.Name, Address: 'addressNew', Age: '20'});
+        }
+    }
+
+    function deleteRow(index) {
+        if (index) {
+            if (confirm("确定要删除？")) {
+                //todo:
+                scDT.remove(index);
+            }
+        }
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css"/>
+</head>
+<body>
+
+<div>
+    <h1 id="popmenu1" class="btn-primary">右键点击我弹出简单右键菜单</h1>
+    <h1 id="popmenu2" class="btn-success">右键点击我弹出右键菜单，‘添加’按钮不可用</h1>
+    <h1 id="autopopmenu" class="btn-warning">右键点击我自动弹出弹出右键菜单，无需自行处理oncontextmenu事件</h1>
+</div>
+
+<div id="mycontextmenu" class="hidden">
+    <!--右键菜单容器。-->
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<script src="js/custom/custom-contextmenu.js"></script>
+<script>
+    $(function () {
+        var options = {
+            items: [
+                {
+                    "text": "添加", //必须的
+                    "id": "additem", //可选的。
+                   "iconclass": "fa fa-plus text-primary", //使用[awesome风格]或[jquery-ui风格]或[bootstrap风格]的图标。//可选的。
+                    "class": "mymenuitem", //可选的。
+                    "action": function (event, data) {
+                        //event：标准的点击事件参数。
+                        //data:点击的关联的数据，此数据一般由SCContextMenu.show()方法的第二个参数传入。
+                        if (data) {
+                            alert("您在弹出菜单时传入了数据：" + data);
+                        }
+                        console.log("点击了添加按钮。")
+                    }
+                },
+                "separator", //一个特殊的菜单项，只显示一个分割符。
+                {
+                    "text": "修改",
+                    "id": "modifyitem",
+                    "iconclass": "fa fa-pencil text-success",
+                    "action": function (event, data) {
+                    }
+                },
+                {
+                    "text": "删除",
+                    "id": "deleteitem",
+                    "iconclass": "fa fa-trash-o text-danger",
+                    "action": function (event, data) {
+                    }
+                },
+                {
+                    "text": "选项",
+                    "children":[
+                        {
+                            "text": "选项一",
+                            "iconclass": "fa fa-trash-o text-danger",
+                        },
+                        {
+                            "text": "选项二",
+                            "iconclass": "fa fa-trash-o text-danger",
+                        }
+                    ]
+                }
+            ]
+        }
+        var scMenu = new SCContextMenu($("#mycontextmenu"), options);
+
+        //弹出最原始的右键菜单。
+        $("#popmenu1").on("contextmenu",function (event) {
+            scMenu.show(event);
+        });
+        //弹出“添加”禁用的右键菜单。
+        $("#popmenu2").on("contextmenu",function (event) {
+            scMenu.show(event,null,["additem"]);
+        });
+
+        scMenu.bind($("#autopopmenu"),"我是菜单的关联数据");
+
+        //也可以用以下方式使用右键菜单。
+//        $("#mycontextmenu").scContextMenu(options);
+//        //弹出最原始的右键菜单。
+//        $("#popmenu1").on("contextmenu",function (event) {
+//            $("#mycontextmenu").scContextMenu().show(event);
+//        });
+//        //弹出“添加”禁用的右键菜单。
+//        $("#popmenu2").on("contextmenu",function (event) {
+//            $("#mycontextmenu").scContextMenu().show(event,null,["additem"]);
+//        });
+//
+//        $("#mycontextmenu").scContextMenu(options).bind($("#autopopmenu"),"我是菜单的关联数据");
+    });
+</script>
+</body>
+</html>

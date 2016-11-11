@@ -1,0 +1,65 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CCTVReplay.VideoTree.Search"
+             x:Class="CCTVReplay.VideoTree.Search.BreakoutBorder"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <Grid  x:Name="grid">
+        <Line X1="0"
+              X2="0"
+              Y1="0"
+              Y2="{Binding ActualHeight, ElementName=grid, Mode=OneWay}"
+              Stroke="#80FFFFFF"
+              Margin="1,1" />
+        <Line X1="0"
+              X2="0"
+              Y1="0"
+              Y2="{Binding ActualHeight, ElementName=grid, Mode=OneWay}"
+              Stroke="#60FFFFFF"
+              Margin="2,1" />
+        <Line X1="0"
+              X2="0"
+              Y1="0"
+              Y2="{Binding ActualHeight, ElementName=grid, Mode=OneWay}"
+              HorizontalAlignment="Right"
+              Stroke="#A0000000"
+              Margin="1,1" />
+        <Line X1="0"
+              X2="0"
+              Y1="0"
+              Y2="{Binding ActualHeight, ElementName=grid, Mode=OneWay}"
+              HorizontalAlignment="Right"
+              Stroke="#80000000"
+              Margin="2,1" />
+
+        <Line X1="0"
+              X2="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"
+              Y1="0"
+              Y2="0"
+              Stroke="#80FFFFFF"
+              Margin="1,1" />
+        <Line X1="0"
+              X2="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"
+              Y1="0"
+              Y2="0"
+              Stroke="#60FFFFFF"
+              Margin="2,1" />
+        <Line X1="0"
+              X2="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"
+              Y1="0"
+              Y2="0"
+              VerticalAlignment="Bottom"
+              Stroke="#A0000000"
+              Margin="1,1" />
+        <Line X1="0"
+              X2="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"
+              Y1="0"
+              Y2="0"
+              VerticalAlignment="Bottom"
+              Stroke="#80000000"
+              Margin="2,1" />
+    </Grid>
+</UserControl>

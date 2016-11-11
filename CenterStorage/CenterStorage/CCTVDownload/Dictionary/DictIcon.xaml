@@ -1,0 +1,105 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCTVDownload">
+
+    <Style TargetType="TextBlock">
+        <Setter Property="VerticalAlignment"
+                Value="Center"/>
+        <Setter Property="Foreground"
+                Value="White"/>
+        <Setter Property="Margin"
+                Value="2,0"/>
+        <Setter Property="FontSize"
+                Value="12"/>
+    </Style>
+
+    <Border x:Key="新建任务按键" Padding="5,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/down_add.png"
+                    Width="25"
+                    Height="25"
+                    Margin="2,0" />
+            <TextBlock Text="新建任务"
+                       FontSize="16"/>
+        </StackPanel>
+    </Border>
+
+    <Border x:Key="全部开始按键"  Padding="5,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/start.png"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="全部开始"
+                       FontSize="16"/>
+        </StackPanel>
+    </Border>
+
+    <Border x:Key="全部暂停按键" Padding="5,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/pause.png"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="全部暂停"
+                       FontSize="16"/>
+        </StackPanel>
+    </Border>
+
+    <Border x:Key="删除下载按键" Padding="5,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/delete.png"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="删除下载"
+                       FontSize="16"/>
+        </StackPanel>
+    </Border>
+
+    <Border x:Key="边下边播按键" Padding="5,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/play.png"
+                    Margin="2,0" />
+            <TextBlock Text="边下边播"/>
+        </StackPanel>
+    </Border>
+
+    <Border x:Key="播放按键" x:Shared="false">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/play.png"
+                    Margin="2,0" />
+            <TextBlock Text="播放" Padding="3"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="选择按键"   Padding="5,2">
+        <TextBlock Text="选择" FontSize="14"/>
+    </Border>
+    <Border x:Key="开始下载按键" Padding="5,2">
+        <TextBlock Text="开始下载"  FontSize="14"/>
+    </Border>
+
+    <Border x:Key="删除按键" Padding="5,0" x:Shared="false">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/delete.png"
+                    Margin="2,0" />
+            <TextBlock Text="删除"/>
+        </StackPanel>
+    </Border>
+    
+    <Border x:Key="置顶按键" Padding="5,0" x:Shared="false">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/go-top.png"
+                    Margin="2,0" />
+            <TextBlock Text="置顶"/>
+        </StackPanel>
+    </Border>
+    
+    <Border x:Key="目录按键" Padding="5,0" x:Shared="false">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/downloadcontrol/folder-open.png"
+                    Margin="2" />
+            <TextBlock Text="目录"/>
+        </StackPanel>
+    </Border>
+</ResourceDictionary>

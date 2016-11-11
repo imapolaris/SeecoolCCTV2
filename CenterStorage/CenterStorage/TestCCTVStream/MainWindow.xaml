@@ -1,0 +1,46 @@
+﻿<Window x:Class="TestCCTVStream.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestCCTVStream"
+        mc:Ignorable="d"
+        Title="视频文件夹读取视频流基本信息" FontSize="18" Height="500" Width="700">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock Text="录像路径:" 
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       Margin="5"/>
+            <Button Name="btReadAll"
+                    Content="读取帧"
+                    Margin="5"
+                    FontSize="15"
+                    Padding="20,2"
+                    DockPanel.Dock="Right"
+                    Click="btReadAll_Click"/>
+            <Button Name="btOk"
+                    Content="读取"
+                    Margin="5"
+                    FontSize="15"
+                    Padding="20,2"
+                    DockPanel.Dock="Right"
+                    Click="btOk_Click"/>
+            <Button Name="btPath"
+                    Content="路径"
+                    Margin="5"
+                    FontSize="15"
+                    Padding="20,2"
+                    DockPanel.Dock="Right"
+                    Click="btPath_Click"/>
+            <TextBox Name="tbPath" 
+                     VerticalAlignment="Center" 
+                     VerticalContentAlignment="Center"
+                     FontSize="15"
+                     Height="30"/>
+        </DockPanel>
+        <TextBox Name="tbData"
+                 TextWrapping="Wrap"
+                  VerticalScrollBarVisibility="Auto"/>
+    </DockPanel>
+</Window>

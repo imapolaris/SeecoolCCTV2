@@ -1,0 +1,28 @@
+LIBRARY "FFmpeg32"
+
+EXPORTS
+	FFmpeg_Init
+	FFmpeg_FreeMemory
+
+	FileBuilder_Create
+	FileBuilder_Close
+	FileBuilder_WriteVideoFrame
+
+	VideoDecoder_Create
+	VideoDecoder_Close
+	VideoDecoder_Decode
+	VideoDecoder_DecodePacket
+
+	StreamReader_Create
+	StreamReader_Close
+	StreamReader_GetVideoDecoder
+	StreamReader_GetVideoStreamIndex
+	StreamReader_GetStreamStartTime
+	StreamReader_GetStreamTimeBase
+	StreamReader_ReadPacketData
+	StreamReader_ReadPacket
+	StreamReader_FreePacket
+
+	ImageScaler_Create
+	ImageScaler_Close
+	ImageScaler_Scale

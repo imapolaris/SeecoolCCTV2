@@ -1,0 +1,30 @@
+﻿<telerik:RadWindow x:Class="VideoNS.SubWindow.PopupWin"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:local="clr-namespace:VideoNS.SubWindow"
+                   xmlns:main="clr-namespace:VideoNS"
+                   xmlns:drag="clr-namespace:DragDropHelper;assembly=DragDropHelper"
+                   xmlns:handler="clr-namespace:VideoNS.DragDropHandler"
+                   mc:Ignorable="d"
+                   Header="{Binding ControlModel.Header}"
+                   d:DesignHeight="300"
+                   d:DesignWidth="300">
+    <telerik:RadWindow.Resources>
+        <handler:PopupWinDragHandler x:Key="dragHandler"/>
+    </telerik:RadWindow.Resources>
+    <telerik:RadWindow.DataContext>
+        <local:PopupWinModel />
+    </telerik:RadWindow.DataContext>
+    <Grid drag:DragDropTool.AllowDrag="True"
+          drag:DragDropData.Data="{Binding ControlModel.VideoId}"
+          drag:DragDropTool.DragHandler="{StaticResource dragHandler}"
+          drag:DragDropVisual.Visual="{Binding RelativeSource={RelativeSource Self}}"
+          drag:DragDropVisual.ShadowVisible="True"
+          drag:DragDropVisual.ShadowColor="#00ff00"
+          drag:DragDropVisual.BorderThickness="2">
+        <main:VideoControl DataContext="{Binding ControlModel}"/>
+    </Grid>
+</telerik:RadWindow>

@@ -1,0 +1,821 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:VideoNS"
+                    xmlns:helper="clr-namespace:VideoNS.Helper">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DictColorBrush.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <DrawingBrush x:Key="全屏_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 93.3187,-1041.19L 58.652,-1041.19C 56.452,-1041.19 54.652,-1042.99 54.652,-1045.19L 54.652,-1079.85C 54.652,-1082.05 56.452,-1083.85 58.652,-1083.85L 93.3187,-1083.85C 95.5187,-1083.85 97.3187,-1082.05 97.3187,-1079.85L 97.3187,-1045.19C 97.3187,-1042.99 95.5187,-1041.19 93.3187,-1041.19 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 87.4133,-1047.99L 79.1733,-1047.99L 79.1733,-1051.35L 87.4133,-1051.35L 87.4133,-1047.99 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 89.3333,-1047.99L 85.9733,-1047.99L 85.9733,-1057.94L 89.3333,-1057.94L 89.3333,-1047.99 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 78.1339,-1060.22L 86.4725,-1051.88L 85.4539,-1050.86L 77.1152,-1059.2L 78.1339,-1060.22 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 87.4133,-1075.58L 79.1733,-1075.58L 79.1733,-1072.22L 87.4133,-1072.22L 87.4133,-1075.58 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 89.3333,-1075.58L 85.9733,-1075.58L 85.9733,-1065.63L 89.3333,-1065.63L 89.3333,-1075.58 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 78.1339,-1063.35L 86.4725,-1071.69L 85.4539,-1072.71L 77.1152,-1064.37L 78.1339,-1063.35 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 63.6747,-1047.99L 71.9147,-1047.99L 71.9147,-1051.35L 63.6747,-1051.35L 63.6747,-1047.99 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 61.7547,-1047.99L 65.1147,-1047.99L 65.1147,-1057.94L 61.7547,-1057.94L 61.7547,-1047.99 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 72.9548,-1060.22L 64.6161,-1051.88L 65.6348,-1050.86L 73.9735,-1059.2L 72.9548,-1060.22 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 63.6747,-1075.58L 71.9147,-1075.58L 71.9147,-1072.22L 63.6747,-1072.22L 63.6747,-1075.58 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 61.7547,-1075.58L 65.1147,-1075.58L 65.1147,-1065.63L 61.7547,-1065.63L 61.7547,-1075.58 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 72.9548,-1063.35L 64.6161,-1071.69L 65.6348,-1072.71L 73.9735,-1064.37L 72.9548,-1063.35 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="退出全屏_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 166.132,-1040.92L 160.532,-1040.92C 158.699,-1040.92 157.199,-1042.42 157.199,-1044.25L 157.199,-1049.85C 157.199,-1051.69 158.699,-1053.19 160.532,-1053.19L 166.132,-1053.19C 167.965,-1053.19 169.465,-1051.69 169.465,-1049.85L 169.465,-1044.25C 169.465,-1042.42 167.965,-1040.92 166.132,-1040.92 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 157.602,-1055.05L 157.602,-1079.51C 157.602,-1081.71 159.402,-1083.51 161.602,-1083.51L 196.185,-1083.51C 198.385,-1083.51 200.185,-1081.71 200.185,-1079.51L 200.185,-1044.92C 200.185,-1042.72 198.385,-1040.92 196.185,-1040.92L 172.277,-1040.92">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 188.753,-1074.25L 180.513,-1074.25L 180.513,-1070.89L 188.753,-1070.89L 188.753,-1074.25 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 190.673,-1074.25L 187.313,-1074.25L 187.313,-1064.3L 190.673,-1064.3L 190.673,-1074.25 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 172.307,-1054.85L 187.812,-1070.36L 186.794,-1071.37L 171.288,-1055.87L 172.307,-1054.85 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="信息_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 23.2369,15.6588C 23.2369,27.4415 13.6862,36.992 1.90356,36.992C -9.87909,36.992 -19.4298,27.4415 -19.4298,15.6588C -19.4298,3.87604 -9.87909,-5.67462 1.90356,-5.67462C 13.6862,-5.67462 23.2369,3.87604 23.2369,15.6588 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 0,1.91669C 0,1.37506 0.1875,0.937561 0.5625,0.562561C 0.9375,0.187561 1.39584,6.10352e-005 1.9375,6.10352e-005C 2.47916,6.10352e-005 2.9375,0.187561 3.3125,0.541687C 3.6875,0.916687 3.89584,1.37506 3.89584,1.91669C 3.89584,2.45831 3.6875,2.91669 3.3125,3.27081C 2.9375,3.64581 2.47916,3.81256 1.9375,3.81256C 1.375,3.81256 0.916656,3.64581 0.541656,3.27081C 0.166656,2.91669 0,2.45831 0,1.91669 Z M 0.375,25.2917L 0.375,8.00006L 3.4375,8.00006L 3.4375,25.2917L 0.375,25.2917 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="信号弱_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="Gray"
+                                     Geometry="F1 M 371.551,-1040.97C 371.551,-1040.23 370.951,-1039.63 370.217,-1039.63L 368.884,-1039.63C 368.151,-1039.63 367.551,-1040.23 367.551,-1040.97L 367.551,-1080.97C 367.551,-1081.7 368.151,-1082.3 368.884,-1082.3L 370.217,-1082.3C 370.951,-1082.3 371.551,-1081.7 371.551,-1080.97L 371.551,-1040.97 Z " />
+                    <GeometryDrawing Brush="Gray"
+                                     Geometry="F1 M 356.883,-1040.96C 356.883,-1040.23 356.283,-1039.63 355.55,-1039.63L 354.216,-1039.63C 353.483,-1039.63 352.883,-1040.23 352.883,-1040.96L 352.883,-1070.3C 352.883,-1071.03 353.483,-1071.63 354.216,-1071.63L 355.55,-1071.63C 356.283,-1071.63 356.883,-1071.03 356.883,-1070.3L 356.883,-1040.96 Z " />
+                    <GeometryDrawing Brush="Red"
+                                     Geometry="F1 M 343.549,-1040.96C 343.549,-1040.23 342.949,-1039.63 342.216,-1039.63L 340.882,-1039.63C 340.149,-1039.63 339.549,-1040.23 339.549,-1040.96L 339.549,-1059.63C 339.549,-1060.36 340.149,-1060.96 340.882,-1060.96L 342.216,-1060.96C 342.949,-1060.96 343.549,-1060.36 343.549,-1059.63L 343.549,-1040.96 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="信号中_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="Gray"
+                                     Geometry="F1 M 371.551,-1040.97C 371.551,-1040.23 370.951,-1039.63 370.217,-1039.63L 368.884,-1039.63C 368.151,-1039.63 367.551,-1040.23 367.551,-1040.97L 367.551,-1080.97C 367.551,-1081.7 368.151,-1082.3 368.884,-1082.3L 370.217,-1082.3C 370.951,-1082.3 371.551,-1081.7 371.551,-1080.97L 371.551,-1040.97 Z " />
+                    <GeometryDrawing Brush="YellowGreen"
+                                     Geometry="F1 M 356.883,-1040.96C 356.883,-1040.23 356.283,-1039.63 355.55,-1039.63L 354.216,-1039.63C 353.483,-1039.63 352.883,-1040.23 352.883,-1040.96L 352.883,-1070.3C 352.883,-1071.03 353.483,-1071.63 354.216,-1071.63L 355.55,-1071.63C 356.283,-1071.63 356.883,-1071.03 356.883,-1070.3L 356.883,-1040.96 Z " />
+                    <GeometryDrawing Brush="YellowGreen"
+                                     Geometry="F1 M 343.549,-1040.96C 343.549,-1040.23 342.949,-1039.63 342.216,-1039.63L 340.882,-1039.63C 340.149,-1039.63 339.549,-1040.23 339.549,-1040.96L 339.549,-1059.63C 339.549,-1060.36 340.149,-1060.96 340.882,-1060.96L 342.216,-1060.96C 342.949,-1060.96 343.549,-1060.36 343.549,-1059.63L 343.549,-1040.96 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="信号强_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 371.551,-1040.97C 371.551,-1040.23 370.951,-1039.63 370.217,-1039.63L 368.884,-1039.63C 368.151,-1039.63 367.551,-1040.23 367.551,-1040.97L 367.551,-1080.97C 367.551,-1081.7 368.151,-1082.3 368.884,-1082.3L 370.217,-1082.3C 370.951,-1082.3 371.551,-1081.7 371.551,-1080.97L 371.551,-1040.97 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 356.883,-1040.96C 356.883,-1040.23 356.283,-1039.63 355.55,-1039.63L 354.216,-1039.63C 353.483,-1039.63 352.883,-1040.23 352.883,-1040.96L 352.883,-1070.3C 352.883,-1071.03 353.483,-1071.63 354.216,-1071.63L 355.55,-1071.63C 356.283,-1071.63 356.883,-1071.03 356.883,-1070.3L 356.883,-1040.96 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 343.549,-1040.96C 343.549,-1040.23 342.949,-1039.63 342.216,-1039.63L 340.882,-1039.63C 340.149,-1039.63 339.549,-1040.23 339.549,-1040.96L 339.549,-1059.63C 339.549,-1060.36 340.149,-1060.96 340.882,-1060.96L 342.216,-1060.96C 342.949,-1060.96 343.549,-1060.36 343.549,-1059.63L 343.549,-1040.96 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="云镜控制圆形_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 557.207,-1060.84C 557.207,-1049.06 547.657,-1039.51 535.874,-1039.51C 524.091,-1039.51 514.541,-1049.06 514.541,-1060.84C 514.541,-1072.62 524.091,-1082.17 535.874,-1082.17C 547.657,-1082.17 557.207,-1072.62 557.207,-1060.84 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="云镜控制三角形_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 692.077,-1040.84C 692.077,-1040.11 692.597,-1039.81 693.231,-1040.17L 727.873,-1060.17C 728.507,-1060.54 728.507,-1061.14 727.873,-1061.51L 693.231,-1081.51C 692.597,-1081.87 692.077,-1081.57 692.077,-1080.84L 692.077,-1040.84 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="云镜控制箭头_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 842.491,-1038.74C 842.124,-1038.74 842.036,-1038.96 842.296,-1039.22L 862.685,-1059.6C 862.944,-1059.86 862.944,-1060.29 862.685,-1060.55L 842.296,-1080.94C 842.036,-1081.2 842.124,-1081.41 842.491,-1081.41L 859.252,-1081.41C 859.619,-1081.41 860.132,-1081.2 860.391,-1080.94L 880.781,-1060.55C 881.041,-1060.29 881.041,-1059.86 880.781,-1059.6L 860.391,-1039.22C 860.132,-1038.96 859.619,-1038.74 859.252,-1038.74L 842.491,-1038.74 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="拍照_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 69.8568,-968.502L 69.8568,-971.385C 69.8568,-972.97 71.3395,-974.268 73.1515,-974.268L 92.7541,-974.268C 94.5661,-974.268 96.0488,-972.97 96.0488,-971.385L 96.0488,-968.502">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 100.862,-931.601L 57.382,-931.601C 55.182,-931.601 53.382,-933.401 53.382,-935.601L 53.382,-965.325C 53.382,-967.525 55.182,-969.325 57.382,-969.325L 100.862,-969.325C 103.062,-969.325 104.862,-967.525 104.862,-965.325L 104.862,-935.601C 104.862,-933.401 103.062,-931.601 100.862,-931.601 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 62.5453,-970.129L 59.2507,-970.129L 59.2507,-973.733L 62.5453,-973.733L 62.5453,-970.129 Z " />
+                    <GeometryDrawing Geometry="F1 M 91.9919,-951.081C 91.9919,-943.689 85.9999,-937.696 78.6065,-937.696C 71.2145,-937.696 65.2225,-943.689 65.2225,-951.081C 65.2225,-953.383 65.8039,-955.549 66.8265,-957.441C 69.0905,-961.624 73.5172,-964.467 78.6065,-964.467C 85.9999,-964.467 91.9919,-958.473 91.9919,-951.081 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 66.7667,-956.127L 53.4853,-956.127L 53.4853,-958.7L 66.7667,-958.7L 66.7667,-956.127 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 105.071,-956.127L 90.4853,-956.127L 90.4853,-958.7L 105.071,-958.7L 105.071,-956.127 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="暂停_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 203.399,-953.518C 203.399,-941.735 193.849,-932.185 182.066,-932.185C 170.283,-932.185 160.733,-941.735 160.733,-953.518C 160.733,-965.301 170.283,-974.851 182.066,-974.851C 193.849,-974.851 203.399,-965.301 203.399,-953.518 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 186.733,-943.685L 185.4,-943.685L 185.4,-963.352L 186.733,-963.352L 186.733,-943.685 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 178.732,-943.685L 177.399,-943.685L 177.399,-963.352L 178.732,-963.352L 178.732,-943.685 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="播放_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 298.524,-954.168C 298.524,-942.385 288.974,-932.834 277.191,-932.834C 265.408,-932.834 255.858,-942.385 255.858,-954.168C 255.858,-965.95 265.408,-975.501 277.191,-975.501C 288.974,-975.501 298.524,-965.95 298.524,-954.168 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 272.191,-946.648C 272.191,-945.915 272.711,-945.615 273.346,-945.982L 286.37,-953.502C 287.005,-953.868 287.005,-954.468 286.37,-954.835L 273.346,-962.354C 272.711,-962.72 272.191,-962.42 272.191,-961.687L 272.191,-946.648 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="搜索_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 361.905,-951.384C 359.348,-948.823 355.943,-947.412 352.325,-947.412C 348.704,-947.412 345.301,-948.823 342.74,-951.384C 337.456,-956.667 337.456,-965.266 342.74,-970.55C 345.301,-973.11 348.704,-974.522 352.325,-974.522C 355.943,-974.522 359.348,-973.11 361.905,-970.55C 367.189,-965.266 367.189,-956.667 361.905,-951.384 Z M 363.273,-971.916C 360.348,-974.84 356.461,-976.454 352.325,-976.454C 348.185,-976.454 344.299,-974.84 341.372,-971.916C 335.332,-965.88 335.332,-956.055 341.372,-950.016C 344.299,-947.091 348.185,-945.479 352.325,-945.479C 356.461,-945.479 360.348,-947.091 363.273,-950.016C 369.313,-956.055 369.313,-965.88 363.273,-971.916 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 377.317,-933.787C 376.765,-933.787 376.2,-934.002 375.773,-934.429L 364.877,-945.325C 364.032,-946.178 364.032,-947.561 364.877,-948.412C 365.733,-949.262 367.105,-949.262 367.961,-948.412L 378.857,-937.513C 379.713,-936.656 379.713,-935.276 378.857,-934.429C 378.431,-934.002 377.88,-933.787 377.317,-933.787 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="关闭_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 57.1359,-818.769L 87.3052,-848.939">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 87.3057,-818.769L 57.1364,-848.939">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="加号_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 200.103,-813.513L 165.437,-813.513C 163.237,-813.513 161.437,-815.313 161.437,-817.513L 161.437,-852.18C 161.437,-854.38 163.237,-856.18 165.437,-856.18L 200.103,-856.18C 202.303,-856.18 204.103,-854.38 204.103,-852.18L 204.103,-817.513C 204.103,-815.313 202.303,-813.513 200.103,-813.513 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round">
+                                <Pen.Brush>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#20FFFFFF"
+                                                      Offset="0"></GradientStop>
+                                        <GradientStop Color="#FFFFFFFF"
+                                                      Offset="0.25"></GradientStop>
+                                        <GradientStop Color="#20FFFFFF"
+                                                      Offset="0.5"></GradientStop>
+                                        <GradientStop Color="#FFFFFFFF"
+                                                      Offset="0.75"></GradientStop>
+                                        <GradientStop Color="#20FFFFFF"
+                                                      Offset="1"></GradientStop>
+                                    </LinearGradientBrush>
+                                </Pen.Brush>
+                            </Pen>
+
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 182.77,-824.18L 182.77,-845.513">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round">
+                                <Pen.Brush>
+                                    <LinearGradientBrush StartPoint="0,0"
+                                                         EndPoint="1,0">
+                                        <GradientStop Color="Gray"
+                                                      Offset="0"></GradientStop>
+                                        <GradientStop Color="LightGray"
+                                                      Offset="0.5"></GradientStop>
+                                        <GradientStop Color="Gray"
+                                                      Offset="1"></GradientStop>
+                                    </LinearGradientBrush>
+                                </Pen.Brush>
+                            </Pen>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 193.437,-834.846L 172.103,-834.846">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round">
+                                <Pen.Brush>
+                                    <LinearGradientBrush StartPoint="0,0"
+                                                         EndPoint="0,1">
+                                        <GradientStop Color="Gray"
+                                                      Offset="0"></GradientStop>
+                                        <GradientStop Color="LightGray"
+                                                      Offset="0.5"></GradientStop>
+                                        <GradientStop Color="Gray"
+                                                      Offset="1"></GradientStop>
+                                    </LinearGradientBrush>
+                                </Pen.Brush>
+                            </Pen>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="拖动_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 280.129,-819.472L 280.129,-850.104">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 295.445,-834.788L 264.813,-834.788">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 295.537,-841.632L 295.537,-828.504L 302.1,-835.067L 295.537,-841.632 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 264.902,-828.504L 264.902,-841.632L 258.339,-835.07L 264.902,-828.504 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 286.784,-819.751L 273.656,-819.751L 280.218,-813.188L 286.784,-819.751 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 273.656,-849.292L 286.784,-849.292L 280.221,-855.854L 273.656,-849.292 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="清除_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 380.735,-845.942L 380.735,-815.77C 380.735,-814.952 380.065,-814.281 379.246,-814.281L 347.957,-814.281C 347.137,-814.281 346.466,-814.952 346.466,-815.77L 346.466,-845.942">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 342.354,-845.351L 342.354,-848.666C 342.354,-850.489 344.695,-851.981 347.557,-851.981L 378.513,-851.981C 381.374,-851.981 383.715,-850.489 383.715,-848.666L 383.715,-845.351">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 355.158,-851.498L 355.158,-854.223C 355.158,-855.722 356.142,-856.947 357.344,-856.947L 370.354,-856.947C 371.556,-856.947 372.54,-855.722 372.54,-854.223L 372.54,-851.498">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 356.183,-819.837L 353.203,-819.837L 353.203,-839.331L 356.183,-839.331L 356.183,-819.837 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 365.123,-819.837L 362.143,-819.837L 362.143,-839.331L 365.123,-839.331L 365.123,-819.837 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 374.063,-819.837L 371.083,-819.837L 371.083,-839.331L 374.063,-839.331L 374.063,-819.837 Z " />
+                    <GeometryDrawing Geometry="F1 M 342.741,-846.066L 383.963,-846.066">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="快捷键_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 522.852,-605.148C 522.852,-603.971 521.897,-603.016 520.72,-603.016L 495.345,-603.016C 494.168,-603.016 493.213,-603.971 493.213,-605.148L 493.213,-630.531C 493.213,-631.708 494.168,-632.663 495.345,-632.663L 520.72,-632.663C 521.897,-632.663 522.852,-631.708 522.852,-630.531M 520.854,-634.727L 495.21,-634.727C 492.993,-634.727 491.194,-632.923 491.194,-630.699L 491.194,-604.981C 491.194,-602.755 492.993,-600.953 495.21,-600.953L 520.854,-600.953C 523.073,-600.953 524.87,-602.755 524.87,-604.981L 524.87,-630.699C 524.87,-632.923 523.073,-634.727 520.854,-634.727 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 501.687,-628.393L 506.739,-623.347C 505.074,-622.942 498.222,-619.431 499.91,-611.826C 502.002,-604.873 510.192,-605.21 510.192,-605.21C 508.707,-605.795 504.658,-608.473 506.142,-612.838C 507.83,-617.002 512.567,-617.542 512.567,-617.542L 518.54,-611.55L 518.507,-628.393L 501.687,-628.393 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="导入_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 84.6649,-748.173L 90.7636,-748.173C 92.9636,-748.173 94.7636,-746.373 94.7636,-744.173L 94.7636,-720.173C 94.7636,-717.973 92.9636,-716.173 90.7636,-716.173L 56.0969,-716.173C 53.8969,-716.173 52.0969,-717.973 52.0969,-720.173L 52.0969,-726.743">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 80.4512,-733.871L 70.6205,-732.036L 76.7392,-726.502L 80.4512,-733.871 Z " />
+                    <GeometryDrawing Geometry="F1 M 51.3167,-749.854C 64.3447,-749.854 74.8873,-740.909 74.8873,-729.854">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="导出_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 168.088,-748.173L 161.989,-748.173C 159.789,-748.173 157.989,-746.373 157.989,-744.173L 157.989,-720.173C 157.989,-717.973 159.789,-716.173 161.989,-716.173L 196.656,-716.173C 198.856,-716.173 200.656,-717.973 200.656,-720.173L 200.656,-726.743">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 191.61,-752.529L 193.231,-742.661L 198.897,-748.659L 191.61,-752.529 Z " />
+                    <GeometryDrawing Geometry="F1 M 175.001,-723.747C 175.282,-736.772 184.453,-747.118 195.505,-746.879">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="退出_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 298.796,-744.805C 297.947,-746.283 296.921,-747.612 295.751,-748.783C 293.293,-751.241 290.203,-752.979 286.715,-753.82C 286.199,-753.945 285.681,-753.632 285.557,-753.115C 285.435,-752.603 285.751,-752.087 286.265,-751.96C 290.904,-750.839 294.768,-747.961 297.14,-743.849C 301.887,-735.621 299.059,-725.067 290.837,-720.32C 286.856,-718.016 282.213,-717.407 277.771,-718.597C 273.321,-719.789 269.609,-722.641 267.305,-726.628C 265.011,-730.607 264.4,-735.249 265.593,-739.692C 266.779,-744.135 269.631,-747.847 273.612,-750.151C 275.021,-750.961 276.559,-751.573 278.173,-751.969C 278.684,-752.094 279.001,-752.607 278.877,-753.125C 278.753,-753.636 278.236,-753.949 277.721,-753.829C 275.929,-753.391 274.224,-752.709 272.656,-751.809C 263.521,-746.532 260.375,-734.805 265.655,-725.667C 268.211,-721.243 272.339,-718.073 277.275,-716.749C 282.208,-715.428 287.367,-716.109 291.795,-718.663C 300.931,-723.936 304.076,-735.66 298.796,-744.805 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 282.227,-738.337C 281.521,-738.337 280.951,-738.704 280.951,-739.16L 280.951,-757.934C 280.951,-758.389 281.521,-758.757 282.227,-758.757C 282.932,-758.757 283.503,-758.389 283.503,-757.934L 283.503,-739.16C 283.503,-738.704 282.932,-738.337 282.227,-738.337 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="布局_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 93.0459,-596.506L 58.3792,-596.506C 56.1792,-596.506 54.3792,-598.306 54.3792,-600.506L 54.3792,-635.173C 54.3792,-637.373 56.1792,-639.173 58.3792,-639.173L 93.0459,-639.173C 95.2459,-639.173 97.0459,-637.373 97.0459,-635.173L 97.0459,-600.506C 97.0459,-598.306 95.2459,-596.506 93.0459,-596.506 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 71.0453,-619.84L 63.0453,-619.84C 61.5787,-619.84 60.3787,-621.04 60.3787,-622.507L 60.3787,-630.507C 60.3787,-631.973 61.5787,-633.173 63.0453,-633.173L 71.0453,-633.173C 72.512,-633.173 73.712,-631.973 73.712,-630.507L 73.712,-622.507C 73.712,-621.04 72.512,-619.84 71.0453,-619.84 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 88.3797,-619.84L 80.3797,-619.84C 78.9131,-619.84 77.7131,-621.04 77.7131,-622.507L 77.7131,-630.507C 77.7131,-631.973 78.9131,-633.173 80.3797,-633.173L 88.3797,-633.173C 89.8464,-633.173 91.0464,-631.973 91.0464,-630.507L 91.0464,-622.507C 91.0464,-621.04 89.8464,-619.84 88.3797,-619.84 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 71.0453,-602.506L 63.0453,-602.506C 61.5787,-602.506 60.3787,-603.706 60.3787,-605.172L 60.3787,-613.172C 60.3787,-614.639 61.5787,-615.839 63.0453,-615.839L 71.0453,-615.839C 72.512,-615.839 73.712,-614.639 73.712,-613.172L 73.712,-605.172C 73.712,-603.706 72.512,-602.506 71.0453,-602.506 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 88.3797,-602.506L 80.3797,-602.506C 78.9131,-602.506 77.7131,-603.706 77.7131,-605.172L 77.7131,-613.172C 77.7131,-614.639 78.9131,-615.839 80.3797,-615.839L 88.3797,-615.839C 89.8464,-615.839 91.0464,-614.639 91.0464,-613.172L 91.0464,-605.172C 91.0464,-603.706 89.8464,-602.506 88.3797,-602.506 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="定时切换_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 199.851,-620.813C 199.851,-609.031 190.301,-599.48 178.518,-599.48C 166.735,-599.48 157.185,-609.031 157.185,-620.813C 157.185,-632.596 166.735,-642.147 178.518,-642.147C 190.301,-642.147 199.851,-632.596 199.851,-620.813 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 178.655,-621.174L 191.988,-621.174">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 178.654,-634.507L 178.654,-621.174">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="应急指挥_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 283.474,-634.386C 274.233,-634.386 267.23,-627.383 267.23,-618.142C 267.23,-608.9 274.233,-601.898 283.474,-601.898C 292.716,-601.898 299.718,-608.9 299.718,-618.142C 299.718,-627.383 292.71,-634.386 283.474,-634.386 Z M 283.474,-598.284C 272.517,-598.284 263.608,-607.195 263.608,-618.152C 263.608,-629.108 272.517,-638.008 283.474,-638.008C 294.432,-638.008 303.341,-629.099 303.341,-618.142C 303.341,-607.184 294.432,-598.284 283.474,-598.284 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 283.615,-605.278C 282.804,-605.278 282.147,-605.554 281.655,-606.089C 281.164,-606.636 280.916,-607.253 280.916,-607.982C 280.916,-608.706 281.221,-609.217 281.669,-609.722C 282.108,-610.213 282.661,-610.547 283.472,-610.547C 284.283,-610.547 284.925,-610.27 285.393,-609.737C 285.86,-609.187 286.104,-608.549 286.104,-607.815C 286.104,-607.09 285.889,-606.494 285.475,-606.026C 285.036,-605.511 284.425,-605.278 283.615,-605.278 Z M 286.271,-628.518C 286.271,-628.055 286.041,-626.497 285.584,-623.802C 285.121,-621.127 284.683,-618.662 284.263,-616.383C 284.015,-615.167 283.772,-613.957 283.524,-612.768C 283.248,-613.927 282.991,-615.091 282.752,-616.254C 282.384,-618.099 281.927,-620.455 281.403,-623.33C 280.868,-626.197 280.601,-627.894 280.601,-628.418C 280.601,-629.023 281.035,-629.724 281.488,-630.106C 281.812,-630.383 282.647,-630.765 283.481,-630.789C 284.249,-630.807 284.921,-630.487 285.441,-630.035C 285.965,-629.619 286.271,-629.057 286.271,-628.518 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="{StaticResource Thickness}"
+                                 LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 265.711,-599.882C 266.228,-600.62 267.267,-601.35 267.793,-602.074C 263.592,-606.14 260.971,-611.831 260.971,-618.142C 260.971,-624.835 263.22,-629.6 267.856,-633.936C 267.38,-634.278 266.595,-635.146 266.124,-635.496C 265.876,-635.683 265.623,-635.879 265.38,-636.066C 265.287,-635.983 265.193,-635.89 265.111,-635.796C 260.387,-631.072 257.788,-624.803 257.788,-618.131C 257.788,-611.459 260.387,-605.174 265.111,-600.466C 265.308,-600.27 265.515,-600.083 265.711,-599.882 Z " />
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="M 306.045,-618.141C 306.045,-611.856 303.734,-606.585 299.543,-602.512L 299.883,-602.068C 300.871,-600.983 301.078,-600.869 301.554,-600.145C 301.709,-600.289 301.755,-600.331 301.894,-600.476C 306.618,-605.2 309.218,-611.469 309.218,-618.141C 309.218,-624.813 306.613,-631.099 301.889,-635.807C 301.797,-635.9 301.714,-635.983 301.621,-636.076C 300.965,-635.451 299.889,-634.551 299.207,-633.983C 303.481,-629.92 306.045,-624.488 306.045,-618.141 Z " />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="窗口最大化_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 1,1L 65,1L 65,65L 1,65L 1,1 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="6"
+                                 LineJoin="Bevel"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 1.81303,1.81299L 64.4797,1.81299L 64.4797,15.813L 1.81303,15.813L 1.81303,1.81299 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen LineJoin="Bevel"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="窗口还原_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 17.1464,17.1878L 17.1464,1L 81.1464,1L 81.1464,65L 64.2707,65">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="4"
+                                 LineJoin="Miter"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 17.3755,1.73962L 80.3755,1.73962L 80.3755,8.23962L 17.3755,8.23962L 17.3755,1.73962 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="4"
+                                 LineJoin="Miter"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 1,16.187L 65,16.187L 65,80.187L 1,80.187L 1,16.187 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="4"
+                                 LineJoin="Miter"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="窗口最小化_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{StaticResource FillColor}"
+                                     Geometry="F1 M 0.5,0.5L 63.1667,0.5L 63.1667,14.5L 0.5,14.5L 0.5,0.5 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen LineJoin="Round"
+                                 Brush="{StaticResource FillColor}" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="返回_默认_Vec"
+                  Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <DrawingGroup ClipGeometry="F1 M 0,0L 982.765,0L 982.765,1122.52L 0,1122.52L 0,0 Z ">
+                        <DrawingGroup.Children>
+                            <GeometryDrawing Brush="{StaticResource FillColor}"
+                                             Geometry="F1 M 357.632,378.734L 346.603,372.366L 357.632,365.998L 357.632,378.734 Z ">
+                                <GeometryDrawing.Pen>
+                                    <Pen Thickness="1.33333"
+                                         LineJoin="Round"
+                                         Brush="{StaticResource FillColor}" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                            <GeometryDrawing Geometry="F1 M 368,372L 376,372C 383.333,372 389.333,378 389.333,385.334L 389.333,386.667C 389.333,394 383.333,400 376,400L 368,400">
+                                <GeometryDrawing.Pen>
+                                    <Pen Thickness="2.66667"
+                                         MiterLimit="2.75"
+                                         Brush="{StaticResource FillColor}" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="{StaticResource FillColor}"
+                                             Geometry="F1 M 376.111,373.333L 357.444,373.333L 357.444,370.667L 376.111,370.667L 376.111,373.333 Z " />
+                            <GeometryDrawing Brush="{StaticResource FillColor}"
+                                             Geometry="F1 M 376.111,401.336L 357.444,401.336L 357.444,398.669L 376.111,398.669L 376.111,401.336 Z " />
+                        </DrawingGroup.Children>
+                    </DrawingGroup>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <Border x:Key="导入按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 导入_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="导入"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}"
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="导出按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 导出_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="导出"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}"
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="清空按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 清除_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="清空"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}"
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="快捷键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 快捷键_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="快捷键"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}"
+                       Margin="2" />
+        </StackPanel>
+    </Border>
+    <Border x:Key="编辑定时切换按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 定时切换_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="编辑定时切换"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}" 
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="返回按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 返回_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="返回"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}" 
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="返回界面布局设置">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 返回_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2"/>
+            <TextBlock Text="返回界面布局设置"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}" 
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+    <Border x:Key="返回显示方案按键">
+        <StackPanel Orientation="Horizontal">
+            <Border Background="{StaticResource 返回_默认_Vec}"
+                    Width="25"
+                    Height="25"
+                    Margin="2" />
+            <TextBlock Text="返回显示方案"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MainBrush}" 
+                       Margin="2"/>
+        </StackPanel>
+    </Border>
+</ResourceDictionary>

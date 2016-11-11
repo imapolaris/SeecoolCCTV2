@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="VideoNS.VideoTrack.TrackPromptInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VideoNS.VideoTrack"
+             xmlns:baseXaml="clr-namespace:VideoNS.BaseXaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml" />
+                <ResourceDictionary Source="../Dictionary/DirtTimeSlider.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <baseXaml:MultiBoolAndToVisibleConverter x:Key="andVisibleConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <DockPanel.Visibility>
+            <MultiBinding Converter="{StaticResource andVisibleConverter}"
+                                  Mode="OneWay">
+                <Binding Path="IsVisible" />
+                <Binding Path="CanBeTracked"/>
+            </MultiBinding>
+        </DockPanel.Visibility>
+        <TextBlock Foreground="{StaticResource FillColor}" Text="变倍：" VerticalAlignment="Center" FontSize="16" DockPanel.Dock="Left"/>
+        <TextBlock Foreground="{StaticResource FillColor}" Text="{Binding Zoom}" VerticalAlignment="Center" FontSize="16" MinWidth="30" DockPanel.Dock="Left"/>
+        <TextBlock Foreground="Green" Text="（已达最大值）" Visibility="{Binding IsZoomMax, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" FontSize="16" DockPanel.Dock="Left"/>
+        <TextBlock Foreground="Green" Text="正在视频跟踪……" Visibility="{Binding IsTracking, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" FontSize="16" DockPanel.Dock="Right"/>
+        <TextBlock Foreground="{Binding StatusColor}" Text="{Binding Status}" FontSize="16"/>
+    </DockPanel>
+</UserControl>

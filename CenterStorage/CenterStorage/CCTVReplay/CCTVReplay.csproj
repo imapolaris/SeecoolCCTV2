@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE69AB5C-AB6F-45F7-B7CF-8C3599E8EA38}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCTVReplay</RootNamespace>
+    <AssemblyName>CCTVReplay</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <DontImportPostSharp>True</DontImportPostSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopUtil">
+      <HintPath>..\..\..\Binary\Libs\AopUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="CCTVClient">
+      <HintPath>..\..\..\Binary\Libs\CCTVClient.dll</HintPath>
+    </Reference>
+    <Reference Include="CCTVInfoHub, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Binary\Libs\CCTVInfoHub.dll</HintPath>
+    </Reference>
+    <Reference Include="CCTVModels">
+      <HintPath>..\..\..\Binary\Libs\CCTVModels.dll</HintPath>
+    </Reference>
+    <Reference Include="Common">
+      <HintPath>..\..\..\Binary\Framework\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Sourceforge.Pinyin4j">
+      <HintPath>..\..\..\Binary\Libs\Net.Sourceforge.Pinyin4j.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\Binary\Libs\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp, Version=4.2.21.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PostSharp.4.2.21\lib\net35-client\PostSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StaticInfoClient">
+      <HintPath>..\..\..\Binary\Libs\StaticInfoClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\Binary\Libs\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="UdpCommunication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\UdpCommunication.dll</HintPath>
+    </Reference>
+    <Reference Include="VideoRender">
+      <HintPath>..\..\..\Binary\Libs\VideoRender.dll</HintPath>
+    </Reference>
+    <Reference Include="VideoStreamClient">
+      <HintPath>..\..\..\Binary\Libs\VideoStreamClient.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Combo\PlaySliderViewModel.cs" />
+    <Compile Include="Proxy\DownloadServerProxy.cs" />
+    <Compile Include="Proxy\VideoDataInfoEventArgs.cs" />
+    <Compile Include="Proxy\VideoDataInfoProxy.cs" />
+    <Compile Include="Proxy\VideoProxyBase.cs" />
+    <Compile Include="Source\DataSource.cs" />
+    <Compile Include="Source\SourceInfoPanel.xaml.cs">
+      <DependentUpon>SourceInfoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\SourceInfoViewModel.cs" />
+    <Compile Include="Source\SourceManagerViewModel.cs" />
+    <Compile Include="Source\SourceManagerWin.xaml.cs">
+      <DependentUpon>SourceManagerWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\SourceType.cs" />
+    <Compile Include="Source\StorageSource.cs" />
+    <Compile Include="Source\VideoDataSource.cs" />
+    <Compile Include="Source\VideoSelectPanel.xaml.cs">
+      <DependentUpon>VideoSelectPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StaticInfo\ImportInfoProxy.cs" />
+    <Compile Include="StaticInfo\IVideoInfoManager.cs" />
+    <Compile Include="StaticInfo\LocalInfoProxy.cs" />
+    <Compile Include="StaticInfo\RemoteInfoProxy.cs" />
+    <Compile Include="StaticInfo\VideoInfoManager.cs" />
+    <Compile Include="Temp\MemorySourceStorage.cs" />
+    <Compile Include="Time\TimePicker.xaml.cs">
+      <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Url\ExportUrlChecker.cs" />
+    <Compile Include="Url\ExportUrlWin.xaml.cs">
+      <DependentUpon>ExportUrlWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Url\ImportUrlWin.xaml.cs">
+      <DependentUpon>ImportUrlWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\CommandDelegate.cs" />
+    <Compile Include="Util\ConfigReader.cs" />
+    <Compile Include="Util\ConstSettings.cs" />
+    <Compile Include="Util\DialogUtil.cs" />
+    <Compile Include="Util\DialogWin.xaml.cs">
+      <DependentUpon>DialogWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\DialogWinModel.cs" />
+    <Compile Include="Util\ElementExtensions.cs" />
+    <Compile Include="Util\ErrorMessageException.cs" />
+    <Compile Include="Util\ImageSaver.cs" />
+    <Compile Include="Util\MouseCommand.cs" />
+    <Compile Include="Util\NinjectResolver.cs" />
+    <Compile Include="Util\PinYinConverter.cs" />
+    <Compile Include="Util\UrlCommands.cs" />
+    <Compile Include="Util\WindowCommands.cs" />
+    <Compile Include="VideoTree\Model\CctvNode.cs" />
+    <Compile Include="VideoTree\Search\BreakoutBorder.xaml.cs">
+      <DependentUpon>BreakoutBorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTree\Search\HighlightTextBlock.xaml.cs">
+      <DependentUpon>HighlightTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTree\Search\SearchBox.cs" />
+    <Compile Include="VideoTree\Search\SearcherControl.xaml.cs">
+      <DependentUpon>SearcherControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTree\Search\SearcherManager.cs" />
+    <Compile Include="VideoTree\Search\SearcherViewModel.cs" />
+    <Compile Include="VideoTree\Search\SearchNodeHistoryViewModel.cs" />
+    <Compile Include="VideoTree\Search\VideoSearcher.cs" />
+    <Compile Include="VideoTree\Search\WatermarkAdorner.cs" />
+    <Compile Include="VideoTree\Thumbnail\VideoThumbnailsViewModel.cs" />
+    <Compile Include="Video\PathSelectWin.xaml.cs">
+      <DependentUpon>PathSelectWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Video\PreviewWin.xaml.cs">
+      <DependentUpon>PreviewWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Video\PreviewWinModel.cs" />
+    <Compile Include="Video\ReplayProcessRate.cs" />
+    <Compile Include="Video\VideoCacheManager.cs" />
+    <Compile Include="Video\VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Video\VideoControlViewModel.cs" />
+    <Compile Include="Video\VideoDataInfo.xaml.cs">
+      <DependentUpon>VideoDataInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Video\VideoDataInfoViewModel.cs" />
+    <Compile Include="Video\VideoDisplay.xaml.cs">
+      <DependentUpon>VideoDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Video\VideoDisplayManager.cs" />
+    <Compile Include="Video\VideoDisplayViewModel.cs" />
+    <Compile Include="Video\VideoStreamProxy.cs" />
+    <Compile Include="WindowControlBox.xaml.cs">
+      <DependentUpon>WindowControlBox.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Combo\PlayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Combo\TimeLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Combo\TimeSelectorWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AutoSave\CustomSetting.cs" />
+    <Compile Include="AutoSave\CustomSettingAutoSave.cs" />
+    <Compile Include="AutoSave\FileSourcePersistence.cs" />
+    <Compile Include="Combo\PlayControl.xaml.cs">
+      <DependentUpon>PlayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Combo\PlayControlViewModel.cs" />
+    <Compile Include="Combo\TimeLabel.xaml.cs">
+      <DependentUpon>TimeLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Combo\TimeSelectorViewModel.cs" />
+    <Compile Include="Combo\TimeSelectorWin.xaml.cs">
+      <DependentUpon>TimeSelectorWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Combo\VideoPlaySpeedManager.cs" />
+    <Compile Include="Interface\IDataProxy.cs" />
+    <Compile Include="Interface\ISourcePersistence.cs" />
+    <Compile Include="Interface\ITimeProcess.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ResDict\ComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResDict\DictBrushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResDict\DictComStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResDict\DictImageBrushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResDict\DictTimeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Source\SourceInfoPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Source\SourceManagerWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Source\VideoSelectPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Time\DictCalendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Time\DictTimeBrushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Time\DictTimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Time\TimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Url\ExportUrlWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Url\ImportUrlWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Util\DialogWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Resrc\DictBrushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Resrc\DictScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Resrc\DictStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Search\BreakoutBorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Search\DictSearchBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Search\HighlightTextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VideoTree\Search\SearcherControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Video\PathSelectWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Video\PreviewWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Video\VideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Video\VideoDataInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Video\VideoDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowControlBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CenterStorageCmd\CenterStorageCmd.csproj">
+      <Project>{3e399021-8386-455e-9bda-ec0f85ff5d76}</Project>
+      <Name>CenterStorageCmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketHelper\SocketHelper.csproj">
+      <Project>{21a10cb5-92c2-4777-8e67-1f3f7be74939}</Project>
+      <Name>SocketHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DIalog\信息.png" />
+    <Resource Include="Images\DIalog\删除.png" />
+    <Resource Include="Images\DIalog\警告.png" />
+    <Resource Include="Images\sclogo.png" />
+    <Resource Include="Images\videoback.png" />
+    <Resource Include="VideoTree\Images\DefaultThumbnail.jpg" />
+    <Resource Include="VideoTree\Images\Search\DVR.png" />
+    <Resource Include="VideoTree\Images\Search\DVR_灰色.png" />
+    <Resource Include="VideoTree\Images\Search\server.png" />
+    <Resource Include="VideoTree\Images\Search\server_灰色.png" />
+    <Resource Include="VideoTree\Images\Search\搜索图标.png" />
+    <Resource Include="VideoTree\Images\Search\搜索框背景.png" />
+    <Resource Include="VideoTree\Images\Search\搜索视频标题背景.png" />
+    <Resource Include="VideoTree\Images\Search\断线图标.png" />
+    <Resource Include="VideoTree\Images\Search\选择视频背景.png" />
+    <Resource Include="VideoTree\Images\Video\关闭_悬浮.png" />
+    <Resource Include="VideoTree\Images\Video\关闭_点击.png" />
+    <Resource Include="VideoTree\Images\Video\关闭_默认.png" />
+    <Resource Include="VideoTree\Images\搜索列表悬浮背景.png" />
+    <Resource Include="VideoTree\Images\搜索列表背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlayControl\播放.png" />
+    <Resource Include="Images\PlayControl\暂停.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\snapshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fullscreenexit.png" />
+    <Resource Include="Images\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlayControl\停止.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlayControl\圆.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\windowbuttons\SysBtn_Close.png" />
+    <Resource Include="Images\windowbuttons\SysBtn_Maximize.png" />
+    <Resource Include="Images\windowbuttons\SysBtn_Minimize.png" />
+    <Resource Include="Images\windowbuttons\SysBtn_Restore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\popup_default.png" />
+    <Resource Include="Images\popup_mouseover.png" />
+    <Resource Include="Images\pull_default.png" />
+    <Resource Include="Images\pull_mouseover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backgroundlogo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy $(SolutionDir)Libs\NLog.config .\</PreBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\PostSharp.4.2.21\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

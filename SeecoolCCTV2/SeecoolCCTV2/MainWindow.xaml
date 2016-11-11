@@ -1,0 +1,639 @@
+﻿<telerik:RadWindow x:Class="SeecoolCCTV2.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:local="clr-namespace:SeecoolCCTV2"
+                   xmlns:Telerik_Windows_Controls_Chromes="clr-namespace:Telerik.Windows.Controls.Chromes;assembly=Telerik.Windows.Controls"
+                   mc:Ignorable="d"
+                   WindowStartupLocation="CenterScreen"
+                   xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+                   navigation:RadWindowInteropHelper.ShowInTaskbar="True"
+                   Header="视酷CCTV 2.0"
+                   Width="1024"
+                   Height="768"
+                   MinWidth="640"
+                   MinHeight="480"
+                   Style="{DynamicResource RadWindowStyle1}">
+    <telerik:RadWindow.Resources>
+        <Style x:Key="RadWindowStyle1"
+               TargetType="{x:Type telerik:RadWindow}">
+            <Setter Property="IsTabStop"
+                    Value="False" />
+            <!--<Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF848484"/>
+            <Setter Property="BorderBackground" Value="#FFEAEAEA"/>-->
+            <Setter Property="Background"
+                    Value="#182D4E" />
+            <Setter Property="BorderBrush"
+                    Value="#182D4E" />
+            <Setter Property="BorderBackground"
+                    Value="#182D4E" />
+            <Setter Property="BorderThickness"
+                    Value="2,0,2,2" />
+            <Setter Property="MinHeight"
+                    Value="36" />
+            <Setter Property="MinWidth"
+                    Value="110" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="Header"
+                    Value="RadWindow" />
+            <Setter Property="WindowStartupLocation"
+                    Value="Manual" />
+            <Setter Property="WindowState"
+                    Value="Normal" />
+            <Setter Property="CaptionHeight"
+                    Value="35" />
+            <Setter Property="ResizeBorder"
+                    Value="8,6,10,10" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type telerik:RadWindow}">
+                        <Grid x:Name="LayoutRoot">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused" />
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DragStates">
+                                    <VisualState x:Name="NotDragging" />
+                                    <VisualState x:Name="Dragging" />
+                                    <VisualState x:Name="Resizing" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="WindowStates">
+                                    <VisualState x:Name="NormalWindow" />
+                                    <VisualState x:Name="MaximizedRestricted" />
+                                    <VisualState x:Name="Maximized">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Header">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="CornerRadius"
+                                                                           Storyboard.TargetName="WindowOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <CornerRadius>0</CornerRadius>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="CornerRadius"
+                                                                           Storyboard.TargetName="WindowInnerBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <CornerRadius>0</CornerRadius>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness"
+                                                                           Storyboard.TargetName="WindowOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness"
+                                                                           Storyboard.TargetName="WindowInnerBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness"
+                                                                           Storyboard.TargetName="ContentInnerBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0,0,0,0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness"
+                                                                           Storyboard.TargetName="ContentOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0,0,0,0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                           Storyboard.TargetName="ContentOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                           Storyboard.TargetName="HeaderButtons">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                           Storyboard.TargetName="WindowOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Minimized">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="ContentOuterBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                           Storyboard.TargetName="HeaderButtons">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Thickness>0</Thickness>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="HorizontalAlignment"
+                                                                           Storyboard.TargetName="LayoutRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <HorizontalAlignment>Left</HorizontalAlignment>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="VerticalAlignment"
+                                                                           Storyboard.TargetName="LayoutRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <VerticalAlignment>Top</VerticalAlignment>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Shadow"
+                                    BorderBrush="#182D4E"
+                                    BorderThickness="2"
+                                    CornerRadius="1">
+                                <!--<Border BorderBrush="#22000000" BorderThickness="1" CornerRadius="9">
+                                    <Border BorderBrush="#33000000" BorderThickness="1" CornerRadius="8">
+                                        <Border BorderBrush="#44000000" BorderThickness="0,0,1,1" CornerRadius="7">
+                                            <Border BorderBrush="#55000000" BorderThickness="0,0,1,1" CornerRadius="6"/>
+                                        </Border>
+                                    </Border>
+                                </Border>-->
+                            </Border>
+                            <Border x:Name="WindowOuterBorder"
+                                    CornerRadius="5"
+                                    Margin="0,2,0,0"
+                                    Grid.RowSpan="2">
+                                <Border x:Name="WindowInnerBorder"
+                                        CornerRadius="4">
+                                    <AdornerDecorator>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <!--<Rectangle x:Name="HeaderBackgroundVisual" Grid.Row="0">
+                                                <Rectangle.Fill>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="White" Offset="0"/>
+                                                        <GradientStop Color="#FFD5D5D5" Offset="0.5"/>
+                                                        <GradientStop Color="#FFA1A1A1" Offset="0.5"/>
+                                                        <GradientStop Color="#FFEAEAEA" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>-->
+                                            <!--<Rectangle x:Name="BackgroundVisual" Fill="{TemplateBinding BorderBackground}" Grid.Row="1"/>-->
+                                            <!--窗口标题栏，隐藏/显示由此处设置-->
+                                            <Grid x:Name="Header"
+                                                  Visibility="Collapsed">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Thumb x:Name="titleThumb"
+                                                       Grid.ColumnSpan="2">
+                                                    <Thumb.Style>
+                                                        <Style TargetType="{x:Type Thumb}">
+                                                            <Setter Property="MinWidth"
+                                                                    Value="5" />
+                                                            <Setter Property="MinHeight"
+                                                                    Value="5" />
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                                                        <Rectangle Fill="Transparent" />
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </Thumb.Style>
+                                                </Thumb>
+                                                <Grid Grid.Column="0"
+                                                      Margin="2,0,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <ContentPresenter x:Name="IconContent"
+                                                                      ContentTemplate="{TemplateBinding IconTemplate}"
+                                                                      Content="{TemplateBinding Icon}"
+                                                                      Grid.Column="0"
+                                                                      HorizontalAlignment="Left"
+                                                                      Margin="2"
+                                                                      VerticalAlignment="Center" />
+                                                    <ContentPresenter x:Name="HeaderContent"
+                                                                      ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                                      Content="{TemplateBinding Header}"
+                                                                      Grid.Column="1"
+                                                                      HorizontalAlignment="Stretch"
+                                                                      SnapsToDevicePixels="True"
+                                                                      VerticalAlignment="Center" />
+                                                </Grid>
+                                                <Border x:Name="PART_HeaderButtonsBorder"
+                                                        Grid.Column="1">
+                                                    <StackPanel x:Name="HeaderButtons"
+                                                                Grid.Column="1"
+                                                                Margin="0,0,3,0"
+                                                                Orientation="Horizontal">
+                                                        <telerik:RadButton x:Name="PART_MinimizeButton"
+                                                                           Command="telerik:WindowCommands.Minimize"
+                                                                           InnerCornerRadius="0">
+                                                            <telerik:RadButton.Style>
+                                                                <Style TargetType="{x:Type telerik:RadButton}">
+                                                                    <Setter Property="Padding"
+                                                                            Value="4" />
+                                                                    <Setter Property="Margin"
+                                                                            Value="1,1,0,1" />
+                                                                    <Setter Property="IsTabStop"
+                                                                            Value="False" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type telerik:RadButton}">
+                                                                                <Grid>
+                                                                                    <Telerik_Windows_Controls_Chromes:ButtonChrome CornerRadius="1"
+                                                                                                                                   RenderNormal="False"
+                                                                                                                                   RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                                                                                   RenderPressed="{TemplateBinding IsPressed}">
+                                                                                        <telerik:StyleManager.Theme>
+                                                                                            <telerik:Office_BlackTheme />
+                                                                                        </telerik:StyleManager.Theme>
+                                                                                    </Telerik_Windows_Controls_Chromes:ButtonChrome>
+                                                                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                                      Content="{TemplateBinding Content}"
+                                                                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                                                      Margin="{TemplateBinding Padding}" />
+                                                                                </Grid>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </telerik:RadButton.Style>
+                                                            <telerik:RadButton.ToolTip>
+                                                                <ToolTip Content="Minimize"
+                                                                         telerik:LocalizationManager.ResourceKey="Minimize">
+                                                                    <telerik:StyleManager.Theme>
+                                                                        <telerik:Office_BlackTheme />
+                                                                    </telerik:StyleManager.Theme>
+                                                                </ToolTip>
+                                                            </telerik:RadButton.ToolTip>
+                                                            <telerik:RadButton.Visibility>
+                                                                <Binding Path="IsEnabled"
+                                                                         RelativeSource="{RelativeSource Self}">
+                                                                    <Binding.Converter>
+                                                                        <telerik:BooleanToVisibilityConverter />
+                                                                    </Binding.Converter>
+                                                                </Binding>
+                                                            </telerik:RadButton.Visibility>
+                                                            <Path Data="M1.5,7.5L12.5,7.5 12.5,11.5 1.5,11.5z"
+                                                                  Height="14"
+                                                                  Stroke="White"
+                                                                  Width="14">
+                                                                <Path.Fill>
+                                                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                                                         StartPoint="0.5,0">
+                                                                        <GradientStop Color="#FF282828" />
+                                                                        <GradientStop Color="#FF7C7C7C"
+                                                                                      Offset="1" />
+                                                                    </LinearGradientBrush>
+                                                                </Path.Fill>
+                                                            </Path>
+                                                        </telerik:RadButton>
+                                                        <telerik:RadButton x:Name="PART_RestoreButton"
+                                                                           Command="telerik:WindowCommands.Restore"
+                                                                           InnerCornerRadius="0">
+                                                            <telerik:RadButton.Style>
+                                                                <Style TargetType="{x:Type telerik:RadButton}">
+                                                                    <Setter Property="Padding"
+                                                                            Value="4" />
+                                                                    <Setter Property="Margin"
+                                                                            Value="1,1,0,1" />
+                                                                    <Setter Property="IsTabStop"
+                                                                            Value="False" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type telerik:RadButton}">
+                                                                                <Grid>
+                                                                                    <Telerik_Windows_Controls_Chromes:ButtonChrome CornerRadius="1"
+                                                                                                                                   RenderNormal="False"
+                                                                                                                                   RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                                                                                   RenderPressed="{TemplateBinding IsPressed}">
+                                                                                        <telerik:StyleManager.Theme>
+                                                                                            <telerik:Office_BlackTheme />
+                                                                                        </telerik:StyleManager.Theme>
+                                                                                    </Telerik_Windows_Controls_Chromes:ButtonChrome>
+                                                                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                                      Content="{TemplateBinding Content}"
+                                                                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                                                      Margin="{TemplateBinding Padding}" />
+                                                                                </Grid>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </telerik:RadButton.Style>
+                                                            <telerik:RadButton.ToolTip>
+                                                                <ToolTip Content="Restore"
+                                                                         telerik:LocalizationManager.ResourceKey="Restore">
+                                                                    <telerik:StyleManager.Theme>
+                                                                        <telerik:Office_BlackTheme />
+                                                                    </telerik:StyleManager.Theme>
+                                                                </ToolTip>
+                                                            </telerik:RadButton.ToolTip>
+                                                            <telerik:RadButton.Visibility>
+                                                                <Binding Path="IsEnabled"
+                                                                         RelativeSource="{RelativeSource Self}">
+                                                                    <Binding.Converter>
+                                                                        <telerik:BooleanToVisibilityConverter />
+                                                                    </Binding.Converter>
+                                                                </Binding>
+                                                            </telerik:RadButton.Visibility>
+                                                            <Path Data="M0.5,4.5L0.5,11.5 1.5,12.5 8.5,12.5 9.5,11.5 9.5,3.5 1.5,3.5z M3.5,6.5L3.5,9.5 6.5,9.5 6.5,6.5z M3.5,3.5L3.5,1.5 4.5,0.5 11.5,0.5 12.5,1.5 12.5,9.5 11.5,10.5 9.5,10.5 9.5,3.5z"
+                                                                  Height="14"
+                                                                  Stroke="White"
+                                                                  Width="14">
+                                                                <Path.Fill>
+                                                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                                                         StartPoint="0.5,0">
+                                                                        <GradientStop Color="#FF282828" />
+                                                                        <GradientStop Color="#FF7C7C7C"
+                                                                                      Offset="1" />
+                                                                    </LinearGradientBrush>
+                                                                </Path.Fill>
+                                                            </Path>
+                                                        </telerik:RadButton>
+                                                        <telerik:RadButton x:Name="PART_MaximizeButton"
+                                                                           Command="telerik:WindowCommands.Maximize"
+                                                                           InnerCornerRadius="0">
+                                                            <telerik:RadButton.Style>
+                                                                <Style TargetType="{x:Type telerik:RadButton}">
+                                                                    <Setter Property="Padding"
+                                                                            Value="4" />
+                                                                    <Setter Property="Margin"
+                                                                            Value="1,1,0,1" />
+                                                                    <Setter Property="IsTabStop"
+                                                                            Value="False" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type telerik:RadButton}">
+                                                                                <Grid>
+                                                                                    <Telerik_Windows_Controls_Chromes:ButtonChrome CornerRadius="1"
+                                                                                                                                   RenderNormal="False"
+                                                                                                                                   RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                                                                                   RenderPressed="{TemplateBinding IsPressed}">
+                                                                                        <telerik:StyleManager.Theme>
+                                                                                            <telerik:Office_BlackTheme />
+                                                                                        </telerik:StyleManager.Theme>
+                                                                                    </Telerik_Windows_Controls_Chromes:ButtonChrome>
+                                                                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                                      Content="{TemplateBinding Content}"
+                                                                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                                                      Margin="{TemplateBinding Padding}" />
+                                                                                </Grid>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </telerik:RadButton.Style>
+                                                            <telerik:RadButton.ToolTip>
+                                                                <ToolTip Content="Maximize"
+                                                                         telerik:LocalizationManager.ResourceKey="Maximize">
+                                                                    <telerik:StyleManager.Theme>
+                                                                        <telerik:Office_BlackTheme />
+                                                                    </telerik:StyleManager.Theme>
+                                                                </ToolTip>
+                                                            </telerik:RadButton.ToolTip>
+                                                            <telerik:RadButton.Visibility>
+                                                                <Binding Path="IsEnabled"
+                                                                         RelativeSource="{RelativeSource Self}">
+                                                                    <Binding.Converter>
+                                                                        <telerik:BooleanToVisibilityConverter />
+                                                                    </Binding.Converter>
+                                                                </Binding>
+                                                            </telerik:RadButton.Visibility>
+                                                            <Path Data="M1.5,2.5L12.5,2.5 12.5,11.5 1.5,11.5z M4.5,5.5L9.5,5.5 9.5,8.5 4.5,8.5z"
+                                                                  Height="14"
+                                                                  Stroke="White"
+                                                                  Width="14">
+                                                                <Path.Fill>
+                                                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                                                         StartPoint="0.5,0">
+                                                                        <GradientStop Color="#FF282828" />
+                                                                        <GradientStop Color="#FF7C7C7C"
+                                                                                      Offset="1" />
+                                                                    </LinearGradientBrush>
+                                                                </Path.Fill>
+                                                            </Path>
+                                                        </telerik:RadButton>
+                                                        <telerik:RadButton x:Name="PART_CloseButton"
+                                                                           Command="telerik:WindowCommands.Close"
+                                                                           InnerCornerRadius="0">
+                                                            <telerik:RadButton.Style>
+                                                                <Style TargetType="{x:Type telerik:RadButton}">
+                                                                    <Setter Property="Padding"
+                                                                            Value="4" />
+                                                                    <Setter Property="Margin"
+                                                                            Value="1,1,0,1" />
+                                                                    <Setter Property="IsTabStop"
+                                                                            Value="False" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type telerik:RadButton}">
+                                                                                <Grid>
+                                                                                    <Telerik_Windows_Controls_Chromes:ButtonChrome CornerRadius="1"
+                                                                                                                                   RenderNormal="False"
+                                                                                                                                   RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                                                                                   RenderPressed="{TemplateBinding IsPressed}">
+                                                                                        <telerik:StyleManager.Theme>
+                                                                                            <telerik:Office_BlackTheme />
+                                                                                        </telerik:StyleManager.Theme>
+                                                                                    </Telerik_Windows_Controls_Chromes:ButtonChrome>
+                                                                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                                      Content="{TemplateBinding Content}"
+                                                                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                                                      Margin="{TemplateBinding Padding}" />
+                                                                                </Grid>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </telerik:RadButton.Style>
+                                                            <telerik:RadButton.ToolTip>
+                                                                <ToolTip Content="Close"
+                                                                         telerik:LocalizationManager.ResourceKey="Close">
+                                                                    <telerik:StyleManager.Theme>
+                                                                        <telerik:Office_BlackTheme />
+                                                                    </telerik:StyleManager.Theme>
+                                                                </ToolTip>
+                                                            </telerik:RadButton.ToolTip>
+                                                            <telerik:RadButton.Visibility>
+                                                                <Binding Path="IsEnabled"
+                                                                         RelativeSource="{RelativeSource Self}">
+                                                                    <Binding.Converter>
+                                                                        <telerik:BooleanToVisibilityConverter />
+                                                                    </Binding.Converter>
+                                                                </Binding>
+                                                            </telerik:RadButton.Visibility>
+                                                            <Path Data="M1.5,3.5L2.5,2.5 4.5,2.5 6.5,4.5 8.5,2.5 10.5,2.5 11.5,3.5 8.5,6.5 8.5,7.5 11.5,10.5 10.5,11.5 8.5,11.5 6.5,9.5 4.5,11.5 2.5,11.5 1.5,10.5 4.5,7.5 4.5,6.5z"
+                                                                  Height="14"
+                                                                  Stroke="White"
+                                                                  Width="14">
+                                                                <Path.Fill>
+                                                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                                                         StartPoint="0.5,0">
+                                                                        <GradientStop Color="#FF282828" />
+                                                                        <GradientStop Color="#FF7C7C7C"
+                                                                                      Offset="1" />
+                                                                    </LinearGradientBrush>
+                                                                </Path.Fill>
+                                                            </Path>
+                                                        </telerik:RadButton>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+                                            <Border x:Name="ContentOuterBorder"
+                                                    Margin="{TemplateBinding BorderThickness}"
+                                                    Grid.Row="1">
+                                                <Border x:Name="ContentInnerBorder"
+                                                        Background="{TemplateBinding Background}">
+                                                    <ContentPresenter x:Name="ContentElement"
+                                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                      Content="{TemplateBinding Content}"
+                                                                      Margin="{TemplateBinding Padding}" />
+                                                </Border>
+                                            </Border>
+                                        </Grid>
+                                    </AdornerDecorator>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ModalBackground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#E5000000" />
+                        <GradientStop Color="#4C000000"
+                                      Offset="0.5" />
+                        <GradientStop Color="#E5000000"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="telerik:AnimationManager.AnimationSelector">
+                <Setter.Value>
+                    <telerik:AnimationSelector>
+                        <telerik:AnimationGroup AnimationName="Show"
+                                                SpeedRatio="0">
+                            <telerik:FadeAnimation AnimationName="{x:Null}"
+                                                   Direction="In"
+                                                   Easing="{x:Null}"
+                                                   MaxOpacity="1"
+                                                   MinOpacity="0"
+                                                   SpeedRatio="0"
+                                                   TargetElementName="LayoutRoot" />
+                            <telerik:ScaleAnimation AnimationName="{x:Null}"
+                                                    Direction="In"
+                                                    Easing="{x:Null}"
+                                                    MaxScale="1"
+                                                    MinScale="0.9"
+                                                    SpeedRatio="0"
+                                                    TargetElementName="LayoutRoot" />
+                        </telerik:AnimationGroup>
+                        <telerik:AnimationGroup AnimationName="Hide"
+                                                SpeedRatio="0">
+                            <telerik:FadeAnimation AnimationName="{x:Null}"
+                                                   Direction="Out"
+                                                   Easing="{x:Null}"
+                                                   MaxOpacity="1"
+                                                   MinOpacity="0"
+                                                   SpeedRatio="0"
+                                                   TargetElementName="LayoutRoot" />
+                            <telerik:ScaleAnimation AnimationName="{x:Null}"
+                                                    Direction="Out"
+                                                    Easing="{x:Null}"
+                                                    MaxScale="1"
+                                                    MinScale="0.9"
+                                                    SpeedRatio="0"
+                                                    TargetElementName="LayoutRoot" />
+                        </telerik:AnimationGroup>
+                    </telerik:AnimationSelector>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="navigation:RadWindowInteropHelper.OpaqueWindowBackground"
+                    Value="#FFEAEAEA" />
+            <Style.Triggers>
+                <Trigger Property="navigation:RadWindowInteropHelper.AllowTransparency"
+                         Value="False">
+                    <Setter Property="navigation:RadWindowInteropHelper.ClipMaskCornerRadius"
+                            Value="10" />
+                    <Setter Property="ResizeBorder"
+                            Value="6" />
+                    <Setter Property="CaptionHeight"
+                            Value="26" />
+                    <Setter Property="telerik:AnimationManager.IsAnimationEnabled"
+                            Value="False" />
+                </Trigger>
+                <Trigger Property="WindowState"
+                         Value="Maximized">
+                    <Setter Property="CaptionHeight"
+                            Value="0" />
+                    <Setter Property="ResizeBorder"
+                            Value="0" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </telerik:RadWindow.Resources>
+</telerik:RadWindow>

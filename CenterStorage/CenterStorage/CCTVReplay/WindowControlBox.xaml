@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="CCTVReplay.WindowControlBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CCTVReplay"
+             xmlns:util="clr-namespace:CCTVReplay.Util"
+             mc:Ignorable="d"
+             d:DesignHeight="50"
+             d:DesignWidth="700">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResDict/DictComStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="B2VConverter" />
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource NoBorderButtonStyle}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource EnableBtnBrush}">
+        <DockPanel>
+            <Image Source="Images/sclogo.png"/>
+            <TextBlock Text="视酷录像回放"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       DockPanel.Dock="Left" 
+                       Foreground="{StaticResource TextBrush}"
+                       Margin="0,0,10,0"/>
+            <Button Content="切换数据源"
+                    Width="100"
+                    FontSize="18"
+                    Style="{StaticResource SrcButtonStyle}"
+                    Click="btnSrcSwitch_Click">
+            </Button>
+            <Button Content="导入URL"
+                    Width="100"
+                    FontSize="18"
+                    Command="util:UrlCommands.Import"
+                    Style="{StaticResource SrcButtonStyle}" />
+            <Button Content="生成URL"
+                    Width="100"
+                    FontSize="18"
+                    Command="util:UrlCommands.Export"
+                    Style="{StaticResource SrcButtonStyle}" />
+            <Grid DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Content="{StaticResource 最小化按键}"
+                        Style="{StaticResource  NoBorderButtonStyle}"
+                        Command="util:WindowCommands.Minimize" 
+                Grid.Column="0"/>
+                <Button Content="{StaticResource 最大化按键}"
+                        Style="{StaticResource NoBorderButtonStyle}"
+                        Command="util:WindowCommands.Maximize"
+                        Grid.Column="1"
+                        Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource B2VConverter}}" />
+                <Button Content="{StaticResource 还原按键}"
+                        Style="{StaticResource NoBorderButtonStyle}"
+                        Command="util:WindowCommands.Restore"
+                        Grid.Column="1"
+                        Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource B2VConverter}}" />
+                <Button Content="{StaticResource 关闭按键}"
+                        Style="{StaticResource NoBorderButtonStyle}"
+                        Command="util:WindowCommands.Close"
+                        Grid.Column="2" />
+            </Grid>
+            <Grid />
+        </DockPanel>
+    </Grid>
+</UserControl>

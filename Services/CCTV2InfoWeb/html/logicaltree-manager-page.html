@@ -1,0 +1,194 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">主页</a>
+        </li>
+        <li class="active">
+            <a href="#">视频树</a>
+        </li>
+    </ul>
+</div>
+<div class="page-content">
+    <div class="page-content-area">
+        <!--<div class="page-header">-->
+            <!--<h1>-->
+                <!--视频树管理-->
+            <!--</h1>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row hidden">
+                    <div class="form-group">
+                        <!--<label class="col-sm-2 control-label text-left">节点树选择:</label>-->
+                        <div class="col-sm-4">
+                            <select class="chosen-select sc-form-input"
+                                    id="logicaltree-selection" name="SelectedLogicalTree" data-placeholder="选择节点树"
+                                    data-bind="value:StreamType" style="display:none;">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-xs btn-info" id="modify-logicaltree-btn">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger" id="delete-logicaltree-btn">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-success" id="add-logicaltree-btn">
+                                <i class="ace-icon fa fa-plus bigger-120"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="header blue lighter smaller">视频树结构</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="widget-box widget-color-blue2"
+                             style="min-height: 600px;">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <h4 class="widget-title lighter smaller col-sm-3">
+                                        当前树
+                                    </h4>
+                                    <div class="no-margin col-sm-9 text-right">
+                                        <button class="btn btn-primary btn-bold" id="add-server-btn">
+                                            <i class="ace-icon fa fa-plus bigger-120"></i>
+                                            添加管理单位
+                                        </button>
+                                        <button class="btn btn-primary btn-bold" id="add-video-btn">
+                                            <i class="ace-icon fa fa-plus bigger-120"></i>
+                                            添加视频
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <ul id="logicaltree-node-tree" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="widget-box widget-color-green2 hidden"
+                             style="min-height: 600px;">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <h4 class="widget-title lighter smaller col-sm-12">
+                                        默认视频树
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <ul id="default-node-tree" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态弹窗,添加/修改结点树-->
+<div id="logicaltree-input-modal-form" class="hide">
+    <form class="form-horizontal" role="form" id="logicaltree-input-form">
+        <!--逻辑名称-->
+        <div class="form-group">
+            <label class="control-label col-xs-3 no-padding-right"
+                   for="logicalname">逻辑名称:</label>
+            <div class="col-xs-8">
+                <input type="text" id="logicalname" name="LogicalName"
+                       placeholder="请使用英文名或汉语拼音" class="form-control sc-form-input">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3 no-padding-right"
+                   for="displayname">显示名称:</label>
+            <div class="col-xs-8">
+                <input type="text" id="displayname" name="DisplayName"
+                       placeholder="用户友好的显示名称" class="form-control sc-form-input">
+            </div>
+        </div>
+    </form>
+</div>
+<!--模态弹窗,添加管理单位-->
+<div id="servernode-input-modal-form" class="hide">
+    <form class="form-horizontal" role="form" id="servernode-input-form">
+        <!--逻辑名称-->
+        <div class="form-group">
+            <label class="control-label col-sm-3 no-padding-right"
+                   for="servernodename">名称:</label>
+            <div class="col-sm-8">
+                <input type="text" id="servernodename" name="Name"
+                       class="form-control sc-form-input">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="serverparentname"
+                   class="col-sm-3 control-label no-padding-right">父节点:</label>
+            <div class="col-sm-8">
+                <input type="text" id="serverparentname" name="ParentName"
+                       class="form-control sc-form-input" readonly>
+                <input type="text"  name="ParentId"
+                       class="sc-form-input hide" readonly>
+                <input type="text"  name="Id"
+                       class="sc-form-input hide" readonly>
+            </div>
+        </div>
+    </form>
+</div>
+<!--模态弹窗,添加/修改视频-->
+<div id="videonode-input-modal-form" class="hide">
+    <div class="sc-video-form-container row">
+
+    </div>
+</div>
+<!--&lt;!&ndash;模态弹窗,添加/修改视频&ndash;&gt;-->
+<!--<div id="videonode-input-modal-form" class="hide">-->
+    <!--<form class="form-horizontal" role="form" id="videonode-input-form">-->
+        <!--&lt;!&ndash;逻辑名称&ndash;&gt;-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label col-sm-3 no-padding-right"-->
+                   <!--for="videonodename">名称:</label>-->
+            <!--<div class="col-sm-8">-->
+                <!--<input type="text" id="videonodename" name="Name"-->
+                       <!--class="form-control sc-form-input">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="videoparentId-selection"-->
+                   <!--class="col-sm-3 control-label no-padding-right">父节点:</label>-->
+            <!--<div class="col-sm-8">-->
+                <!--<select class="chosen-select sc-form-input"-->
+                        <!--id="videoparentId-selection" name="ParentId" data-placeholder="选择父节点"-->
+                        <!--style="display:none;">-->
+                    <!--<option></option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="elementid-selection"-->
+                   <!--class="col-sm-3 control-label no-padding-right">关联视频:</label>-->
+            <!--<div class="col-sm-8">-->
+                <!--<select class="chosen-select sc-form-input"-->
+                        <!--id="elementid-selection" name="ElementId"-->
+                        <!--data-placeholder="选择关联的视频"-->
+                        <!--style="display:none;">-->
+                    <!--<option></option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+<div id="contextmenu" class="hidden">
+    <!--右键菜单。-->
+</div>

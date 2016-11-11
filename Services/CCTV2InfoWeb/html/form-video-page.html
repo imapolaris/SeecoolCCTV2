@@ -1,0 +1,651 @@
+<div class="col-sm-12 sc-maxwidth-900">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">基本信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form id="baseinfo-form" class="form-horizontal" role="form" action="api/static">
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="videoName">视频名称:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="videoName" name="Name" minlength="1"
+                                       data-bind="value:Name" placeholder="使用友好的视频名称"
+                                       class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="latitude">纬度:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="latitude" name="Latitude"
+                                       data-bind="value:Latitude" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="longitude">经度:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="longitude" name="Longitude"
+                                       data-bind="value:Longitude"
+                                       class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="altitude">海拔:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="altitude" name="Altitude"
+                                       data-bind="value:Altitude" class="form-control sc-form-input">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="heading">朝向:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="heading" name="Heading" min="0" max="360"
+                                       data-bind="value:Heading" placeholder="0-360°"
+                                       class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="ViewPort">视场角:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="ViewPort" name="ViewPort" min="0" max="360"
+                                       data-bind="value:ViewPort" placeholder="0-360°"
+                                       class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="imagetype" class="col-sm-4 control-label">图像参数:</label>
+                            <div class="col-sm-8">
+                                <select class="chosen-select sc-form-input"
+                                        id="imagetype" name="ImageType" data-placeholder="选择图像参数"
+                                        data-bind="value:ImageType" style="display:none;">
+                                    <option value="1">高清</option>
+                                    <option value="2">夜视</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--设备信息-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">设备信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form id="deviceinfo-form" class="form-horizontal" role="form" action="api/static">
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="PreferredServerId">接入节点:</label>
+                            <div class="col-sm-8">
+                                <select class="chosen-select sc-form-input"
+                                        id="PreferredServerId" name="PreferredServerId" data-placeholder="选择首选服务器"
+                                        data-bind="value:StreamType" style="display:none;">
+                                    <option></option>
+                                    <option value="0">未知</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="devicetype" class="col-sm-4 control-label">设备类型:</label>
+                            <div class="col-sm-8">
+                                <select class="chosen-select sc-form-input"
+                                        id="devicetype" name="DeviceType" data-placeholder="选择设备类型"
+                                        data-bind="value:Type" style="display:none;">
+                                    <option value="1">海康IP高清</option>
+                                    <option value="2">海康模拟</option>
+                                    <option value="3">安讯士</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="deviceuser"
+                                   class="col-sm-4 control-label">用户名:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="deviceuser" name="User" class="form-control sc-form-input"
+                                       data-bind="value:User"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="deviceip"
+                                   class="col-sm-4 control-label">IP地址:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="deviceip" name="Ip" placeholder="0.0.0.0"
+                                       class="form-control sc-form-input" data-bind="value:Ip"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="devicepwd"
+                                   class="col-sm-4 control-label">密码:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="devicepwd" name="Password"
+                                       data-bind="value:Password" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="deviceport"
+                                   class="col-sm-4 control-label">端口:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="deviceport" name="Port" min="0" max="65535"
+                                       placeholder="0-65535"
+                                       class="form-control sc-form-input" data-bind="value:Port"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--码流信息-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">码流信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form class="form-horizontal" id="streaminfo-form">
+                        <div class="form-group col-sm-12">
+                            <label for="streamname"
+                                   class="col-sm-2 control-label">名称:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="streamname" name="Name" class="form-control sc-form-input"
+                                       data-bind="value:Name"/>
+                            </div>
+                            <label for="streamindex"
+                                   class="col-sm-2 control-label">索引:</label>
+                            <div class="col-sm-4">
+                                <input type="number" id="streamindex" name="Index" min="0"
+                                       class="form-control sc-form-input" data-bind="value:Index"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="streamchannel"
+                                   class="col-sm-2 control-label">通道号:</label>
+                            <div class="col-sm-4">
+                                <input type="number" id="streamchannel" name="Channel" min="1"
+                                       class="form-control sc-form-input" data-bind="value:Channel"/>
+                            </div>
+                            <label class="col-sm-2 control-label">码流类型:</label>
+                            <div class="col-sm-4">
+                                <div class="radio col-sm-5  no-padding-right no-padding-left">
+                                    <label class="no-padding-left">
+                                        <input name="StreamType" type="radio" class="ace sc-form-input" value="1"/>
+                                        <span class="lbl">主码流</span>
+                                    </label>
+                                </div>
+                                <div class="radio col-sm-6  no-padding-right no-padding-left">
+                                    <label>
+                                        <input name="StreamType" type="radio" class="ace sc-form-input" value="2"/>
+                                        <span class="lbl">子码流</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button type="button" class="btn btn-primary btn-sm"
+                                        id="video-btn-addstream">添加
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <table id="video-stream-table"
+                           class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>索引</th>
+                            <th>名称</th>
+                            <th>通道号</th>
+                            <th>码流类型</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{Index}}</td>
+                            <td>{{Name}}</td>
+                            <td>{{Channel}}</td>
+                            <td>{{StreamTypeName}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-xs btn-success sc-datatable-action"
+                                            data-clickaction="editRow">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-danger sc-datatable-action"
+                                            data-clickaction="deleteRow">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--方位信息-->
+    <!--<div class="widget-box">-->
+    <!--<div class="widget-header">-->
+    <!--<h4 class="widget-title">方位信息</h4>-->
+    <!--<div class="widget-toolbar">-->
+    <!--<a href="#" data-action="collapse">-->
+    <!--<i class="ace-icon fa fa-chevron-up"></i>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="widget-body">-->
+    <!--<div class="widget-main">-->
+    <!--<div class="row">-->
+    <!--<form class="form-horizontal" id="coord-form">-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="latitude">纬度:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="latitude" name="Latitude"-->
+    <!--data-bind="value:Latitude" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="longitude">经度:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="longitude" name="Longitude"-->
+    <!--data-bind="value:Longitude"-->
+    <!--class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="altitude">海拔:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="altitude" name="Altitude"-->
+    <!--data-bind="value:Altitude" class="form-control sc-form-input">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="heading">朝向:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="heading" name="Heading" min="0" max="360"-->
+    <!--data-bind="value:Heading" placeholder="0-360°"-->
+    <!--class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="ViewPort">视场角:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="ViewPort" name="ViewPort" min="0" max="360"-->
+    <!--data-bind="value:ViewPort" placeholder="0-360°"-->
+    <!--class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--控制信息-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">控制信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form class="form-horizontal" id="control-form">
+                        <div class="form-group col-sm-6">
+                            <!--控制类型-->
+                            <label class="col-sm-4 control-label"
+                                   for="controltype">控制类型:</label>
+                            <div class="col-sm-8">
+                                <select class="chosen-select sc-form-input"
+                                        id="controltype" name="Type" data-placeholder="选择控制类型"
+                                        style="display:none;">
+                                    <option></option>
+                                    <option value="1">DVR</option>
+                                    <option value="2">透明通道</option>
+                                    <option value="3">TCP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <!--IP地址-->
+                            <label class="col-sm-4 control-label"
+                                   for="controlip">IP地址:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="controlip" name="Ip" placeholder="0.0.0.0"
+                                       data-bind="value:Ip" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <!--端口-->
+                            <label class="col-sm-4 control-label"
+                                   for="controlport">端口:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="controlport" name="Port" min="0" max="65535"
+                                       placeholder="0-65535"
+                                       data-bind="value:Port" class="form-control sc-form-input">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 sc-group-toggle sc-group-dvr sc-group-tdvr">
+                            <!--用户名-->
+                            <label class="col-sm-4 control-label"
+                                   for="username">用户名:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="username" name="UserName"
+                                       data-bind="value:UserName" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 sc-group-toggle sc-group-dvr sc-group-tdvr">
+                            <!--密码-->
+                            <label class="col-sm-4 control-label"
+                                   for="password">密码:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="password" name="Password"
+                                       data-bind="value:Password" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6  sc-group-toggle sc-group-tdvr sc-group-tcp">
+                            <label class="col-sm-4 control-label"
+                                   for="cameraid">解码器ID:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="cameraid" name="CameraId" min="0" max="255"
+                                       data-bind="value:CameraId" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 sc-group-toggle sc-group-dvr sc-group-tdvr">
+                            <!--通道号-->
+                            <label class="col-sm-4 control-label"
+                                   for="controlchannel">通道号:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="controlchannel" name="Channel"
+                                       data-bind="value:Channel" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 sc-group-toggle sc-group-tdvr">
+                            <label class="col-sm-4 control-label "
+                                   for="serialport">串口号:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="serialport" name="SerialPort" placeholder="1－232串口；2－485串口"
+                                       data-bind="value:SerialPort" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 sc-group-toggle sc-group-tdvr">
+                            <label class="col-sm-4 control-label"
+                                   for="serialtype">串口类型:</label>
+                            <div class="col-sm-8">
+                                <select class="chosen-select sc-form-input"
+                                        id="serialtype" name="SerialType" data-placeholder="选择串口类型"
+                                        style="display:none;">
+                                    <option></option>
+                                    <option value="1">ICU03</option>
+                                    <option value="2">Bewator</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6  sc-group-toggle sc-group-tdvr sc-group-tcp">
+                            <label class="col-sm-4 control-label"
+                                   for="reversezoom">缩放反转:</label>
+                            <label class="col-sm-8">
+                                <input name="ReverseZoom" id="reversezoom" type="checkbox"
+                                       class="ace form-control sc-form-input"
+                                       data-bind="value:ReverseZoom" value="true"/>
+                                <span class="lbl">缩放反转</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--开关信息分组-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">开关信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <form class="form-horizontal" id="switchinfo-form">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="switchIndex"
+                                   class="col-sm-3 control-label no-padding-right">开关索引:</label>
+                            <div class="col-sm-7">
+                                <input type="number" id="switchIndex" name="Index" min="0"
+                                       class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="switchName"
+                                   class="col-sm-3 control-label no-padding-right">开关名称:</label>
+                            <div class="col-sm-7">
+                                <input type="text" id="switchName" name="Name"
+                                       class="form-control sc-form-input">
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary btn-sm pull-right" type="button"
+                                        id="video-btn-addswitch">添加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <table id="video-switch-table"
+                           class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>开关索引</th>
+                            <th>开关名称</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{Index}}</td>
+                            <td>{{Name}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-xs btn-success sc-datatable-action"
+                                            data-clickaction="editRow">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-danger sc-datatable-action"
+                                            data-clickaction="deleteRow">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--相机可控范围-->
+    <!--<div class="widget-box">-->
+    <!--<div class="widget-header">-->
+    <!--<h4 class="widget-title">相机可控范围</h4>-->
+    <!--<div class="widget-toolbar">-->
+    <!--<a href="#" data-action="collapse">-->
+    <!--<i class="ace-icon fa fa-chevron-up"></i>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="widget-body">-->
+    <!--<div class="widget-main">-->
+    <!--<div class="row">-->
+    <!--<form class="form-horizontal" id="cameralimits-form">-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="uplimit">上极限:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="uplimit" name="UpLimit" min="0" max="360" placeholder="0-360°"-->
+    <!--data-bind="value:UpLimit" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="downlimit">下极限:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="downlimit" name="DownLimit" min="0" max="360"-->
+    <!--placeholder="0-360°"-->
+    <!--data-bind="value:DownLimit" class="form-control sc-form-input">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="leftlimit">左极限:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="leftlimit" name="LeftLimit" min="0" max="360"-->
+    <!--placeholder="0-360°"-->
+    <!--data-bind="value:LeftLimit" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="rightlimit">右极限:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="rightlimit" name="RightLimit" min="0" max="360"-->
+    <!--placeholder="0-360°"-->
+    <!--data-bind="value:RightLimit" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="maxviewport">最大视场角:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="maxviewport" name="MaxViewPort" min="0" max="360"-->
+    <!--placeholder="0-360°"-->
+    <!--data-bind="value:MaxViewPort" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group col-sm-6">-->
+    <!--<label class="col-sm-4 control-label"-->
+    <!--for="minviewport">最小视场角:</label>-->
+    <!--<div class="col-sm-8">-->
+    <!--<input type="number" id="minviewport" name="MinViewPort" min="0" max="360"-->
+    <!--placeholder="0-360°"-->
+    <!--data-bind="value:MinViewPort" class="form-control sc-form-input"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--视频跟踪-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">视频跟踪</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form class="form-horizontal" id="videotrack-form">
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="videotrackip">IP地址:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="videotrackip" name="Ip" placeholder="0.0.0.0"
+                                       data-bind="value:Ip" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="videotrackport">端口:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="videotrackport" name="Port" min="0" max="65535"
+                                       placeholder="0-65535"
+                                       data-bind="value:Port" class="form-control sc-form-input">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--视频跟踪-->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">视频分析</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <div class="row">
+                    <form class="form-horizontal" id="analyze-form">
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="analyzeip">IP地址:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="analyzeip" name="Ip" placeholder="0.0.0.0"
+                                       data-bind="value:Ip" class="form-control sc-form-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label"
+                                   for="analyzeport">端口:</label>
+                            <div class="col-sm-8">
+                                <input type="number" id="analyzeport" name="Port" min="0" max="65535"
+                                       placeholder="0-65535"
+                                       data-bind="value:Port" class="form-control sc-form-input">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

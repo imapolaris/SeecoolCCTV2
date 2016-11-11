@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{C7E1D232-9781-45C5-B079-6DA3434FF690}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VideoNS</RootNamespace>
+    <AssemblyName>VideoPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <DontImportPostSharp>True</DontImportPostSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binary\Plugins\VideoPlugin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Binary\Plugins\VideoPlugin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopUtil">
+      <HintPath>..\..\Binary\Libs\AopUtil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CCTVCameraControl">
+      <HintPath>..\..\Binary\Libs\CCTVCameraControl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CCTVClient">
+      <HintPath>..\..\Binary\Libs\CCTVClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CCTVInfoHub">
+      <HintPath>..\..\Binary\Libs\CCTVInfoHub.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CCTVModels">
+      <HintPath>..\..\Binary\Libs\CCTVModels.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Common">
+      <HintPath>..\..\Binary\Framework\Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\Binary\Libs\Common.Logging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\Binary\Libs\Common.Logging.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DragDropHelper">
+      <HintPath>..\..\Binary\Libs\DragDropHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FFmpeg">
+      <HintPath>..\..\Binary\Libs\FFmpeg.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media">
+      <HintPath>..\..\Binary\Libs\Media.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Codec">
+      <HintPath>..\..\Binary\Libs\Media.Codec.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Codecs.Image">
+      <HintPath>..\..\Binary\Libs\Media.Codecs.Image.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Codecs.Video.H264">
+      <HintPath>..\..\Binary\Libs\Media.Codecs.Video.H264.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Common">
+      <HintPath>..\..\Binary\Libs\Media.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Compression">
+      <HintPath>..\..\Binary\Libs\Media.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Container">
+      <HintPath>..\..\Binary\Libs\Media.Container.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Containers.Mpeg">
+      <HintPath>..\..\Binary\Libs\Media.Containers.Mpeg.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Ntp">
+      <HintPath>..\..\Binary\Libs\Media.Ntp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Rtmp">
+      <HintPath>..\..\Binary\Libs\Media.Rtmp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Rtp">
+      <HintPath>..\..\Binary\Libs\Media.Rtp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.RtpTools">
+      <HintPath>..\..\Binary\Libs\Media.RtpTools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Rtsp">
+      <HintPath>..\..\Binary\Libs\Media.Rtsp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.RtspServer">
+      <HintPath>..\..\Binary\Libs\Media.RtspServer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Media.Sdp">
+      <HintPath>..\..\Binary\Libs\Media.Sdp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Net.Sourceforge.Pinyin4j">
+      <HintPath>..\..\Binary\Libs\Net.Sourceforge.Pinyin4j.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Libs\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PluginBaseLib">
+      <HintPath>..\..\Binary\Framework\PluginBaseLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PostSharp, Version=4.2.21.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PostSharp.4.2.21\lib\net35-client\PostSharp.dll</HintPath>
+      <Private>True</Private>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Seecool.RemoteCall">
+      <HintPath>..\..\Binary\Libs\Seecool.RemoteCall.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Seecool.ShareMemory">
+      <HintPath>..\..\Binary\Libs\Seecool.ShareMemory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\..\Binary\Libs\SharpDX.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>..\..\Binary\Libs\SharpDX.Direct3D9.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="StaticInfoClient">
+      <HintPath>..\..\Binary\Libs\StaticInfoClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\Binary\Libs\System.Net.Http.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Libs\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\Binary\Libs\System.Net.Http.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Pivot.Core">
+      <HintPath>..\..\Binary\Libs\Telerik.Pivot.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Chart.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Docking">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Docking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.GridView.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Input.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Pivot">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.Pivot.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.PivotFieldList">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.PivotFieldList.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.ScheduleView">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Controls.ScheduleView.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Flow">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.Flow.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Html">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.FormatProviders.Html.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.OpenXml">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.FormatProviders.OpenXml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Pdf">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.FormatProviders.Pdf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Zip">
+      <HintPath>..\..\Binary\Libs\Telerik.Windows.Zip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Thrift">
+      <HintPath>..\..\Binary\Libs\Thrift.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIManipulator">
+      <HintPath>..\..\Binary\Framework\UIManipulator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UserModule">
+      <HintPath>..\..\Binary\Modules\UserModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VideoRender">
+      <HintPath>..\..\Binary\Libs\VideoRender.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VideoStreamClient">
+      <HintPath>..\..\Binary\Libs\VideoStreamClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VideoTrackingCmd">
+      <HintPath>..\..\Binary\Libs\VideoTrackingCmd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowDispatcherLib">
+      <HintPath>..\..\Binary\Framework\WindowDispatcherLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adorners\CoverViewModel.cs" />
+    <Compile Include="Adorners\SplitScreenAdorner.cs" />
+    <Compile Include="Adorners\VideoPanelDropBlur.xaml.cs">
+      <DependentUpon>VideoPanelDropBlur.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoSave\CustomLayoutAutoSave.cs" />
+    <Compile Include="AutoSave\CustomLayoutScheme.cs" />
+    <Compile Include="AutoSave\LayoutAutoSave.cs" />
+    <Compile Include="AutoSave\LayoutScheme.cs" />
+    <Compile Include="AutoSave\ShortcutAutoSave.cs" />
+    <Compile Include="AutoSave\ShortcutScheme.cs" />
+    <Compile Include="AutoSave\TimeSwitchAutoSave.cs" />
+    <Compile Include="AutoSave\WindowStatusAutoSave.cs" />
+    <Compile Include="BaseXaml\BoolToVisibleConverter.cs" />
+    <Compile Include="BaseXaml\MultiBoolAndToVisibleConverter.cs" />
+    <Compile Include="BaseXaml\MultiBoolOrToVisibleConverter.cs" />
+    <Compile Include="BaseXaml\VideoPlusPanel.xaml.cs">
+      <DependentUpon>VideoPlusPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Base\FileSelector.cs" />
+    <Compile Include="BaseXaml\BreakoutBorder.xaml.cs">
+      <DependentUpon>BreakoutBorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ImageSaver.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\RatioValueConverter.cs" />
+    <Compile Include="Converter\ThicknessAddConverter.cs" />
+    <Compile Include="Converter\TimeToStringConverter.cs" />
+    <Compile Include="Converter\TwoBoolLogicConverter.cs" />
+    <Compile Include="DragDropHandler\PopupWinDragHandler.cs" />
+    <Compile Include="DragDropHandler\SplitScreenDropHandler.cs" />
+    <Compile Include="DragDropHandler\VideoPanelDragHandler.cs" />
+    <Compile Include="DragDropHandler\VideoPanelDropHandler.cs" />
+    <Compile Include="Helper\AppConstants.cs" />
+    <Compile Include="Helper\ArrowDirection.cs" />
+    <Compile Include="Helper\BindingHelper.cs" />
+    <Compile Include="Helper\CustomBrush.cs" />
+    <Compile Include="Helper\DirectoryHelper.cs" />
+    <Compile Include="Helper\ElementExtensions.cs" />
+    <Compile Include="Helper\ListBoxBehavior.cs" />
+    <Compile Include="Helper\MouseCommandBehavior.cs" />
+    <Compile Include="Helper\ProcessHelper.cs" />
+    <Compile Include="Layout\VideoPanelItemControl.xaml.cs">
+      <DependentUpon>VideoPanelItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomLayout.cs" />
+    <Compile Include="Model\WindowStatusInfo.cs" />
+    <Compile Include="SplitScreen\SplitControlModel.cs" />
+    <Compile Include="SplitScreen\SplitScreenTopCover.xaml.cs">
+      <DependentUpon>SplitScreenTopCover.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\PresetPanel.xaml.cs">
+      <DependentUpon>PresetPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\SwitchPanel.xaml.cs">
+      <DependentUpon>SwitchPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\SwitchPanelViewModel.cs" />
+    <Compile Include="SubWindow\DialogWin.xaml.cs">
+      <DependentUpon>DialogWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\DialogWinModel.cs" />
+    <Compile Include="SubWindow\GridBlock.xaml.cs">
+      <DependentUpon>GridBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\GridBlockManipulator.xaml.cs">
+      <DependentUpon>GridBlockManipulator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\GridBlockModel.cs" />
+    <Compile Include="SubWindow\LayoutDesignModel.cs" />
+    <Compile Include="SubWindow\LayoutDesignWin.xaml.cs">
+      <DependentUpon>LayoutDesignWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\PopupWin.xaml.cs">
+      <DependentUpon>PopupWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\PopupWinModel.cs" />
+    <Compile Include="SubWindow\PreviewWin.xaml.cs">
+      <DependentUpon>PreviewWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\PreviewWinModel.cs" />
+    <Compile Include="SubWindow\ShortcutWin.xaml.cs">
+      <DependentUpon>ShortcutWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindow\ShortcutWinModel.cs" />
+    <Compile Include="Thumbnail\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoSave\TimeSwitchScheme.cs" />
+    <Compile Include="Json\JsonParser.cs" />
+    <Compile Include="Json\JsonParserExpand.cs" />
+    <Compile Include="Layout\LayoutPanel.xaml.cs">
+      <DependentUpon>LayoutPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layout\LayoutViewModel.cs" />
+    <Compile Include="Layout\SearcherPanel.xaml.cs">
+      <DependentUpon>SearcherPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layout\SplitScreenIcon.xaml.cs">
+      <DependentUpon>SplitScreenIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layout\SplitScreenSettingIcon.xaml.cs">
+      <DependentUpon>SplitScreenSettingIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SplitScreenLayoutModel.cs" />
+    <Compile Include="Model\SplitScreenLayoutsModel.cs" />
+    <Compile Include="SplitScreen\SettingControlModel.cs" />
+    <Compile Include="SplitScreen\SplitScreenControl.xaml.cs">
+      <DependentUpon>SplitScreenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SplitScreenInfo.cs" />
+    <Compile Include="Model\SplitScreenNode.cs" />
+    <Compile Include="SplitScreen\SplitScreenModel.cs" />
+    <Compile Include="SplitScreen\SplitScreenPanel.xaml.cs">
+      <DependentUpon>SplitScreenPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Adorners\VideoPanelDropAdorner.cs" />
+    <Compile Include="Adorners\VideoPanelDropCover.xaml.cs">
+      <DependentUpon>VideoPanelDropCover.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\PTZControlPanel.xaml.cs">
+      <DependentUpon>PTZControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\DoubleInverter.cs" />
+    <Compile Include="Converter\HalfValueConverter.cs" />
+    <Compile Include="Model\TransformParam.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rtsp\RtspSource.cs" />
+    <Compile Include="SubControls\ArrowAnimationBar.xaml.cs">
+      <DependentUpon>ArrowAnimationBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\SpeedTipBar.xaml.cs">
+      <DependentUpon>SpeedTipBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\VideoInfoPanel.xaml.cs">
+      <DependentUpon>VideoInfoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Thumbnail\ThumbnailsPack.cs" />
+    <Compile Include="TimeSwitch\LayoutIcon.xaml.cs">
+      <DependentUpon>LayoutIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\TimeSwitchPlanControl.xaml.cs">
+      <DependentUpon>TimeSwitchPlanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\LayoutPlanItem.xaml.cs">
+      <DependentUpon>LayoutPlanItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\LayoutPlanItemPanel.xaml.cs">
+      <DependentUpon>LayoutPlanItemPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\LayoutPlanModel.cs" />
+    <Compile Include="TimeSwitch\LayoutPlanPanel.xaml.cs">
+      <DependentUpon>LayoutPlanPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\PlusPanel.xaml.cs">
+      <DependentUpon>PlusPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSwitch\TimeSwitchViewModel.cs" />
+    <Compile Include="Utils\Config.cs" />
+    <Compile Include="VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoControlManager.cs" />
+    <Compile Include="VideoControlViewModel\PlaySliderViewModel.cs" />
+    <Compile Include="VideoControlViewModel\PlusSignViewModel.cs" />
+    <Compile Include="SubControls\PresetViewModel.cs" />
+    <Compile Include="VideoControlViewModel\PTZControlModel.cs" />
+    <Compile Include="VideoControlViewModel\RealTimeControlModel.cs" />
+    <Compile Include="VideoControlViewModel\ReplayControlModel.cs" />
+    <Compile Include="VideoControlViewModel\VideoControlModel.cs" />
+    <Compile Include="VideoControlViewModel\VideoInfoMessageViewModel.cs" />
+    <Compile Include="VideoControlViewModel\VideoItemViewModel.cs" />
+    <Compile Include="VideoControlViewModel\VideoTrackViewModel.cs" />
+    <Compile Include="VideoDisp\FluentAverageCalculator.cs" />
+    <Compile Include="VideoDisp\VideoDisplay.xaml.cs">
+      <DependentUpon>VideoDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoDisp\VideoDisplayViewModel.cs" />
+    <Compile Include="VideoDisp\VideoFrameBuffer.cs" />
+    <Compile Include="VideoDisp\XpsCalculator.cs" />
+    <Compile Include="VideoDistribute\StreamDecoder.cs" />
+    <Compile Include="VideoDistribute\VideoBuffer.cs" />
+    <Compile Include="VideoDistribute\VideoBufferManager.cs" />
+    <Compile Include="VideoDistribute\VideoData.cs" />
+    <Compile Include="VideoDistribute\VideoDataManager.cs" />
+    <Compile Include="VideoFlashback\FfmpegFlashbackPlayer.cs" />
+    <Compile Include="VideoFlashback\FlashbackChannel.cs" />
+    <Compile Include="VideoFlashback\HikM4FlashbackPlayer.cs" />
+    <Compile Include="VideoFlashback\IFlashbackPlayer.cs" />
+    <Compile Include="VideoFlashback\Record.cs" />
+    <Compile Include="VideoFlashback\UniviewFlashbackPlayer.cs" />
+    <Compile Include="VideoFlashback\VideoFlashbackManager.cs" />
+    <Compile Include="RemoteCall\CameraControlRemoteCall.cs" />
+    <Compile Include="VideoInfo\CCTVInfoManager.cs" />
+    <Compile Include="VideoInfo\Search\SearchedResultControl.xaml.cs">
+      <DependentUpon>SearchedResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoInfo\Search\SearchedResultViewModel.cs" />
+    <Compile Include="VideoInfo\Search\SearcherManager.cs" />
+    <Compile Include="VideoInfo\Search\SearchNodeHistoryViewModel.cs" />
+    <Compile Include="VideoInfo\Search\WatermarkAdorner.cs" />
+    <Compile Include="VideoInfo\VideoIdToSnapshotConverter.cs" />
+    <Compile Include="VideoInfo\Search\CctvNode.cs" />
+    <Compile Include="VideoInfo\Search\HighlightTextBlock.xaml.cs">
+      <DependentUpon>HighlightTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoInfo\Search\PinYinConverter.cs" />
+    <Compile Include="VideoInfo\Search\SearchBox.cs" />
+    <Compile Include="VideoInfo\Search\VideoSearcher.cs" />
+    <Compile Include="VideoInfo\VideoThumbnailsViewModel.cs" />
+    <Compile Include="VideoPanelItem.xaml.cs">
+      <DependentUpon>VideoPanelItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTrack\BitmapCursor.cs" />
+    <Compile Include="VideoTrack\BoundSizeControl.cs" />
+    <Compile Include="VideoTrack\CursorsExpand.cs" />
+    <Compile Include="VideoTrack\TrackingControlPanel.xaml.cs">
+      <DependentUpon>TrackingControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTrack\TrackingDataSwapClient.cs" />
+    <Compile Include="VideoTrack\TrackingStatusEnum.cs" />
+    <Compile Include="VideoTrack\TrackPromptInfo.xaml.cs">
+      <DependentUpon>TrackPromptInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoTrack\VideoTrackConfig.cs" />
+    <Compile Include="WindowTreeView.xaml.cs">
+      <DependentUpon>WindowTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoInfo\VideoInfoPlugin.cs" />
+    <Compile Include="VideoPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Adorners\VideoPanelDropBlur.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BaseXaml\BreakoutBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BaseXaml\VideoPlusPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictColorBrush.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictCoverIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictGlowIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictImageIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DirtTimeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layout\LayoutPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layout\SearcherPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layout\SplitScreenIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layout\SplitScreenSettingIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layout\VideoPanelItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplitScreen\SplitScreenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplitScreen\SplitScreenPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Adorners\VideoPanelDropCover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplitScreen\SplitScreenTopCover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\DictControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\PresetPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\PTZControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dictionary\DictStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubControls\ArrowAnimationBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\SpeedTipBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\SwitchPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\VideoInfoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\DialogWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\GridBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\GridBlockManipulator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\LayoutDesignWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubWindow\PopupWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\PreviewWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindow\ShortcutWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TimeSwitch\LayoutIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeSwitch\TimeSwitchPlanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeSwitch\LayoutPlanItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeSwitch\LayoutPlanItemPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeSwitch\LayoutPlanPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeSwitch\PlusPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoDisp\VideoDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoInfo\Search\DictSearchBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoInfo\Search\HighlightTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoInfo\Search\SearchedResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoPanelItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoTrack\TrackingControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoTrack\TrackPromptInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Thumbnail\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\default.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\提示框背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\搜索图标.png" />
+    <Resource Include="Images\Search\搜索框背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\loading_当前进度.png" />
+    <Resource Include="Images\Video\loading_进度.png" />
+    <Resource Include="Images\Video\loading_默认.png" />
+    <Resource Include="Images\Video\VideoPanelBottom.png" />
+    <Resource Include="Images\Video\VideoPanelTop.png" />
+    <Resource Include="Images\Video\信号_悬浮.png" />
+    <Resource Include="Images\Video\信号_点击.png" />
+    <Resource Include="Images\Video\信号_默认.png" />
+    <Resource Include="Images\Video\信息_悬浮.png" />
+    <Resource Include="Images\Video\信息_点击.png" />
+    <Resource Include="Images\Video\信息_默认.png" />
+    <Resource Include="Images\Video\全屏_悬浮.png" />
+    <Resource Include="Images\Video\全屏_点击.png" />
+    <Resource Include="Images\Video\全屏_默认.png" />
+    <Resource Include="Images\Video\关闭_悬浮.png" />
+    <Resource Include="Images\Video\关闭_点击.png" />
+    <Resource Include="Images\Video\关闭_默认.png" />
+    <Resource Include="Images\Video\快照_悬浮.png" />
+    <Resource Include="Images\Video\快照_点击.png" />
+    <Resource Include="Images\Video\快照_默认.png" />
+    <Resource Include="Images\Video\按钮边框选中.png" />
+    <Resource Include="Images\Video\按钮边框默认.png" />
+    <Resource Include="Images\Video\搜索图标.png" />
+    <Resource Include="Images\Video\搜索框背景.png" />
+    <Resource Include="Images\Video\播放_悬浮.png" />
+    <Resource Include="Images\Video\播放_点击.png" />
+    <Resource Include="Images\Video\播放_默认.png" />
+    <Resource Include="Images\Video\暂停_悬浮.png" />
+    <Resource Include="Images\Video\暂停_点击.png" />
+    <Resource Include="Images\Video\暂停_默认.png" />
+    <Resource Include="Images\Video\退出全屏_悬浮.png" />
+    <Resource Include="Images\Video\退出全屏_点击.png" />
+    <Resource Include="Images\Video\退出全屏_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PTZ\圆_悬浮.png" />
+    <Resource Include="Images\PTZ\圆_点击.png" />
+    <Resource Include="Images\PTZ\圆_默认.png" />
+    <Resource Include="Images\PTZ\小箭头_中间.png" />
+    <Resource Include="Images\PTZ\小箭头_外.png" />
+    <Resource Include="Images\PTZ\箭头_悬浮.png" />
+    <Resource Include="Images\PTZ\箭头_点击.png" />
+    <Resource Include="Images\PTZ\箭头_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog\信息.png" />
+    <Resource Include="Images\Dialog\删除.png" />
+    <Resource Include="Images\Dialog\警告.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\整体背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\搜索列表背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\空白添加视频背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Window\最大化_悬浮.png" />
+    <Resource Include="Images\Window\最大化_点击.png" />
+    <Resource Include="Images\Window\最大化_默认.png" />
+    <Resource Include="Images\Window\最大化还原_悬浮.png" />
+    <Resource Include="Images\Window\最大化还原_点击.png" />
+    <Resource Include="Images\Window\最大化还原_默认.png" />
+    <Resource Include="Images\Window\最小化_悬浮.png" />
+    <Resource Include="Images\Window\最小化_点击.png" />
+    <Resource Include="Images\Window\最小化_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\搜索列表悬浮背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\背景_加号.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\按钮边框灰色.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\选择视频背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\俩字btn_禁止.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\俩字btn_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\俩字btn_悬浮.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\搜索视频标题背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\DVR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TimeSwitch\定时切换背景_悬浮.png" />
+    <Resource Include="Images\TimeSwitch\定时切换背景_选中.png" />
+    <Resource Include="Images\TimeSwitch\定时切换背景_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\断线图标.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\倒计时_圆球.png" />
+    <Resource Include="Images\倒计时开始.png" />
+    <Resource Include="Images\倒计时结束.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button\滑过_140.png" />
+    <Resource Include="Images\Button\滑过_80.png" />
+    <Resource Include="Images\Button\点击_140.png" />
+    <Resource Include="Images\Button\点击_80.png" />
+    <Resource Include="Images\Button\默认_140.png" />
+    <Resource Include="Images\Button\默认_80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Video\保存视频_悬浮.png" />
+    <Resource Include="Images\Video\保存视频_点击.png" />
+    <Resource Include="Images\Video\保存视频_默认.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\自定义顶部背景.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sclogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TimeSwitch\定时切换.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Layout\界面布局.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search\DVR_灰色.png" />
+    <Resource Include="Images\Search\server_灰色.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\PostSharp.4.2.21\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.2.21\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

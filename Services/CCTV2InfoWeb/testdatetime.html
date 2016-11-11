@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.min.css"/>
+
+    <link rel="stylesheet" href="css/ace-fonts.css"/>
+    <link rel="stylesheet" href="css/ace.min.css" id="main-ace-style"/>
+
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css"/>
+
+    <script src="js/ace-extra.min.js"></script>
+</head>
+<body>
+<div>
+    <label for="date-timepicker1" class="col-xs-3 control-label no-padding-right">Date/Time Picker</label>
+    <div class="col-sm-9">
+        <input id="date-timepicker1" type="text" class="form-control"/>
+            <span class="input-group-addon">
+                <i class="fa fa-clock-o bigger-110"></i>
+            </span>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+
+<!--ace scripts-->
+<script src="js/ace-elements.min.js"></script>
+<script src="js/ace.min.js"></script>
+<script>
+    $('#date-timepicker1').datetimepicker("fr");
+</script>
+</html>

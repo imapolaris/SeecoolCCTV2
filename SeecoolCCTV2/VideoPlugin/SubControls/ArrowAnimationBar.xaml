@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="VideoNS.SubControls.ArrowAnimationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VideoNS.SubControls"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             mc:Ignorable="d"
+             d:DesignHeight="100"
+             d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictImageIcons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Duration x:Key="animDuration">0:0:0.3</Duration>
+            <!--<Style TargetType="Border">
+                <Setter Property="Opacity" Value="0"/>
+            </Style>-->
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Border Name="arrow1"
+                Background="{StaticResource 小箭头_中间}"
+                Opacity="0"
+                Grid.Column="0"/>
+        <Border Name="arrow2"
+                Background="{StaticResource 小箭头_中间}"
+                Opacity="0"
+                Grid.Column="1"/>
+        <!--<Border Name="arrow3"
+                Background="{StaticResource 小箭头_中间}"
+                Opacity="0"
+                Grid.Column="2" />-->
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="UserControl.Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever">
+                        <DoubleAnimation Storyboard.TargetName="arrow1"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="1"
+                                         Duration="{StaticResource animDuration}"/>
+                        <DoubleAnimation Storyboard.TargetName="arrow2"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="1"
+                                         BeginTime="0:0:0.3"
+                                         Duration="{StaticResource animDuration}"/>
+                        <DoubleAnimation Storyboard.TargetName="arrow1"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="1"
+                                         To="0"
+                                         BeginTime="0:0:0.6"
+                                         Duration="{StaticResource animDuration}" />
+                        <DoubleAnimation Storyboard.TargetName="arrow2"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="1"
+                                         To="0"
+                                         BeginTime="0:0:0.9"
+                                         Duration="{StaticResource animDuration}" />
+                        <!--<DoubleAnimation Storyboard.TargetName="arrow3"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="1"
+                                         BeginTime="0:0:0.6"
+                                         AutoReverse="True"
+                                         Duration="{StaticResource animDuration}"/>
+                        <DoubleAnimation Storyboard.TargetName="arrow3"
+                                         Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="0"
+                                         BeginTime="0:0:1.2"
+                                         AutoReverse="True"
+                                         Duration="{StaticResource animDuration}" />-->
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+    </Grid>
+</UserControl>

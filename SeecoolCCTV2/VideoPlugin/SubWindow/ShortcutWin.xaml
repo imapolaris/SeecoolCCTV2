@@ -1,0 +1,242 @@
+﻿<Window x:Class="VideoNS.SubWindow.ShortcutWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VideoNS.SubWindow"
+        xmlns:helper="clr-namespace:VideoNS.Helper"
+        xmlns:sub="clr-namespace:VideoNS.SubControls"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:MaskedInput="clr-namespace:Telerik.Windows.Controls.MaskedInput;assembly=Telerik.Windows.Controls.Input"
+        xmlns:Chromes="clr-namespace:Telerik.Windows.Controls.Chromes;assembly=Telerik.Windows.Controls"
+        mc:Ignorable="d"
+        Title="LayoutDesignWin"
+        Height="480"
+        MinHeight="480"
+        Width="400"
+        MinWidth="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml" />
+                <ResourceDictionary Source="../Dictionary/DictColorBrush.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="DarkBlue"
+                             Color="#0F1D37" />
+            <!--列表框列表项分割细线条颜色-->
+            <SolidColorBrush x:Key="ListItemSplitBorderBrush"
+                             Color="#637E95" />
+            <!--视频树面板背景颜色-->
+            <SolidColorBrush x:Key="VideoTreePanelBrush"
+                             Color="#0447A0" />
+            <!--面板边界分割细线条颜色-->
+            <SolidColorBrush x:Key="PanelSplitBorderBrush"
+                             Color="#3E72B2" />
+            <SolidColorBrush x:Key="DisabledForegroundBrush"
+                             Color="#888" />
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="CaretBrush"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Margin"
+                        Value="3" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="Foreground"
+                        Value="Gold" />
+                <Setter Property="BorderBrush"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="5" />
+            </Style>
+            <Style x:Key="ListBoxItemStyle"
+                   TargetType="ListBoxItem">
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="BorderThickness"
+                        Value="0,0,0,1" />
+                <Setter Property="BorderBrush"
+                        Value="{StaticResource ListItemSplitBorderBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" />
+                                <ContentPresenter />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="{StaticResource VideoTreePanelBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="{StaticResource ListItemSplitBorderBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LabelComStyle"
+                   TargetType="TextBlock">
+                <Setter Property="Foreground"
+                        Value="{StaticResource FillColor}" />
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="FontFamily"
+                        Value="微软雅黑" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ShortcutWinModel />
+    </Window.DataContext>
+    <Grid>
+        <Border BorderBrush="{StaticResource GlowBrush}"
+                BorderThickness="5"
+                Margin="10">
+            <Border.Effect>
+                <BlurEffect Radius="15" />
+            </Border.Effect>
+        </Border>
+        <Border BorderBrush="{StaticResource GlowBrush}"
+                BorderThickness="1"
+                Background="{StaticResource NormalBlue}"
+                Opacity="0.9"
+                Margin="14" />
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="120" />
+                <RowDefinition />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <DockPanel x:Name="panelTop"
+                       Background="{StaticResource 自定义顶部背景}"
+                       Opacity="0.8"
+                       Grid.Row="0">
+                <TextBlock Text="快捷键设置"
+                           DockPanel.Dock="Left" />
+                <Button Style="{StaticResource CommonButtonStyle}"
+                        Background="{StaticResource 关闭_默认}"
+                        helper:CustomBrush.MouseOverBrush="{StaticResource 关闭_悬浮}"
+                        DockPanel.Dock="Right"
+                        Command="{Binding CloseCmd}"
+                        Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
+                <Grid />
+            </DockPanel>
+            <Grid Grid.Row="1"
+                  Background="{StaticResource DarkBlue}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="名称:" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding CurrentEdit.Name}" />
+                <TextBlock Text="布局文件:"
+                           Grid.Row="1"
+                           Grid.Column="0" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding CurrentEdit.FileName}" />
+                <Button Grid.Row="1"
+                        Grid.Column="2"
+                        Width="60"
+                        Margin="5,0"
+                        Style="{StaticResource TextButtonStyle}"
+                        Content="选择"
+                        Command="{Binding SelectFileCmd}" />
+                <TextBlock Text="快捷键:"
+                           Grid.Row="2"
+                           Grid.Column="0" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         x:Name="txtShortcut"
+                         IsReadOnly="True"
+                         Text="{Binding CurrentEdit.ShortcutString, Mode=OneWay}" />
+                <Button Grid.Row="2"
+                        Grid.Column="2"
+                        Width="60"
+                        Margin="5,0"
+                        Style="{StaticResource TextButtonStyle}"
+                        Content="保存"
+                        Command="{Binding SaveCmd}"/>
+            </Grid>
+            <Grid Margin="10"
+                  Grid.Row="2">
+                <ListBox x:Name="listSrc"
+                         HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding Shortcuts}"
+                         SelectedItem="{Binding CurrentSelected}"
+                         Background="Transparent"
+                         BorderBrush="{StaticResource PanelSplitBorderBrush}"
+                         BorderThickness="1"
+                         ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border VerticalAlignment="Center">
+                                <TextBlock Text="{Binding DisplayString}"
+                                           Style="{StaticResource LabelComStyle}"
+                                           FontSize="18"
+                                           Margin="5" />
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <DockPanel Grid.Row="3"
+                       Background="{StaticResource DarkBlue}"
+                       Opacity="0.8">
+                <Button Content="删除选中"
+                        Width="90"
+                        Margin="5,0"
+                        Style="{StaticResource TextButtonStyle}"
+                        Command="{Binding DeleteCmd}"
+                        DockPanel.Dock="Left" />
+                <Button Content="清空"
+                        Width="60"
+                        Margin="5,0"
+                        Style="{StaticResource TextButtonStyle}"
+                        Command="{Binding ClearCmd}"
+                        DockPanel.Dock="Left" />
+                <Button Content="关闭"
+                        Width="60"
+                        Margin="5,0"
+                        Style="{StaticResource TextButtonStyle}"
+                        Command="{Binding CloseCmd}"
+                        DockPanel.Dock="Right" />
+                <Grid />
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

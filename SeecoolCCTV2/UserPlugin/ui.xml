@@ -1,0 +1,7 @@
+﻿<Content  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		  xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+	<Controls>
+		<!--<telerik:RadMenuItem Header="注销" x:Name="UserPlugin_MenuA" Command="{Binding LogoutCommand}"/>-->
+	</Controls>
+</Content>

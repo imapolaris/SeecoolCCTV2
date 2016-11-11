@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCTVReplay.Time">
+    <Color x:Key="CaleHeaderColor">#FF0664C6</Color>
+    <Color x:Key="CaleBackColor">#FF7ECDF4</Color>
+    <!--日历标题颜色-->
+    <SolidColorBrush x:Key="CaleHeaderBrush"
+                     Color="{StaticResource CaleHeaderColor}" />
+    <!--日历背景颜色-->
+    <SolidColorBrush x:Key="CaleBackBrush"
+                     Color="{StaticResource CaleBackColor}" />
+    <!--日历文字颜色-->
+    <SolidColorBrush x:Key="CaleNormTextBrush"
+                     Color="#FF003C9E" />
+    <!--日历文字选中的颜色-->
+    <SolidColorBrush x:Key="CaleSelTextBrush"
+                     Color="White" />
+    <SolidColorBrush x:Key="CaleSelTextBackBrush"
+                     Color="{StaticResource CaleHeaderColor}" />
+    <!--日历文字日期不在当前月份中的颜色-->
+    <SolidColorBrush x:Key="CaleInactiveTextBrush"
+                     Color="#FF7A8F98" />
+    <!--日历边框颜色-->
+    <SolidColorBrush x:Key="CaleBorderBrush"
+                     Color="#FFB6DFF5" />
+    <!--日历各区域分割线颜色-->
+    <SolidColorBrush x:Key="CaleSplitBrush"
+                     Color="#FFE1F1FD" />
+</ResourceDictionary>

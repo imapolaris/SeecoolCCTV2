@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="CCTVDownload.DownloadControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CCTVDownload"
+             xmlns:converter="clr-namespace:CCTVDownload.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary/DictIcon.xaml"/>
+                <ResourceDictionary Source="../Dictionary/DictStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:DownloadStatusToPngConverter x:Key="DownloadStatusConverter"/>
+            <local:DownloadViewSortConverter x:Key="DownloadViewSortConverter"/>
+            <converter:BooleanToVisibleConverter x:Key="boolToVisConverter"/>
+            <converter:MultiBooleansToVisibleConverter x:Key="multiBoolToVisConverter"/>
+            <converter:SelectStatusToVisibilityConverter x:Key="selectStatusToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Gray" 
+                BorderThickness="0.5" 
+                Opacity="0.8"
+                Grid.RowSpan="3"/>
+        <Grid Margin="0.5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding DownloadStatus, Converter={StaticResource DownloadStatusConverter}}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Height="30"
+                   Margin="5"/>
+            <Grid Grid.Column="1"
+                  Margin="0,20"
+                  Width="40"
+                   Height="40">
+                <Image Source="../Images/视频.png"/>
+                <CheckBox IsChecked="{Binding Selected, Mode=OneWay}" 
+                          IsEnabled="False"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Right"
+                          Visibility="{Binding SingleSelected, Converter={StaticResource boolToVisConverter},ConverterParameter=False}"/>
+            </Grid>
+
+            <DockPanel Grid.Column="2" Margin="5,0" VerticalAlignment="Center">
+                <StackPanel Margin="5,2"
+                    Orientation="Horizontal"
+                            DockPanel.Dock="Bottom"
+                            Height="25">
+                    <StackPanel.Visibility>
+                        <MultiBinding Converter="{StaticResource multiBoolToVisConverter}">
+                            <Binding Path="SingleSelected"/>
+                            <Binding Path="Selected"/>
+                        </MultiBinding>
+                    </StackPanel.Visibility>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource selectStatusToVisibilityConverter}"
+                                  ConverterParameter="已完成" 
+                                  Mode="OneWay">
+                                <Binding Path ="SingleSelected"/>
+                                <Binding Path="DownloadStatus"/>
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Button Content="{StaticResource 播放按键}"
+                        Style="{StaticResource IconTextButtonStyle}"
+                        Command="{Binding PlayingCommand}"
+                        Margin="5,0">
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                        Margin="5,0">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource selectStatusToVisibilityConverter}"
+                                  ConverterParameter="正在下载"
+                                  Mode="OneWay">
+                                <Binding Path="SingleSelected"/>
+                                <Binding Path="DownloadStatus"/>
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Button Content="{StaticResource 边下边播按键}"
+                        Command="{Binding PlayingCommand}"
+                        Style="{StaticResource IconTextButtonStyle}" Height="25" VerticalAlignment="Bottom"/>
+                        <ToggleButton IsChecked="{Binding Path=IsDownloading,Mode=TwoWay}"
+                              Style="{StaticResource DownPauseStyle}"
+                                      Padding="5,0"/>
+                        
+                        <Button Content="{StaticResource 置顶按键}"
+                        Command="{Binding GoTopCommand}"
+                        Style="{StaticResource IconTextButtonStyle}"/>
+                    </StackPanel>
+                    <Button Content="{StaticResource 删除按键}"
+                        Style="{StaticResource IconTextButtonStyle}"
+                        Command="{Binding DeleteCommand}"/>
+                    <Button Content="{StaticResource 目录按键}"
+                        Command="{Binding OpenCommand}"
+                        Style="{StaticResource IconTextButtonStyle}"
+                        Foreground="White"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Size, Mode=OneWay}"
+                           Visibility="{Binding DownloadStatus, Converter={StaticResource DownloadViewSortConverter},ConverterParameter=正在下载, Mode=OneWay}"
+                           Margin="5,2"
+                           DockPanel.Dock="Bottom"/>
+                <TextBlock Text="{Binding Name, Mode=OneWay}" 
+                           TextWrapping="Wrap"
+                           Margin="5,2"/>
+            </DockPanel>
+            <DockPanel Visibility="{Binding DownloadStatus, Converter={StaticResource DownloadViewSortConverter},ConverterParameter=正在下载, Mode=OneWay}"
+                       VerticalAlignment="Center"
+                       Width="200"
+                       Grid.Column="3" >
+                <DockPanel DockPanel.Dock="Bottom">
+                    <TextBlock Text="{Binding DownloadTimeSpan,Mode=OneWay}" 
+                               Margin="5"/>
+                </DockPanel>
+                <Grid Height="12">
+                    <ProgressBar Value="{Binding Slider, Mode=OneWay}" 
+                                 Foreground="#0297E3"/>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Slider, Mode=OneWay}" 
+                                   Foreground="Black"
+                                   Margin="1,0"/>
+                        <TextBlock Text="%"
+                                   Foreground="Black"
+                                   Margin="1,0"/>
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
+            <TextBlock Text="{Binding Size, Mode=OneWay}"
+                       Grid.Column="3"
+                       Visibility="{Binding DownloadStatus, Converter={StaticResource DownloadViewSortConverter},ConverterParameter=已完成,Mode=OneWay}"
+                       Foreground="White"
+                       Width="150"
+                       TextAlignment="Right"
+                       Margin="20,0"
+                       VerticalAlignment="Center"/>
+            <Grid Grid.Column="4"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="120"
+                  Margin="10">
+                <TextBlock Text="{Binding Speed, Mode=OneWay}"
+                           TextAlignment="Center"
+                           Visibility="{Binding DownloadStatus, Converter={StaticResource DownloadViewSortConverter},ConverterParameter=正在下载,Mode=OneWay}"/>
+
+                <TextBlock Text="{Binding UpdatedLastestTime, Mode=OneWay}"
+                           TextAlignment="Center"
+                           Visibility="{Binding DownloadStatus, Converter={StaticResource DownloadViewSortConverter},ConverterParameter=已完成,Mode=OneWay}"/>
+            </Grid>
+        </Grid>
+        <StackPanel Margin="5,0,5,5"
+                    Orientation="Horizontal"
+                    Grid.Row="2">
+            <StackPanel.Visibility>
+                <MultiBinding Converter="{StaticResource multiBoolToVisConverter}">
+                    <Binding Path="SingleSelected"/>
+                    <Binding Path="Selected"/>
+                </MultiBinding>
+            </StackPanel.Visibility>
+            <TextBlock Text="IP："/>
+            <TextBlock Text="{Binding IPAddress}"
+                       Width="100"/>
+            <TextBlock Text="{Binding BeginTime}"/>
+            <TextBlock Text=" 至 "/>
+            <TextBlock Text="{Binding EndTime}"/>
+            <TextBlock Text="质量："
+                       Margin="40,0,0,0"/>
+            <TextBlock Text="{Binding Quality, Mode=OneWay}"/>
+            <TextBlock Text="{Binding ErrorInfo, Mode=OneWay}"
+                       Foreground="Red"
+                       Margin="20,0,5,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

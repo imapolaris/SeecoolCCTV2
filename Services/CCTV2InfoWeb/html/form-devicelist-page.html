@@ -1,0 +1,55 @@
+<div class="col-sm-4">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">平台共享设备</h4>
+            <!--<div class="widget-toolbar">-->
+            <!--<a href="#" data-action="collapse">-->
+            <!--<i class="ace-icon fa fa-chevron-up"></i>-->
+            <!--</a>-->
+            <!--</div>-->
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <ul id="tree-devicelist" class="ztree" style="height: 450px; overflow-x:auto;overflow-y: scroll"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-8">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">设备基本信息</h4>
+            <!--<div class="widget-toolbar">-->
+            <!--<a href="#" data-action="collapse">-->
+            <!--<i class="ace-icon fa fa-chevron-up"></i>-->
+            <!--</a>-->
+            <!--</div>-->
+        </div>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <table class="table table-bordered table-striped" id="table-deviceinfo">
+                    <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>值</th>
+                        <th>属性</th>
+                        <th>值</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach:devices">
+                    <tr>
+                        <!--<td data-bind="text:prop1"></td>-->
+                        <!--<td data-bind="text:value1"></td>-->
+                        <!--<td data-bind="text:prop2"></td>-->
+                        <!--<td data-bind="text:value2"></td>-->
+                        <td>{{prop1}}</td>
+                        <td>{{value1}}</td>
+                        <td>{{prop2}}</td>
+                        <td>{{value2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

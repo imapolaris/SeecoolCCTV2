@@ -1,0 +1,569 @@
+﻿<UserControl x:Class="VideoNS.VideoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VideoNS"
+             xmlns:baseXaml="clr-namespace:VideoNS.BaseXaml"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib"
+             xmlns:subctrl="clr-namespace:VideoNS.SubControls"
+             xmlns:disp="clr-namespace:VideoNS.VideoDisp"
+             xmlns:helper="clr-namespace:VideoNS.Helper"
+             xmlns:track="clr-namespace:VideoNS.VideoTrack"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary/DictStyles.xaml" />
+                <ResourceDictionary Source="Dictionary/DirtTimeSlider.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <clr:Double x:Key="upHeight">33</clr:Double>
+            <clr:Double x:Key="upFrom">-33</clr:Double>
+            <clr:Double x:Key="downHeight">55</clr:Double>
+            <clr:Double x:Key="downFrom">55</clr:Double>
+            <Thickness x:Key="downMargin">0,12,0,0</Thickness>
+            <Duration x:Key="AnimDuration">0:0:0.2</Duration>
+            <GridLength x:Key="gridLength">30</GridLength>
+            <local:RatioValueConverter x:Key="ratioConverter" />
+            <local:DoubleInverter x:Key="convertH2BT" />
+            <local:TimeToStringConverter x:Key="TimeToStringConverter" />
+            <local:ScaleToTooltip x:Key="scale2Tip" />
+            <local:ScaleToVisible x:Key="scale2Vis" />
+            <disp:LatencyConverter x:Key="latencyConverter" />
+            <baseXaml:MultiBoolOrToVisibleConverter x:Key="orVisibleConverter" />
+            <baseXaml:MultiBoolAndToVisibleConverter x:Key="andVisibleConverter" />
+            <baseXaml:BoolToVisibleConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--<UserControl.DataContext>
+        <local:VideoControlModel />
+    </UserControl.DataContext>-->
+    <Grid ClipToBounds="True"
+          x:Name="grid">
+        <disp:VideoDisplay x:Name="videoDisp"
+                           DataContext="{Binding Path=DisplayModel}">
+            <disp:VideoDisplay.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="{Binding VideoTransform.ScaleX}"
+                                    ScaleY="{Binding VideoTransform.ScaleY}" />
+                    <TranslateTransform X="{Binding VideoTransform.TranslateX}"
+                                        Y="{Binding VideoTransform.TranslateY}" />
+                </TransformGroup>
+            </disp:VideoDisplay.RenderTransform>
+        </disp:VideoDisplay>
+        <Grid x:Name="gridMain"
+              Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <!--上侧面板-->
+            <Grid Grid.Row="0">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Background"
+                                Value="{StaticResource VideoPanelTop}" />
+                        <Setter Property="Height"
+                                Value="{StaticResource upHeight}" />
+                        <Style.Triggers>
+                            <DataTrigger Value="true"
+                                         Binding="{Binding IsControlPanelVisible}">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             Duration="{StaticResource AnimDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="{StaticResource upFrom}"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             Duration="{StaticResource AnimDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="panelTopTranslate"
+                                        Y="{StaticResource upFrom}" />
+                </Grid.RenderTransform>
+                <DockPanel Name="panelTop">
+                    <Button x:Name="btnClose"
+                            DockPanel.Dock="Right"
+                            Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                            Style="{StaticResource CommonButtonStyle}"
+                            Visibility="{Binding CloseBtnVisibility,Mode=TwoWay}"
+                            Background="{StaticResource 关闭_默认}"
+                            helper:CustomBrush.MouseOverBrush="{StaticResource 关闭_悬浮}"
+                            Command="{Binding StopCommand}" />
+                    <Grid x:Name="gridTopCenter">
+                        <TextBlock Text="{Binding DisplayModel.VideoName,Mode=OneWay}"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="White">
+
+                        </TextBlock>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+            <!--跟踪提示信息-->
+            <track:TrackPromptInfo DataContext="{Binding RealTimeControl.TrackSource}"
+                                   Grid.Row="1"
+                                   FontSize="15"
+                                   Foreground="Gold"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Stretch">
+                <track:TrackPromptInfo.RenderTransform>
+                    <TranslateTransform Y="{Binding ElementName=panelBottomTranslate,Path=Y}"
+                                        X="5" />
+                </track:TrackPromptInfo.RenderTransform>
+            </track:TrackPromptInfo>
+            <!--信息展示面板-->
+            <subctrl:VideoInfoPanel Grid.Row="1"
+                                    DataContext="{Binding ElementName=videoDisp,Path=DataContext}"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Right">
+                <subctrl:VideoInfoPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource orVisibleConverter}"
+                                  Mode="OneWay">
+                        <Binding ElementName="btnInfo"
+                                 Path="IsMouseOver" />
+                        <Binding ElementName="btnInfo"
+                                 Path="IsChecked" />
+                    </MultiBinding>
+                </subctrl:VideoInfoPanel.Visibility>
+                <subctrl:VideoInfoPanel.RenderTransform>
+                    <TranslateTransform Y="{Binding ElementName=panelBottomTranslate,Path=Y,Converter={StaticResource ratioConverter},ConverterParameter=0.945}"
+                                        X="-5" />
+                </subctrl:VideoInfoPanel.RenderTransform>
+            </subctrl:VideoInfoPanel>
+            <TextBlock Text="正在回看•••"
+                       Grid.Row="1"
+                       FontSize="15"
+                       Foreground="Gold"
+                       Visibility="{Binding Path=ReplayControl.IsVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform Y="{Binding ElementName=panelBottomTranslate,Path=Y}"
+                                        X="5" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <!--数据变倍-->
+            <TextBlock Grid.Row="1"
+                       FontSize="15"
+                       Foreground="Gold"
+                       Visibility="{Binding Path=DisplayModel.VideoTransform.ScaleX,Converter={StaticResource scale2Vis}}"
+                       Text="{Binding DisplayModel.VideoTransform.ScaleX,Converter={StaticResource scale2Tip}}"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform Y="{Binding ElementName=panelTopTranslate,Path=Y}"
+                                        X="-5" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <!--视频状态提示-->
+            <TextBlock Text="{Binding ToolTip}"
+                       Visibility="{Binding TooltipVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="15"
+                       Foreground="Gold"
+                       Background="#4F000000"
+                       Grid.Row="1">
+            </TextBlock>
+            <!--下侧面板-->
+            <Grid x:Name="panelBottom"
+                  Grid.Row="2">
+                <!--显示类型-->
+                <Popup x:Name="popDisType"
+                       Focusable="{Binding Path=IsShowPlayType}"
+                       Style="{StaticResource PopupStyle}"
+                       Width="{Binding ElementName=btnDisplayType, Path=ActualWidth}"
+                       PlacementTarget="{Binding ElementName=btnDisplayType}"
+                       StaysOpen="{Binding ElementName=btnDisplayType,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding Path=IsShowPlayType, Mode=TwoWay}">
+                    <Border>
+                        <StackPanel>
+                            <ListBox x:Name="listDisType"
+                                     ItemsSource="{Binding Path= DisplayTypeSource.View}"
+                                     SelectedItem="{Binding SelectedDisplayType,Mode=TwoWay}"
+                                     helper:ListBoxBehavior.HideSelectedItem="True"
+                                     Background="{x:Null}"
+                                     BorderBrush="{x:Null}"
+                                     Width="50">
+                                <ListBox.Resources>
+                                    <Style TargetType="ListBoxItem"
+                                           BasedOn="{StaticResource listBoxItem1}" />
+                                </ListBox.Resources>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--码流类型-->
+                <Popup x:Name="popStreamType"
+                       Focusable="{Binding Path=RealTimeControl.IsShowStreamType}"
+                       Style="{StaticResource PopupStyle}"
+                       Width="{Binding ElementName=listStreamType, Path=ActualWidth}"
+                       PlacementTarget="{Binding ElementName=btnStreamType}"
+                       StaysOpen="{Binding ElementName=btnStreamType,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding Path=RealTimeControl.IsShowStreamType, Mode=TwoWay}">
+                    <Border>
+                        <StackPanel>
+                            <ListBox x:Name="listStreamType"
+                                     helper:ListBoxBehavior.HideSelectedItem="True"
+                                     ItemsSource="{Binding Path=RealTimeControl.StreamType.View}"
+                                     SelectedItem="{Binding  RealTimeControl.SelectedStreamType,Mode=TwoWay}"
+                                     Background="{x:Null}"
+                                     BorderBrush="{x:Null}"
+                                     Width="50">
+                                <ListBox.Resources>
+                                    <Style TargetType="ListBoxItem"
+                                           BasedOn="{StaticResource listBoxItem1}" />
+                                </ListBox.Resources>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--云镜控制-->
+                <Popup x:Name="popPTZCtrl"
+                       Style="{StaticResource PopupStyle}"
+                       VerticalOffset="-3"
+                       HorizontalOffset="-50"
+                       VerticalAlignment="Bottom"
+                       DataContext="{Binding Path=RealTimeControl.PTZControl}"
+                       PlacementTarget="{Binding ElementName=btnPTZCtrl}"
+                       StaysOpen="{Binding ElementName=btnPTZCtrl,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding ElementName=btnPTZCtrl, Path=IsChecked, Mode=TwoWay}">
+                    <Border>
+                        <StackPanel>
+                            <local:PTZControlPanel Width="180"
+                                                   Height="270" />
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--开关控制-->
+                <Popup x:Name="popSwitch"
+                       Style="{StaticResource PopupStyle}"
+                       VerticalOffset="-3"
+                       HorizontalOffset="{Binding ElementName=switchPanel,Path=ActualWidth,Converter={StaticResource ratioConverter},ConverterParameter=-0.5_28}"
+                       VerticalAlignment="Bottom"
+                       DataContext="{Binding Path=RealTimeControl.SwitchModel}"
+                       PlacementTarget="{Binding ElementName=btnSwitch}"
+                       StaysOpen="{Binding ElementName=btnSwitch,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding ElementName=btnSwitch,Path=IsChecked, Mode=TwoWay}">
+                    <Border>
+                        <StackPanel>
+                            <subctrl:SwitchPanel x:Name="switchPanel"
+                                                 Width="auto"
+                                                 MaxWidth="400"
+                                                 Height="auto" />
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--预置位-->
+                <Popup x:Name="popPreset"
+                       Style="{StaticResource PopupStyle}"
+                       VerticalOffset="-3"
+                       HorizontalOffset="-145"
+                       VerticalAlignment="Bottom"
+                       DataContext="{Binding Path=RealTimeControl.PresetModel}"
+                       PlacementTarget="{Binding ElementName=btnPreset}"
+                       StaysOpen="{Binding ElementName=btnPreset,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding ElementName=btnPreset,Path=IsChecked,Mode=TwoWay}">
+                    <Border>
+                        <StackPanel>
+                            <subctrl:PresetPanel Width="360"
+                                                 Height="240" />
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--回看速度-->
+                <Popup x:Name="popSpeedType"
+                       Style="{StaticResource PopupStyle}"
+                       PlacementTarget="{Binding ElementName=btnSpeedType}"
+                       Width="50"
+                       StaysOpen="{Binding ElementName=btnSpeedType,Path=IsMouseOver,Mode=OneWay}"
+                       IsOpen="{Binding ReplayControl.IsShowReplayControl}">
+                    <Border>
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding Path=ReplayControl.SpeedType.View}"
+                                     Background="{x:Null}"
+                                     BorderBrush="{x:Null}"
+                                     SelectedItem="{Binding  ReplayControl.SelectedSpeedType,Mode=TwoWay}">
+                                <ListBox.Resources>
+                                    <Style TargetType="ListBoxItem"
+                                           BasedOn="{StaticResource listBoxItem1}" />
+                                </ListBox.Resources>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <!--网络延时-->
+                <Popup x:Name="popLatency"
+                       Style="{StaticResource PopupStyle}"
+                       HorizontalOffset="-30"
+                       VerticalOffset="-15"
+                       PlacementTarget="{Binding ElementName=btnSignal}"
+                       StaysOpen="True"
+                       IsOpen="{Binding ElementName=btnSignal,Path=IsMouseOver,Mode=OneWay}">
+                    <Border BorderBrush="{StaticResource GlowBrush}"
+                            BorderThickness="1"
+                            CornerRadius="2"
+                            Background="{StaticResource PanelBackground}"
+                            Padding="5">
+                        <TextBlock Foreground="{StaticResource FillColor}"
+                                   FontSize="15"
+                                   Text="{Binding ElementName=videoDisp,Path=DataContext.Latency,Converter={StaticResource latencyConverter}}">
+                        </TextBlock>
+                    </Border>
+
+                </Popup>
+                <!--下侧控制面板-->
+                <Grid>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Background"
+                                    Value="{StaticResource VideoPanelBottom}" />
+                            <Setter Property="Height"
+                                    Value="{StaticResource downHeight}" />
+                            <Style.Triggers>
+                                <DataTrigger Value="true"
+                                             Binding="{Binding IsControlPanelVisible}">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                                 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                                 Duration="{StaticResource AnimDuration}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="{StaticResource downFrom}"
+                                                                 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                                 Duration="{StaticResource AnimDuration}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="panelBottomTranslate"
+                                            Y="{StaticResource downFrom}" />
+                    </Grid.RenderTransform>
+                    <DockPanel Margin="{StaticResource downMargin}">
+                        <!--右下角控制图标-->
+                        <StackPanel Orientation="Horizontal"
+                                    DockPanel.Dock="Right">
+                            <Button Background="{StaticResource 快照_默认}"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    Style="{StaticResource CommonButtonStyle}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 快照_悬浮}"
+                                    Command="{Binding SnapshotCommand}" />
+                            <Button Background="{StaticResource 保存视频_默认}"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    Style="{StaticResource CommonButtonStyle}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 保存视频_悬浮}"
+                                    Visibility="{Binding Path= ReplayControl.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Command="{Binding SaveVideoCommand}" />
+                            <Button x:Name="btnSignal"
+                                    Background="{StaticResource 信号_默认}"
+                                    helper:CustomBrush.MouseOverBrush="{StaticResource 信号_悬浮}"
+                                    Style="{StaticResource CommonButtonStyle}"
+                                    Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                    Visibility="{Binding Path=  RealTimeControl.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            </Button>
+                            <ToggleButton x:Name="btnInfo"
+                                          IsChecked="{Binding Path=RealTimeControl.VideoInfoMessage.IsViewMessage,Mode=TwoWay}"
+                                          helper:CustomBrush.MouseOverBrush="{StaticResource 信息_悬浮}"
+                                          Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}"
+                                          Visibility="{Binding Path=  RealTimeControl.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton"
+                                           BasedOn="{StaticResource CommonButtonStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="{StaticResource 信息_悬浮}" />
+                                            </Trigger>
+                                            <Trigger Property="IsChecked"
+                                                     Value="False">
+                                                <Setter Property="Background"
+                                                        Value="{StaticResource 信息_默认}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding Path=IsFullScreen,Mode=TwoWay}"
+                                          Visibility="{Binding FullScreenBtnVisibility}"
+                                          Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton"
+                                           BasedOn="{StaticResource CommonButtonStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="true">
+                                                <Setter Property="Background"
+                                                        Value="{StaticResource 退出全屏_默认}" />
+                                                <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                                        Value="{StaticResource 退出全屏_悬浮}" />
+                                            </Trigger>
+                                            <Trigger Property="IsChecked"
+                                                     Value="False">
+                                                <Setter Property="Background"
+                                                        Value="{StaticResource 全屏_默认}" />
+                                                <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                                        Value="{StaticResource 全屏_悬浮}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                        </StackPanel>
+                        <!--视频跟踪面板-->
+                        <track:TrackingControlPanel x:Name="trackingControl"
+                                                    Grid.Row="1"
+                                                    DataContext="{Binding RealTimeControl.TrackSource}"
+                                                    VerticalAlignment="Bottom"
+                                                    Height="40"
+                                                    HorizontalAlignment="Stretch" />
+
+                        <!--实时回看模式-->
+                        <DockPanel Visibility="{Binding Path=RealTimeControl.TrackSource.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=0}">
+                            <ToggleButton x:Name="btnDisplayType"
+                                          IsChecked="{Binding Path=IsShowPlayType, Mode=TwoWay}"
+                                          DockPanel.Dock="Left"
+                                          Width="55"
+                                          Style="{StaticResource TextToggleButtonStyle}"
+                                          Content="{Binding Path=SelectedDisplayType, Mode=OneWay}">
+                            </ToggleButton>
+                            <DockPanel Visibility="{Binding Path=RealTimeControl.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <ToggleButton x:Name="btnStreamType"
+                                              IsChecked="{Binding Path=RealTimeControl.IsShowStreamType, Mode=TwoWay}"
+                                              DockPanel.Dock="Left"
+                                              Width="55"
+                                              Style="{StaticResource TextToggleButtonStyle}"
+                                              Content="{Binding Path=RealTimeControl.SelectedStreamType, Mode=OneWay}" />
+                                <DockPanel Visibility="{Binding Path=RealTimeControl.PTZControl.IsShowControl, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           DockPanel.Dock="Left">
+                                    <ToggleButton x:Name="btnPTZCtrl"
+                                                  DockPanel.Dock="Left"
+                                                  Content="云镜控制"
+                                                  Width="90"
+                                                  IsEnabled="{Binding Path=RealTimeControl.PTZControl.IsEnable, Mode=OneWay}"
+                                                  IsChecked="{Binding Path=RealTimeControl.PTZControl.IsVisible, Mode=TwoWay}"
+                                                  Style="{StaticResource TextToggleButtonStyle}" />
+                                    <ToggleButton x:Name="btnSwitch"
+                                                  DockPanel.Dock="Left"
+                                                  Content="开关"
+                                                  Width="55"
+                                                  IsEnabled="{Binding Path=RealTimeControl.PTZControl.IsEnable, Mode=OneWay}"
+                                                  IsChecked="{Binding Path=RealTimeControl.SwitchModel.IsVisible, Mode=TwoWay}"
+                                                  Style="{StaticResource TextToggleButtonStyle}" />
+                                    <ToggleButton x:Name="btnPreset"
+                                                  DockPanel.Dock="Left"
+                                                  Content="预置位"
+                                                  Width="65"
+                                                  IsEnabled="{Binding Path=RealTimeControl.PTZControl.IsEnable, Mode=OneWay}"
+                                                  IsChecked="{Binding Path=RealTimeControl.PresetModel.IsVisible, Mode=TwoWay}"
+                                                  Style="{StaticResource TextToggleButtonStyle}" />
+                                    <ToggleButton x:Name="btnTrackCtrl"
+                                                  DockPanel.Dock="Left"
+                                                  Content="视频跟踪"
+                                                  Width="90"
+                                                  IsChecked="{Binding Path=RealTimeControl.TrackSource.IsVisible, Mode=TwoWay}"
+                                                  Visibility="{Binding Path=RealTimeControl.TrackSource.CanBeTracked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                  Style="{StaticResource TextToggleButtonStyle}">
+                                    </ToggleButton>
+                                </DockPanel>
+                            </DockPanel>
+                            <DockPanel Visibility="{Binding Path=ReplayControl.IsVisible, Converter={StaticResource BooleanToVisibilityConverter},Mode=OneWay}">
+                                <ToggleButton IsChecked="{Binding Path=ReplayControl.IsPlay,Mode=TwoWay}"
+                                              DockPanel.Dock="Left"
+                                              Width="{Binding RelativeSource={RelativeSource Self},Path=ActualHeight}">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton"
+                                               BasedOn="{StaticResource CommonButtonStyle}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="true">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource 暂停_默认}" />
+                                                    <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                                            Value="{StaticResource 暂停_悬浮}" />
+                                                </Trigger>
+                                                <Trigger Property="IsChecked"
+                                                         Value="False">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource 播放_默认}" />
+                                                    <Setter Property="helper:CustomBrush.MouseOverBrush"
+                                                            Value="{StaticResource 播放_悬浮}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+                                <Button DockPanel.Dock="Left"
+                                        Style="{StaticResource TextButtonStyle}"
+                                        Content="前一帧"
+                                        Width="65"
+                                        Visibility="Collapsed"
+                                        Command="{Binding ReplayControl.PreFrameCommand}" />
+                                <Button DockPanel.Dock="Left"
+                                        Style="{StaticResource TextButtonStyle}"
+                                        Content="后一帧"
+                                        Width="65"
+                                        Visibility="Collapsed"
+                                        Command="{Binding ReplayControl.NextFrameCommand}" />
+                                <ToggleButton x:Name="btnSpeedType"
+                                              IsChecked="{Binding Path=ReplayControl.IsShowReplayControl,Mode=TwoWay}"
+                                              DockPanel.Dock="Right"
+                                              Content="{Binding ReplayControl.SelectedSpeedType}"
+                                              Width="50"
+                                              Style="{StaticResource TextToggleButtonStyle}" />
+                                <TextBlock x:Name="txtBeginTime"
+                                           Margin="5,5,10,0"
+                                           Foreground="Gold"
+                                           Text="{Binding Path=ReplayControl.PlaySlider.BeginTime, Converter={StaticResource TimeToStringConverter}}"
+                                           DockPanel.Dock="Left"
+                                           VerticalAlignment="Center" />
+                                <TextBlock x:Name="txtEndTime"
+                                           Margin="10,5,5,0"
+                                           Foreground="Gold"
+                                           Text="{Binding Path=ReplayControl.PlaySlider.EndTime, Converter={StaticResource TimeToStringConverter}}"
+                                           DockPanel.Dock="Right"
+                                           VerticalAlignment="Center" />
+                                <Slider VerticalAlignment="Center"
+                                        Style="{StaticResource Horizontal_Time_Slider}"
+                                        DataContext="{Binding Path=ReplayControl.PlaySlider}"
+                                        Minimum="0"
+                                        Maximum="{Binding Path=SliderMaximum}"
+                                        Value="{Binding Path=Slider, Mode=TwoWay}"
+                                        Margin="0,5,0,0" />
+                            </DockPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

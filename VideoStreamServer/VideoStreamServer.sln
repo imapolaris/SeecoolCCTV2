@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamServer", "VideoStreamServer\VideoStreamServer.csproj", "{305F68DA-0DDE-4453-B144-5AE4024DF5FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamModels", "VideoStreamModels\VideoStreamModels.csproj", "{63C8F10F-E61E-4696-8B5D-B76B474A37DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCTVStreamCmd", "..\Services\CCTVStream\CCTVStreamCmd\CCTVStreamCmd.csproj", "{30420B6F-7687-4AE8-A387-73EB58B6388A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seecool.VideoStreamBase", "..\Services\CCTVStream\Seecool.VideoStreamBase\Seecool.VideoStreamBase.csproj", "{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "TestServer\TestServer.csproj", "{63E46D61-E7DC-4752-82B3-7C28889FD54B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{305F68DA-0DDE-4453-B144-5AE4024DF5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305F68DA-0DDE-4453-B144-5AE4024DF5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305F68DA-0DDE-4453-B144-5AE4024DF5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305F68DA-0DDE-4453-B144-5AE4024DF5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C8F10F-E61E-4696-8B5D-B76B474A37DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C8F10F-E61E-4696-8B5D-B76B474A37DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C8F10F-E61E-4696-8B5D-B76B474A37DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C8F10F-E61E-4696-8B5D-B76B474A37DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30420B6F-7687-4AE8-A387-73EB58B6388A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5BEFE0-24E7-4DA0-A813-3091FEEA0B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E46D61-E7DC-4752-82B3-7C28889FD54B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E46D61-E7DC-4752-82B3-7C28889FD54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E46D61-E7DC-4752-82B3-7C28889FD54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E46D61-E7DC-4752-82B3-7C28889FD54B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

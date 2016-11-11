@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCTVClient", "CCTVClient\CCTVClient.csproj", "{FEE7AC30-75C1-402F-88E9-19512EB574B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticInfoClient", "..\InfoService\StaticInfoClient\StaticInfoClient.csproj", "{10D2DA3E-DE6C-4673-BB70-316FBF1A8AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg", "FFmpeg\FFmpeg.csproj", "{F370F9B8-CD8C-4E3D-BE34-61FF6260D192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCTVModels", "..\..\CCTVModels\CCTVModels\CCTVModels.csproj", "{42EB73F0-9063-4F77-AFF0-AB4ECA5AAE2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCTVInfoAdapter", "CCTVInfoAdapter\CCTVInfoAdapter.csproj", "{BC2F240A-F86A-4334-90C1-1A037F03F352}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEE7AC30-75C1-402F-88E9-19512EB574B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE7AC30-75C1-402F-88E9-19512EB574B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE7AC30-75C1-402F-88E9-19512EB574B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE7AC30-75C1-402F-88E9-19512EB574B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D2DA3E-DE6C-4673-BB70-316FBF1A8AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D2DA3E-DE6C-4673-BB70-316FBF1A8AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D2DA3E-DE6C-4673-BB70-316FBF1A8AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D2DA3E-DE6C-4673-BB70-316FBF1A8AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F370F9B8-CD8C-4E3D-BE34-61FF6260D192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F370F9B8-CD8C-4E3D-BE34-61FF6260D192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F370F9B8-CD8C-4E3D-BE34-61FF6260D192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F370F9B8-CD8C-4E3D-BE34-61FF6260D192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EB73F0-9063-4F77-AFF0-AB4ECA5AAE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EB73F0-9063-4F77-AFF0-AB4ECA5AAE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EB73F0-9063-4F77-AFF0-AB4ECA5AAE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EB73F0-9063-4F77-AFF0-AB4ECA5AAE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2F240A-F86A-4334-90C1-1A037F03F352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2F240A-F86A-4334-90C1-1A037F03F352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2F240A-F86A-4334-90C1-1A037F03F352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2F240A-F86A-4334-90C1-1A037F03F352}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

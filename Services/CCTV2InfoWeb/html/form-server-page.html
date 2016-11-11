@@ -1,0 +1,65 @@
+<form id="server-info-form" class="form-horizontal" role="form" action="api/server">
+    <div class="form-group col-sm-6">
+        <!--输入服务器名称-->
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="servername">节点名称:</label>
+        <div class="col-sm-7">
+            <input type="text" id="servername" name="Name" placeholder="如:某某局/某某海事处"
+                   class="form-control sc-form-input"/>
+        </div>
+    </div>
+    <!--输入信息服务地址-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="serviceip">信息服务IP：</label>
+        <div class="col-sm-7">
+            <input type="text" id="serviceip" name="InfoServiceIp" placeholder="格式:0.0.0.0"
+                   class="form-control sc-form-input"/>
+        </div>
+    </div>
+    <!--端口-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="serviceport">信息服务端口:</label>
+        <div class="col-sm-7">
+            <input type="number" id="serviceport" name="InfoServicePort" min="0" max="65535"
+                   class="form-control sc-form-input" value="27010"/>
+        </div>
+    </div>
+    <!--输入流媒体服务地址-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="streamserverip">流媒体服务IP：</label>
+        <div class="col-sm-7">
+            <input type="text" id="streamserverip" name="StreamServerIp" placeholder="格式:0.0.0.0"
+                   class="form-control sc-form-input"/>
+        </div>
+    </div>
+    <!--端口-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="streamserverport">流媒体服务端口:</label>
+        <div class="col-sm-7">
+            <input type="number" id="streamserverport" name="StreamServerPort" min="0" max="65535"
+                   class="form-control sc-form-input" value="37010"/>
+        </div>
+    </div>
+    <!--输入控制服务地址-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="controlserverip">控制服务IP：</label>
+        <div class="col-sm-7">
+            <input type="text" id="controlserverip" name="ControlServerIp" placeholder="格式:0.0.0.0"
+                   class="form-control sc-form-input"/>
+        </div>
+    </div>
+    <!--端口-->
+    <div class="form-group col-sm-6">
+        <label class="col-sm-5 control-label no-padding-left no-padding-right"
+               for="controlserverport">控制服务端口:</label>
+        <div class="col-sm-7">
+            <input type="number" id="controlserverport" name="ControlServerPort" min="0" max="65535"
+                   class="form-control sc-form-input" value="47010"/>
+        </div>
+    </div>
+</form>
